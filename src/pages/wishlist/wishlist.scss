@@ -1,0 +1,48 @@
+page-wishlist {
+.content{
+   background:#f0f9f7;
+}
+.totalrow{
+    padding: 20px;
+    height: 150px;
+    border-bottom: 1px solid gray;
+}
+
+
+.delete{
+     float: right;
+    color: gray;
+    font-size: 1.8em;
+}
+
+h4{
+    font-weight: normal;
+    margin-top: .6rem;
+  font-size: inherit;
+}
+h6{
+    color: gray;
+    font-weight: normal;
+}
+
+.stars{
+ color: gray;
+ width: 90%;
+ float: left;
+}
+
+.carticon{
+    font-size: 30px;
+    margin-top: -10px;
+    color: gray;
+    float: right;
+  position: absolute;
+  right: 0px;
+}
+
+.search{
+       padding-right: 15px;
+       padding-left: 0px;
+       float: left;
+}
+}

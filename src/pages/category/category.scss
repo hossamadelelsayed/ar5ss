@@ -1,0 +1,190 @@
+page-category {
+.content{
+    background:#f1f5f5;
+}
+.toolbar-title-md{
+    padding-top:10px;
+
+
+}
+.search{
+       padding-right: 5px;
+       padding-left: 5px;
+       float: left;
+}
+ .header-md::after{
+     background-image: none;
+ }
+ .header{
+     height: 130px;
+ }
+ .toolbar-background{
+    background: white;
+ }
+.headdiv{
+        float: right;
+        border: 1px solid;
+        width: 85px;
+        height: 40px;
+        text-align: center;
+        border-radius: 20px;
+}
+.hot{
+    height: 37px;
+    width: 37px;
+    float: right;
+    margin-top: 0;
+    padding-right: 2px;
+}
+.segment{
+        height: 100%;
+}
+.segment-md .segment-button{
+       color: #afa8a8;
+}
+
+.segment-md .segment-button ion-icon{
+    font-size: 18px !important;
+}
+.segment-md .segment-button.segment-activated{
+    border:none;
+    background: #d2cfcf;
+    border-radius: 50%;
+    color: white;
+
+}
+.headrow{
+    text-align: center;
+    padding-top: 10px;
+    background: white;
+    padding-bottom: 10px;
+    border-top: 1px solid lightgray;
+     border-bottom: 1px solid lightgray;
+      h6{
+           margin: 0;
+           display: inline-block;
+           font-size: 13px;
+      }
+      span{
+            font-size: 10px;
+            color: gray;
+      }
+      ion-icon{
+          color: crimson;
+      }
+}
+
+
+.card{
+    height: 160px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    background: #f7f7f7;
+
+    .botticon{
+            padding-right: 20px;
+            float: right;
+            padding-top: 7px;
+            font-size: 20px;
+    }
+  h5{
+      color:gray;
+  }
+
+ h6{
+        width: 50%;
+        float: left;
+        color:gray;
+        margin-left: 12px;
+        margin-top: 9px;
+    }
+h4{
+    font-size: 20px;
+}
+    .product{
+        background: white;
+        height: 80%;
+        padding: 5px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius:10px;
+    }
+    .starrow{
+        padding-top:15px;
+        color:lightgray;
+    }
+}
+
+.leftimg{
+        width: 23px;
+        height: 23px;
+        border-radius: 20px;
+    }
+
+
+
+
+.contdiv{
+
+        background: white;
+        height: 260px;
+        border-radius: 7px;
+        margin-top: 10px;
+
+       .leftimg{
+       margin: 5px;
+       }
+
+        .prodimg{
+            height: 100px;
+            width: 65%;
+            margin-left: 15%;
+            margin-top: 5%;
+        }
+
+        .row{
+            padding-left: 10px;
+             padding-top:15px;
+            ion-icon{
+                color:gray;
+            }
+        }
+
+         h4{
+                text-align: left;
+                padding-left: 10px;
+                margin: 0;
+                padding-top: 5px;
+                font-weight: normal;
+            }
+            h6{
+                margin: 0;
+                text-align: left;
+                padding-left:10px;
+                padding-top: 5px;
+                color:gray;
+            }
+}
+.iconsdiv{
+        height: 41px;
+        background: #e4e4e4;
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
+        text-align: left;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+       .carticon , .hearticon{
+               font-size: 25px;
+                padding-left: 10px;
+                padding-top: 5px;
+                color: darkgrey;
+       }
+      .hearticon{
+           float: right;
+           padding-right: 10px;
+      }
+
+}
+
+}

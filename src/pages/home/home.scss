@@ -1,0 +1,132 @@
+page-home {
+
+  .content{
+    background:#f1f5f5;
+ }
+.back-button-md{
+    margin-left: 0;
+    margin-right: 0;
+    min-width: 0;
+}
+.toolbar-title-md{
+    padding-left: 0;
+}
+.search{
+       padding-right: 5px;
+       padding-left: 5px;
+       float: left;
+}
+.toolbar-ios ion-title{
+    padding-left: 30px;
+    padding-right: 15px;
+}
+.back-button-text-ios{
+    display: none;
+}
+.imgdiv{
+        padding: 10px;
+        text-align: center;
+        img{
+            border-radius: 15px;
+            border-radius: 15px;
+            height: 160px;
+            width: 100%;
+        }
+}
+h6{
+    width: 70%;
+    float: left;
+    margin: 0;
+    padding-left: 10px;
+    font-weight:normal;
+    font-size: 14px;
+}
+.products{
+    height: 275px;
+    margin-bottom: 30px;
+     span{
+        float: right;
+        padding-right:11px;
+        color:gray;
+}}
+  ion-scroll {
+    position: relative;
+    display: list-item;
+    padding: 13%;
+            .scroll-content{
+                white-space: nowrap;
+                height: 290px;
+                overflow-x:scroll;
+                margin-top: 15px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            }
+
+ .card{
+    width: 40%;
+    display: inline-block;
+    height: 265px;
+    max-height: 265px;
+    border-radius: 15px;
+    margin: 0;
+    margin-left: 8px;
+    margin-top: 15px;
+    background: whitesmoke;
+ }
+
+ .detaildiv{
+    height: 85%;
+    background: white;
+    margin-top: -9px;
+    border-radius: 11px;
+
+    h6{
+        color:gray;
+        font-size: 11px;
+    }
+ }
+
+    .leftimg{
+        width: 23px;
+        margin: 10px 0 0 5px;
+        height: 23px;
+        border: 1px solid lightgray;
+        border-radius: 20px;
+    }
+   .prodimg{
+            height: 45%;
+            max-height: 55%;
+            margin-left: 16%;
+            width: 70%;
+            margin-top: 35px;
+   }
+   .starrow{
+     padding-left: 10px;
+     padding-top: 10px;
+     ion-icon{
+         color:gray;
+     }
+   }
+   h5{
+       padding-left: 10px
+   }
+
+
+ .cardfoot{
+     font-size: 22px;
+     padding: 5px 10px;
+     color: darkgrey;
+ }
+ .hot{
+    width: 30%;
+    float: right;
+    margin-top: -20px;
+ }
+  .slides{
+    height: 155px;
+  }
+  .toolbar-title span {
+    color: crimson;
+  }
+}

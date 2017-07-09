@@ -1,0 +1,44 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'Product Details' | translate}}
+       <ion-icon style="float: right ;color: darkgray"  name="heart" (click)="addToWishList(ProductID)" item-right></ion-icon>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="content" padding>
+  <ion-slides class="slider" style="direction:ltr">
+    <div *ngFor="let color of productDetails?.product_color">
+      <ion-slide *ngFor="let image of color.product_image">
+        <ion-item class= "align" >
+          <img width="100" height="100" [src]="image.Image">
+          <img *ngIf="productDetails?.HotOfferID != 0" class="hot" src="assets/imgs/hot.png">
+        </ion-item>
+      </ion-slide>
+    </div>
+  </ion-slides>
+<h2 text-center>{{productDetails?.product_name}}<small>{{productDetails?.size}}</small></h2>
+<p class="style">{{productDetails?.ProductPrice}} {{ 'SAR' | translate}}</p>
+<div style="text-align: center">
+ <ion-icon class="iconcolor" name="star"></ion-icon>
+ <ion-icon class="iconcolor" name="star"></ion-icon>
+ <ion-icon class="iconcolor" name="star"></ion-icon>
+ <ion-icon class="style" name="star-outline"></ion-icon>
+ <ion-icon class="style" name="star-outline"></ion-icon>
+<br>
+  <button class="btn1" ion-button round
+          *ngFor="let color of productDetails?.product_color"
+          [style.background]="color.colors_of_product.ColorHexa" >
+  </button>
+</div>
+<hr>
+    <button class="btn3" (click)="otherOffer()" > {{ 'Other Offers found' | translate}}</button>
+
+ <hr>
+  <!--<div class="btna">
+    <h4>Shipping</h4>
+    <p style="color:red;">SAR 50</p>
+  </div>-->
+<button class="addtocar" ion-button large (click)="addToCart(ProductID)">{{ 'Add To Cart' | translate}}</button>
+</ion-content>

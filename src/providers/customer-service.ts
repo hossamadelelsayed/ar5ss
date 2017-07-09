@@ -1,0 +1,206 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import {MainService} from "./main-service";
+import {NativeStorage} from "@ionic-native/native-storage";
+import {CommonService} from "./common-service";
+import {TranslateService} from "@ngx-translate/core";
+
+/*
+  Generated class for the CustomerService provider.
+
+  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+  for more info on providers and Angular 2 DI.
+*/
+
+
+@Injectable()
+export class CustomerService {
+
+  public customer ;
+  public deviceToken : string ="xyzx";
+  public customerCreateUrl : string = MainService.baseUrl+"register/";
+  public customerLoginUrl : string = MainService.baseUrl+"login/";
+  public customerForgetPasswordUrl : string = MainService.baseUrl+"forgetpassword/";
+  public addToWishListUrl : string = MainService.baseUrl+"inserttowishlist";
+  public getWishListByCustomerUrl : string = MainService.baseUrl+"getwishlist/";
+  public getWishListByTokenUrl : string = MainService.baseUrl+"getwishlistfortokenid/";
+  public addToCartUrl : string = MainService.baseUrl+"addcart";
+  public getCartByCustomerUrl : string = MainService.baseUrl+"cart/";
+  public getCartByTokenUrl : string = MainService.baseUrl+"cartunregtsiter/";
+  public deleteWishlistUrl : string = MainService.baseUrl+"deletWishlist/";
+  public getComplainTypesUrl : string = MainService.baseUrl+"complaintype?lang=";
+  public insertComplainUrl : string = MainService.baseUrl+"insertcomplain";
+  public contactUrl : string = MainService.baseUrl+"contact";
+  public aboutUrl : string = MainService.baseUrl+"about";
+  public updateUserUrl : string = MainService.baseUrl+"updateuser/";
+
+
+
+
+
+  constructor(public http: Http,public nativeStorage : NativeStorage,
+              public commonService : CommonService, public translateService :TranslateService) {
+    console.log('Hello CustomerService Provider');
+  }
+  updateUser(Name : string ,
+             Email : string ,
+             Mobile : string ,
+             Image: string  ) {
+    let customer = {
+      Name: Name,
+      Email: Email,
+      Mobile: Mobile,
+      Image: Image
+    };
+    return this.http.put(this.updateUserUrl + this.customer.UserID , customer).map((res) => res.json());
+  }
+  about()
+  {
+    return this.http.get(this.aboutUrl).map((res) => res.json());
+  }
+  contact(Email : string,Title : string,Body : string)
+  {
+    let body = {
+      Email : Email ,
+      Title : Title ,
+      Body : Body
+    };
+    return this.http.post(this.contactUrl,body).map((res) => res.json());
+  }
+
+  insertComplain(UserID : number, ComplainTypeId : number, Tittle :string, Descriotion : string)
+  {
+    let body = {
+      UserID : UserID,
+      ComplainTypeId : ComplainTypeId ,
+      Tittle : Tittle,
+      Descriotion : Descriotion
+    };
+    return this.http.post(this.insertComplainUrl,body).map((res) => res.json());
+  }
+  getComplainTypes()
+  {
+    return this.http.get(this.getComplainTypesUrl+MainService.lang).map((res) => res.json());
+  }
+  deleteWishlist(favoritID : number)
+  {
+      return this.http.delete(this.deleteWishlistUrl+favoritID).map((res) => res.json());
+  }
+  addToCart(ProductID : number)
+  {
+    let body ;
+    if(this.customer != null)
+    {
+      body = {
+        ProductID : ProductID ,
+        UserID : this.customer.UserID,
+        QTY: 1
+      };
+    }
+    else
+    {
+      body = {
+        ProductID : ProductID ,
+        TokenID : this.deviceToken ,
+        QTY: 1
+      };
+    }
+    return this.http.post(this.addToCartUrl,body).map((res) => res.json());
+  }
+  getCart()
+  {
+    if(this.customer != null)
+      return this.http.get(this.getCartByCustomerUrl+this.customer.UserID).map((res) => res.json());
+    else
+      return this.http.get(this.getCartByTokenUrl+this.deviceToken).map((res) => res.json());
+  }
+  addToWishList(ProductID : number)
+  {
+    let body ;
+    if(this.customer != null)
+    {
+      body = {
+        ProductID : ProductID ,
+        UserID : this.customer.UserID
+      };
+    }
+    else
+    {
+      body = {
+        ProductID : ProductID ,
+        TokenID : this.deviceToken
+      };
+    }
+    return this.http.post(this.addToWishListUrl,body).map((res) => res.json());
+  }
+  getWishList()
+  {
+    if(this.customer != null)
+      return this.http.get(this.getWishListByCustomerUrl+this.customer.UserID).map((res) => res.json());
+    else
+      return this.http.get(this.getWishListByTokenUrl+this.deviceToken).map((res) => res.json());
+  }
+  customerForgetPassword(Email : string )
+  {
+    return this.http.post(this.customerForgetPasswordUrl+MainService.lang,{Email:Email}).map((res) => res.json());
+  }
+  customerCreate(Name : string ,
+                 Email : string ,
+                 Password : string ,
+                 Mobile : string ,
+                 Image: string  )
+  {
+    let customer = {
+      Name : Name ,
+      Email : Email ,
+      Password : Password ,
+      Mobile : Mobile ,
+      UseType : 1 ,
+      DivceType : 1 ,
+      Token : this.deviceToken ,
+      Image: Image
+    };
+    return this.http.post(this.customerCreateUrl+MainService.lang,customer).map((res) => res.json());
+  }
+  customerLogin(Email : string , Password : string )
+  {
+    let customer = {
+      Email : Email ,
+      Password : Password ,
+      TokenID : this.deviceToken
+    };
+    return this.http.post(this.customerLoginUrl+MainService.lang,customer).map((res) => res.json());
+  }
+  customerStorageSave(customer:any){
+    this.nativeStorage.setItem('customer', customer)
+      .then(
+        () => {
+          this.customer = customer;
+          console.log('Customer Is Stored!');
+        },
+        error => console.error('Error storing item', error)
+      );
+  }
+  customerStorageErase(){
+    this.nativeStorage.remove('customer')
+      .then(
+        () => {
+          this.customer = null;
+          console.log('Customer Is Erased!');
+        },
+        error => console.error(error)
+      );
+  }
+  customerStorageGet(){
+    this.nativeStorage.getItem('customer')
+      .then(
+        (customer) => {
+          this.customer = customer;
+          console.log('Customer Is Geted!');
+          //return customer
+        },
+        error => console.error(error)
+      );
+  }
+}

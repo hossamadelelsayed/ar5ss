@@ -1,0 +1,37 @@
+page-otheroffer {
+.content{
+    background-color: #f0f9f7;
+}
+
+.header-md::after{
+    background-image: none !important;
+}
+.toolbar-title-md {
+    padding: 0 12px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: red;
+}
+.toolbar-background-md{
+        background-color: aliceblue;
+}
+.img{
+     width: 65px;
+    height: 128px;
+    z-index: 0;
+}
+.button{
+        width: 31px;
+    height: 54px;
+   background-color: #5B5F5F;
+    z-index: 1;
+    margin-left: -39px;
+    margin-top: -21px;
+}
+.iconcolor{
+    color: #EEAA23;
+}
+.iconcolor2{
+    color: gray;
+}
+}

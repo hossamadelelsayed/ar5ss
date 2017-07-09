@@ -1,0 +1,58 @@
+<!--
+  Generated template for the Profile page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title><ion-icon class="search" ios="ios-search" md="md-search"></ion-icon>
+     <span>{{ 'Your Profile' | translate}}</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngIf="customerService.customer == null">
+    <ion-item (click)="login()">
+      <img src="assets/imgs/profile_edit.png" height="25px">
+      <h6>{{'Login' | translate}}</h6>
+      <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+    <ion-item (click)="signUp()">
+      <img src="assets/imgs/profile_edit.png" height="25px">
+      <h6>{{ 'SignUp' | translate}}</h6>
+      <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="customerService.customer != null">
+    <ion-item (click)="edit()">
+          <img src="assets/imgs/profile_edit.png" height="25px">
+          <h6>{{ 'Edit Profile' | translate}}</h6>
+          <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+     <ion-item>
+          <img src="assets/imgs/profile_payment.png" height="25px">
+          <h6>Payment</h6>
+          <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+     <ion-item>
+          <img src="assets/imgs/profile_history.png" height="25px">
+          <h6>History</h6>
+          <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+     <ion-item>
+          <img src="assets/imgs/profile_location.png" height="25px">
+          <h6>Locations</h6>
+          <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+     <ion-item (click)="logOut()">
+          <img src="assets/imgs/profile_logout.png" height="25px">
+          <h6>{{ 'LogOut' | translate}} </h6>
+    </ion-item>
+  </ion-list>
+</ion-content>

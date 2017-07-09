@@ -1,0 +1,73 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Sohppping cart
+        <ion-icon class="search" ios="trash" md="ios-trash-outline" (click)="trash()"></ion-icon>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-row>
+      <ion-col>
+<h5>Cart subtotal (2 items)
+   <span style="color: red; float: right;">10,000SAR</span></h5>
+<button class="bt" ion-button block (click)="gotosummary()" >Proceed to ckeckout</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+         <button class="btn" ion-button round ></button>
+          <img class="img" src="assets/imgs/cat_refrigerator.png">
+      </ion-col>
+      <ion-col col-9 >
+        <h2 style="font-family: inherit; color: #4A4D4D;">SAMSUNG,18 <small>FT</small></h2>
+    <p style="font-size: 16px; color:red;">5,100 SAR</p>
+    <p class="shipping">(15 SAR Shipping)</p>
+       <ion-item>
+        <ion-select class="sel" [(ngModel)]="QTY2" placeholder="{{1}}QTY" >
+     <ion-option value="1">1</ion-option>
+     <ion-option value="2">2 </ion-option>
+     <ion-option value="3">3</ion-option>
+     <ion-option value="4">4</ion-option>
+     <ion-option value="5">5</ion-option>
+     <ion-option value="6">6</ion-option>
+     <ion-option value="7">7</ion-option>
+     <ion-option value="8">8</ion-option>
+     <ion-option value="9">9</ion-option>
+     <ion-option value="10">10</ion-option>
+</ion-select>
+</ion-item>
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row>
+      <ion-col col-3>
+         <button class="btn" ion-button round ></button>
+          <img class="img" src="assets/imgs/cat_refrigerator.png">
+      </ion-col>
+      <ion-col style="height: 50%;">
+        <h2 style="font-family: inherit; color: #4A4D4D;">SAMSUNG,18 <small>FT</small></h2>
+    <p style="font-size: 16px; color:red;">5,100 SAR</p>
+    <p class="shipping">(15 SAR Shipping)</p>
+     
+       <ion-item>
+       
+        <ion-select class="sel" [(ngModel)]="QTY" placeholder="{{1}}QTY" >
+     <ion-option value="1">1</ion-option>
+     <ion-option value="2">2 </ion-option>
+     <ion-option value="3">3</ion-option>
+     <ion-option value="4">4</ion-option>
+     <ion-option value="5">5</ion-option>
+     <ion-option value="6">6</ion-option>
+     <ion-option value="7">7</ion-option>
+     <ion-option value="8">8</ion-option>
+     <ion-option value="9">9</ion-option>
+     <ion-option value="10">10</ion-option>
+</ion-select>
+</ion-item>
+      </ion-col>
+    </ion-row>
+  <hr>
+  </ion-list>
+</ion-content>

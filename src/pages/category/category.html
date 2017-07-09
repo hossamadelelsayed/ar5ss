@@ -1,0 +1,124 @@
+
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+          <ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>
+      <span>{{ 'Category' | translate}}</span>
+
+
+ <div class="headdiv">
+    <ion-segment [(ngModel)]="showing">
+        <ion-segment-button value="grid">
+            <ion-icon style="padding-right:3px" ios="ios-grid" md="md-grid"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="list">
+            <ion-icon ios="ios-list" md="md-list"></ion-icon>
+        </ion-segment-button>
+     </ion-segment>
+      </div>
+    </ion-title>
+  </ion-navbar>
+    <ion-row class="headrow">
+      <ion-col col-4 (click)="gotoall()">
+      <ion-icon style="padding-right:3px" ios="ios-grid" md="md-grid"></ion-icon>
+      <h6>{{ 'Category' | translate}}</h6><span> {{ 'Refrigerator' | translate}}</span>
+      </ion-col>
+      <ion-col col-4 (click)="gotowish()" style="border-right:1px solid lightgray;border-left:1px solid lightgray;">
+        <ion-icon ios="ios-arrow-round-down" md="md-arrow-round-down"></ion-icon>
+        <ion-icon ios="ios-arrow-round-up" md="md-arrow-round-up"></ion-icon>
+        <h6>{{ 'Sort By' | translate}}</h6><br><span>{{ 'Lowest Price' | translate}}</span>
+      </ion-col>
+      <ion-col col-4 (click)="gotohot()">
+         <img src="assets/imgs/sort.png "height="12px">
+        <h6>{{ 'Hot Offers' | translate}}</h6><br><span>{{ 'Refrigerator' | translate}}</span>
+      </ion-col>
+    </ion-row>
+
+</ion-header>
+
+
+<ion-content>
+
+
+  <div [ngSwitch]="showing">
+  <ion-list  *ngSwitchDefault >
+    <ion-row>
+      <ion-col col-6 *ngFor="let product of categoryProducts">
+    <div class="contdiv" (click)="viewProduct(product.ProductID)">
+        <img class="leftimg" [style.background]="product.ColorHexa">
+        <img *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
+        <img  class="prodimg" [src]="product.Image" height="140px">
+        <ion-row>
+          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
+          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
+          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
+          <ion-icon ios="ios-star" md="md-star"></ion-icon>
+          <ion-icon ios="ios-star" md="md-star"></ion-icon>
+      </ion-row>
+      <h4>{{product.product_name}} , {{product.size}}</h4>
+      <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
+    </div>
+    <div class="iconsdiv">
+       <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID)"></ion-icon>
+        <ion-icon
+          *ngIf="!checkProductInFav(product.ProductID)"
+          [attr.id]="product.ProductID"
+          #productsIcon
+          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+      <ion-icon
+        *ngIf="checkProductInFav(product.ProductID)"
+        [attr.id]="product.ProductID"
+        #productsIcon
+        style="color: red"
+        class="hearticon" ios="ios-heart" md="md-heart" ></ion-icon>
+
+
+    </div>
+  </ion-col>
+    </ion-row>
+</ion-list>
+
+
+  <ion-list *ngSwitchCase="'list'">
+  <ion-card *ngFor="let product of categoryProducts">
+    <div class="product" (click)="viewProduct(product.ProductID)">
+      <img class="leftimg" [style.background]="product.ColorHexa">
+      <img  *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
+       <ion-row>
+      <ion-col col-3>
+        <img [src]="product.Image" (click)="gotohistory()">
+      </ion-col>
+      <ion-col col-9>
+          <ion-row class="starrow">
+              <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
+              <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
+              <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star"></ion-icon>
+        </ion-row>
+              <h4>{{product.product_name}} , {{product.size}}</h4>
+              <h5>{{product.CategroyName}}</h5>
+      </ion-col>
+    </ion-row>
+    </div>
+       <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
+        <ion-icon
+          *ngIf="!checkProductInFav(product.ProductID)"
+          [attr.id]="product.ProductID+'2'"
+          #productsIcon2
+          style="color:darkgray"
+          class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+    <ion-icon
+      *ngIf="checkProductInFav(product.ProductID)"
+      [attr.id]="product.ProductID+'2'"
+      #productsIcon2
+      style="color:red" class="botticon"ios="ios-heart" md="md-heart"></ion-icon>
+       <ion-icon style="color:gray" class="botticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID)"></ion-icon>
+
+  </ion-card>
+  </ion-list>
+</div>
+
+</ion-content>
