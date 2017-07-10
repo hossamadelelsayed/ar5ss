@@ -37,6 +37,19 @@
   "Lowest Price" : "الأقل سعرا" ,
   "Hot Offers" : "العروض المميزة" ,
   "Wish List" : "المفضلة",
-  "No" : "لا"
-
+  "History" : "الطلبات السابقة" ,
+  "Sohppping cart"  : " سلة التسوق" ,
+  "Items" : "منتجات" ,
+  "Cart Items" : "منتجات العربة" ,
+  "Proceed To CheckOut" : "تأكيد الطلب" ,
+  "Summary" : "تأكيد الطلب" ,
+  "Payment" : "الدفع" ,
+  "Payment Method" : "طريقة الدفع" ,
+  "VISA" : "فيزا" ,
+  "MADA" : "مدى" ,
+  "PAYPAL" : "باى بال" ,
+  "SADAD" : "سداد" ,
+  "CASH" : "كاش" ,
+  "Determine Your Location" : "حدد موقعك" ,
+  "Address" : "العنوان"
 }

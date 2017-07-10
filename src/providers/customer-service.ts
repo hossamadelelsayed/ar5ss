@@ -34,6 +34,14 @@ export class CustomerService {
   public contactUrl : string = MainService.baseUrl+"contact";
   public aboutUrl : string = MainService.baseUrl+"about";
   public updateUserUrl : string = MainService.baseUrl+"updateuser/";
+  public updateQtyUrl : string = MainService.baseUrl+"modifaycart/";
+  public deleteCartUrl : string = MainService.baseUrl+"deletecart/";
+  public addLocationUrl : string = MainService.baseUrl+"addlocation";
+  public getUserLocationUrl : string = MainService.baseUrl+"userlocation/";
+
+
+
+
 
 
 
@@ -42,6 +50,28 @@ export class CustomerService {
   constructor(public http: Http,public nativeStorage : NativeStorage,
               public commonService : CommonService, public translateService :TranslateService) {
     console.log('Hello CustomerService Provider');
+  }
+  getUserLocation() {
+    return this.http.get(this.getUserLocationUrl + this.customer.UserID ).map((res) => res.json());
+  }
+  addLocation(latitude : string , longitude : string , Place : string)
+  {
+    let body = {
+      UserID : this.customer.UserID,
+      latitude : latitude ,
+      longitude :  longitude ,
+      Place : Place
+    };
+    return this.http.post(this.addLocationUrl , body ).map((res) => res.json());
+  }
+  deleteCart(CartID : number  ) {
+    return this.http.delete(this.deleteCartUrl + CartID ).map((res) => res.json());
+  }
+  updateQTY(QTY : number ,  CartID : number  ) {
+    let body = {
+      QTY: QTY
+    };
+    return this.http.put(this.updateQtyUrl + CartID , body).map((res) => res.json());
   }
   updateUser(Name : string ,
              Email : string ,

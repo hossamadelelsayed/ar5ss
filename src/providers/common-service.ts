@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {ToastController, LoadingController, Loading} from "ionic-angular";
 import {TranslateService} from "@ngx-translate/core";
+import {Observable, Subscriber} from "rxjs";
 
 /*
   Generated class for the CommonService provider.
@@ -65,6 +66,26 @@ export class CommonService {
       }
     );
   }
+  public translateArray(words : string[])
+  {
+    let values = [];
+    for (let i = 0; i < words.length; i++) {
+      this.translateService.get(words[i]).subscribe(
+        value => {
+          // value is our translated string
+          values.push(value);
+        }
+      );
+    }
+    return Observable.create((observer: Subscriber<any>) => {
+      observer.next(values);
+      observer.complete();
+    });
+  }
+
+
+
+
   presentLoading(txt:string) {
     this.loader = this.loadingCtrl.create({
       content: txt
@@ -87,5 +108,15 @@ export class CommonService {
       return true ;
     else return false ;
   }
-
+  sumInputValuesWithFilter(inputs : any[]) : number
+  {
+    let sum : number = 0;
+    for(let i = 0 ; i < inputs.length ; i++)
+      sum += inputs[i].value ;
+    return sum;
+  }
+  /*let ArrayFilter :any[] ;
+  ArrayFilter = inputs.filter((item) => {
+    return (item._native._elementRef.nativeElement.parentElement.id != 'price'+ProductID);
+  });*/
 }

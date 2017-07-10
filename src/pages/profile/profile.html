@@ -7,12 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-
     <ion-title><ion-icon class="search" ios="ios-search" md="md-search"></ion-icon>
      <span>{{ 'Your Profile' | translate}}</span>
-    </ion-title>
-  </ion-navbar>
-
+      </ion-title>
+    </ion-navbar>
 </ion-header>
 
 
@@ -35,24 +33,26 @@
           <h6>{{ 'Edit Profile' | translate}}</h6>
           <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
     </ion-item>
-     <ion-item>
+     <!--
+     <ion-item >
           <img src="assets/imgs/profile_payment.png" height="25px">
           <h6>Payment</h6>
           <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
     </ion-item>
-     <ion-item>
+    -->
+     <ion-item (click)="history()">
           <img src="assets/imgs/profile_history.png" height="25px">
-          <h6>History</h6>
-          <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
+          <h6>{{ 'History' | translate}}</h6>
+          <ion-icon style="float:right" name="arrow-forward" item-right ></ion-icon>
     </ion-item>
-     <ion-item>
+    <ion-item (click)="goToMap()">
           <img src="assets/imgs/profile_location.png" height="25px">
-          <h6>Locations</h6>
+          <h6>{{ 'Determine Your Location' | translate}} </h6>
           <ion-icon style="float:right" name="arrow-forward" item-right></ion-icon>
     </ion-item>
      <ion-item (click)="logOut()">
           <img src="assets/imgs/profile_logout.png" height="25px">
           <h6>{{ 'LogOut' | translate}} </h6>
-    </ion-item>
+     </ion-item>
   </ion-list>
 </ion-content>

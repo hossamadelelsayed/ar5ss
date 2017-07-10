@@ -8,6 +8,7 @@ import {HotoffersPage} from "../hotoffers/hotoffers";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {DetailsPage} from "../details/details";
+import {ShoppingcartsPage} from "../shoppingcarts/shoppingcarts";
 
 
 @Component({
@@ -86,6 +87,10 @@ export class HomePage {
     this.navCtrl.push(DetailsPage,{
       ProductID :ProductID
     });
+  }
+  goToCart()
+  {
+    this.navCtrl.push(ShoppingcartsPage);
   }
 
 }

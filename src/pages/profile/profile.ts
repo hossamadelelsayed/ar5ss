@@ -4,6 +4,8 @@ import {Editprofile} from "../editprofile/editprofile";
 import {CustomerService} from "../../providers/customer-service";
 import {SignupPage} from "../signup/signup";
 import {LoginPage} from "../login/login";
+import {HistoryPage} from "../history/history";
+import {AddlocationPage} from "../addlocation/addlocation";
 
 @Component({
   selector: 'page-profile',
@@ -33,6 +35,13 @@ export class Profile {
   {
     this.customerService.customerStorageErase();
   }
-
+  history()
+  {
+    this.navCtrl.push(HistoryPage);
+  }
+  goToMap()
+  {
+    this.navCtrl.push(AddlocationPage);
+  }
 
 }

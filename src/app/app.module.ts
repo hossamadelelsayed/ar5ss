@@ -39,6 +39,8 @@ import {HighlightDirective} from "../directives/highlight.directive";
 import {AddlocationPage} from "../pages/addlocation/addlocation";
 import {ShoppingcartsPage} from "../pages/shoppingcarts/shoppingcarts";
 import {SummaryPage} from "../pages/summary/summary";
+import {PayPal} from "@ionic-native/paypal";
+import {Geolocation} from "@ionic-native/geolocation";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -122,7 +124,9 @@ export function createTranslateLoader(http: Http) {
     NativeStorage,
     ProductService,
     Push,
-    BarcodeScanner
+    BarcodeScanner,
+    PayPal ,
+    Geolocation
   ]
 })
 export class AppModule {}
