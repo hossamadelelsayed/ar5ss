@@ -51,5 +51,15 @@
   "SADAD" : "سداد" ,
   "CASH" : "كاش" ,
   "Determine Your Location" : "حدد موقعك" ,
-  "Address" : "العنوان"
+  "Address" : "العنوان" ,
+  "Add New Location" : "أضف مكان جديد" ,
+  "Total" : "الإجمالى" ,
+  "Recent Order" : "الطلبات الأخيرة" ,
+  "Past Order" : "الطلبات السابقة" ,
+  "ID" : "م" ,
+  "Shipping" : "الشحن" ,
+  "Order Details" : "تفاصيل الطلب" ,
+  "QTY" : "قطعة" ,
+  "Explore Now" : "تصفح المنتجات" ,
+  "this already in the cart" : "المنتج مضاف بالفعل !"
 }

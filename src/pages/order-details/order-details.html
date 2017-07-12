@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'Order Details' | translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <div *ngFor="let product of orderDetails">
+      <ion-row >
+        <ion-col col-3>
+          <button class="btn" ion-button round [style.background]="product.ColorHexa"></button>
+          <img class="img" [src]="product.Image">
+        </ion-col>
+        <ion-col col-9 >
+          <h2 style="font-family: inherit; color: #4A4D4D;">{{product.product_name}} , <small>  {{product.size}} </small></h2>
+          <p style="font-size: 16px; color:red;">
+            {{ product.ItemsQTY * product.ProductPrice}} {{ 'SAR' | translate}}</p>
+          <p class="shipping">{{ 'Shipping' | translate}} :  {{product.Shiping}} {{ 'SAR' | translate}} </p>
+          <ion-item style="background-color: inherit;">
+            {{ product.ItemsQTY }}  {{ 'QTY' | translate }}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <hr>
+    </div>
+  </ion-list>
+</ion-content>

@@ -1,10 +1,10 @@
 page-history {
 .content{
     background:#f1f5f5;
-}   
+}
 .toolbar{
         border-bottom: 1px solid lightgray;
-}    
+}
 .toolbar-background-md{
     background: white;
 }
@@ -20,7 +20,7 @@ page-history {
     margin: 10px auto 0;
 }
 .header{
-      
+
         border-radius: 10px;
         background: white;
 }
@@ -45,7 +45,7 @@ page-history {
         height: 95px;
         text-align: center;
         padding-top: 15px;
-     
+
     }
 }
 .card{
@@ -70,15 +70,15 @@ page-history {
         color:crimson;
         text-align: right;
         padding: 10px;
-        
+
 
     }
-    p{   
+    p{
         width: 30%;
         float: left;
         padding: 8px;
         color: gray;
-        
+
     }
 
 }
@@ -86,5 +86,17 @@ page-history {
 .rowcont{
         border-bottom: 1px solid lightgray;
 }
+  .explore{
+    width: 45%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    background: crimson;
+  }
 
+  .empty{
+    text-align: center;
+    width: 80%;
+    margin: 10% auto;
+  }
 }

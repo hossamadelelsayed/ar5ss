@@ -19,6 +19,7 @@ export class HomePage {
   public hotads : any ;
   public groupShow : any ;
   public wishList : any ;
+  public cartNo : number = 0 ;
   @ViewChildren('productsIcon') elRef;
   constructor(public navCtrl: NavController , public productService : ProductService ,
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
@@ -27,6 +28,9 @@ export class HomePage {
   }
   ionViewWillEnter()
   {
+     this.customerService.getCart().subscribe((res)=>{
+      this.cartNo = res.length ;
+     });
       this.productService.hotads().subscribe((res)=>{
         this.hotads = res ;
       });
@@ -77,7 +81,12 @@ export class HomePage {
   {
     this.customerService.addToCart(ProductID).subscribe((res)=>{
       if(res == true)
+      {
         this.commonService.successToast();
+        this.cartNo++;
+      }
+      else if(res.error)
+        this.commonService.translateAndToast(res.error);
       else
         this.commonService.errorToast();
     });

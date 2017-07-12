@@ -5,5 +5,7 @@
   "LogOut": "Log Out",
   "Success":"Success",
   "Map": "Map",
-  "Error": "There Is An Error"
+  "Error": "There Is An Error" ,
+  "Determine Your Location" : "Your Location" ,
+  "this already in the cart" : "Product Already Exist"
 }

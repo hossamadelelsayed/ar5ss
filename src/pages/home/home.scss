@@ -129,4 +129,15 @@ h6{
   .toolbar-title span {
     color: crimson;
   }
+  .cartNo {
+    display: inline;
+    font-size: 12px;
+    color: red;
+    position: fixed;
+    top: -10px;
+    right: 29px;
+    border: 1px solid black;
+    padding: 0 4px;
+    border-radius: 50%;
+  }
 }

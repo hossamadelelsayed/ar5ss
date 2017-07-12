@@ -41,6 +41,7 @@ import {ShoppingcartsPage} from "../pages/shoppingcarts/shoppingcarts";
 import {SummaryPage} from "../pages/summary/summary";
 import {PayPal} from "@ionic-native/paypal";
 import {Geolocation} from "@ionic-native/geolocation";
+import {OrderDetailsPage} from "../pages/order-details/order-details";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -72,7 +73,8 @@ export function createTranslateLoader(http: Http) {
     HighlightDirective ,
     AddlocationPage ,
     ShoppingcartsPage ,
-    SummaryPage
+    SummaryPage ,
+    OrderDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -111,7 +113,8 @@ export function createTranslateLoader(http: Http) {
     OtherofferPage,
     AddlocationPage ,
     ShoppingcartsPage ,
-    SummaryPage
+    SummaryPage ,
+    OrderDetailsPage
   ],
   providers: [
     StatusBar,

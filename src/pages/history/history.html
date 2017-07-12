@@ -7,75 +7,77 @@
 <ion-header>
 
   <ion-navbar>
-   <ion-title><span>History</span></ion-title>
+   <ion-title><span>{{ 'History' | translate}}</span></ion-title>
    </ion-navbar>
     <ion-segment [(ngModel)]="showing">
-        <ion-segment-button value="grid">
-            Recent Order
+        <ion-segment-button value="recent">
+            {{'Recent Order' | translate}}
         </ion-segment-button>
-        <ion-segment-button value="list">
-            Past Order
+        <ion-segment-button value="past">
+            {{'Past Order' | translate}}
         </ion-segment-button>
-     </ion-segment>  
+     </ion-segment>
 </ion-header>
 
 
 <ion-content>
-  
-<ion-card>
-  <ion-row class="rowcont">
-    <ion-col col-4>
-      <div>
-          <h1>15 <br>Mar</h1>
+
+  <div [ngSwitch]="showing">
+    <div *ngSwitchDefault >
+      <div class="empty" *ngIf="recentHistory?.length == 0">
+        <img src="assets/imgs/new_search.png">
+        <button ion-button block class="explore" (click)="goToHome()">{{ 'Explore Now' | translate}}</button>
       </div>
-    </ion-col>
-    <ion-col col-8>
-      <h2>4 ITEMS</h2>
-      <h4>Id # 453458</h4>
-    </ion-col>
-  </ion-row>
- 
-   <p>Via Visa</p>
-   <h6>5000 SAR</h6>
-  
-</ion-card>
+      <ion-card *ngFor="let order of recentHistory" (click)="orderDetails(order)">
+        <ion-row class="rowcont" >
+          <ion-col col-4>
+            <div>
+              <h1>{{ handleDay(order.OrderDate)}} <br>{{ handleMonth(order.OrderDate)}}</h1>
+            </div>
+          </ion-col>
+          <ion-col col-8>
+            <h2>{{ order.Items }} {{ 'Items' | translate }}</h2>
+            <h4>{{'ID' | translate}} # {{ order.OrderID }}</h4>
+          </ion-col>
+        </ion-row>
+        <p>{{order.payment_name}}</p>
+        <h6>{{order.TotalPrice}} {{ 'SAR' | translate}}</h6>
 
-
-<ion-card>
-  <ion-row class="rowcont">
-    <ion-col col-4>
-      <div>
-          <h1>15 <br>Mar</h1>
+      </ion-card>
+    </div>
+    <div *ngSwitchCase="'past'">
+      <div class="empty" *ngIf="lastHistory?.length == 0 ">
+        <img src="assets/imgs/new_search.png">
+        <button ion-button block class="explore" (click)="goToHome()">{{ 'Explore Now' | translate}}</button>
       </div>
-    </ion-col>
-    <ion-col col-8>
-      <h2>4 ITEMS</h2>
-      <h4>Id # 453458</h4>
-    </ion-col>
-  </ion-row>
- 
-   <p>Via Visa</p>
-   <h6>5000 SAR</h6>
-  
-</ion-card>
+      <ion-card *ngFor="let order of lastHistory" (click)="orderDetails(order)">
+        <ion-row class="rowcont" >
+          <ion-col col-4>
+            <div>
+              <h1>{{ handleDay(order.OrderDate)}} <br>{{ handleMonth(order.OrderDate)}}</h1>
+            </div>
+          </ion-col>
+          <ion-col col-8>
+            <h2>{{ order.Items }} {{ 'Items' | translate }}</h2>
+            <h4>{{'ID' | translate}} # {{ order.OrderID }}</h4>
+          </ion-col>
+        </ion-row>
+        <p>{{order.payment_name}}</p>
+        <h6>{{order.TotalPrice}} {{ 'SAR' | translate}}</h6>
+
+      </ion-card>
+    </div>
+  </div>
 
 
-<ion-card>
-  <ion-row class="rowcont">
-    <ion-col col-4>
-      <div>
-          <h1>15 <br>Mar</h1>
-      </div>
-    </ion-col>
-    <ion-col col-8>
-      <h2>4 ITEMS</h2>
-      <h4>Id # 453458</h4>
-    </ion-col>
-  </ion-row>
- 
-   <p>Via Visa</p>
-   <h6>5000 SAR</h6>
-  
-</ion-card>
+
+
+
+
+
+
+
+
+
 
 </ion-content>

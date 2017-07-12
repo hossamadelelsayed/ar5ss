@@ -38,18 +38,45 @@ export class CustomerService {
   public deleteCartUrl : string = MainService.baseUrl+"deletecart/";
   public addLocationUrl : string = MainService.baseUrl+"addlocation";
   public getUserLocationUrl : string = MainService.baseUrl+"userlocation/";
+  public getPaymentTypesUrl : string = MainService.baseUrl+"payment?lang=";
+  public confirmOrderUrl : string = MainService.baseUrl+"insertorder";
+  public orderHistoryUrl : string = MainService.baseUrl+"orderhiostry/";
 
 
 
+  public static readonly paymentVisaCode = 1 ;
+  public static readonly paymentPaypalCode = 2 ;
+  public static readonly paymentMadaCode = 3 ;
+  public static readonly paymentSdadCode = 4 ;
+  public static readonly paymentCashCode = 5 ;
 
-
-
-
+  public static readonly RecentOrderCode = 1 ;
+  public static readonly LastOrderCode = 2 ;
 
 
   constructor(public http: Http,public nativeStorage : NativeStorage,
               public commonService : CommonService, public translateService :TranslateService) {
     console.log('Hello CustomerService Provider');
+  }
+  orderHistory(OrderState : number)
+  {
+    let body = {
+      OrderState : OrderState
+    };
+    return this.http.post(this.orderHistoryUrl + this.customer.UserID , body ).map((res) => res.json());
+  }
+  confirmOrder(PaymentID :  number , LocationID : number)
+  {
+    let body = {
+      UserID : this.customer.UserID ,
+      PaymentID : PaymentID ,
+      LocationID : LocationID
+    };
+    return this.http.post(this.confirmOrderUrl , body ).map((res) => res.json());
+  }
+  getPaymentTypes()
+  {
+    return this.http.get(this.getPaymentTypesUrl + MainService.lang ).map((res) => res.json());
   }
   getUserLocation() {
     return this.http.get(this.getUserLocationUrl + this.customer.UserID ).map((res) => res.json());

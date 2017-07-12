@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {CustomerService} from "../../providers/customer-service";
+import {CommonService} from "../../providers/common-service";
+import {OrderDetailsPage} from "../order-details/order-details";
+import {HomePage} from "../home/home";
 
 
 @Component({
@@ -7,12 +11,45 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'history.html',
 })
 export class HistoryPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public recentHistory : any [] = [];
+  public lastHistory : any [] = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public customerService : CustomerService , public commonService :  CommonService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HistoryPage');
+  }
+  ionViewWillEnter()
+  {
+    this.customerService.orderHistory(CustomerService.RecentOrderCode).subscribe((res)=>{
+      this.recentHistory = res ;
+    });
+    this.customerService.orderHistory(CustomerService.LastOrderCode).subscribe((res)=>{
+      this.lastHistory = res ;
+    });
+  }
+  handleMonth(date : string)
+  {
+    let str = date;
+    let res = str.split("th ");
+    return res[1];
+  }
+  handleDay(date : string)
+  {
+    let str = date;
+    let res = str.split("th ");
+    return res[0];
+  }
+  orderDetails(order : any)
+  {
+    this.navCtrl.push(OrderDetailsPage,{
+      order : order
+    });
+  }
+  goToHome()
+  {
+    this.navCtrl.push(HomePage);
   }
 
 }

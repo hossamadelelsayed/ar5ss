@@ -5,12 +5,16 @@ import {CommonService} from "../../providers/common-service";
 import {MainService} from "../../providers/main-service";
 import {PayPal, PayPalConfiguration, PayPalPayment} from "@ionic-native/paypal";
 import {CustomerService} from "../../providers/customer-service";
+import {HomePage} from "../home/home";
 @Component({
   selector: 'page-summary',
   templateUrl: 'summary.html',
 })
 export class SummaryPage {
   public userLocations : any[] ;
+  public paymentTypes : any[] ;
+  public PaymentID : number = 0;
+  public LocationID : number = 0 ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public actionSheetCtrl :  ActionSheetController , public commonService : CommonService ,
               public payPal: PayPal , public customerService : CustomerService) {
@@ -24,11 +28,14 @@ export class SummaryPage {
     this.customerService.getUserLocation().subscribe((res)=>{
         this.userLocations = res ;
     });
+    this.customerService.getPaymentTypes().subscribe((res)=>{
+      this.paymentTypes = res ;
+    });
   }
   goaddlocation(){
     this.navCtrl.push(AddlocationPage);
   }
-  showUserLocations()
+  getUserLocationsButtons(newLocationTrans : string) : any []
   {
     let buttons : any[] = [] ;
     for(let i = 0 ; i < this.userLocations.length ; i++) {
@@ -37,78 +44,81 @@ export class SummaryPage {
           text: this.userLocations[i].Place,
           icon: 'navigate',
           handler: () => {
-            console.log('VISA');
+            this.LocationID = this.userLocations[i].LocationID;
           }
         };
-
       buttons.push(button);
-      console.log(this.userLocations[i].Place)
     }
+    let addNewLocationButton =
+      {
+        text: newLocationTrans,
+        icon: 'navigate',
+        handler: () => {
+          this.navCtrl.push(AddlocationPage);
+        }
+      };
+    buttons.push(addNewLocationButton);
+    return buttons ;
+  }
 
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'dfh',
-      cssClass: 'action-sheets-basic-page',
-      buttons: buttons
+  showUserLocations()
+  {
+    this.commonService.translateArray(
+      [
+        'Determine Your Location' ,
+        'Add New Location'
+      ]).subscribe((translatedArray : string[])=>{
+      let actionSheet = this.actionSheetCtrl.create({
+        title: translatedArray[0],
+        cssClass: 'action-sheets-basic-page',
+        buttons: this.getUserLocationsButtons(translatedArray[1])
+      });
+      actionSheet.present();
     });
-    actionSheet.present();
+  }
+  handlePaymentTypes(code : number)
+  {
+    switch(code){
+      case CustomerService.paymentPaypalCode:
+        this.payPalPayment("10");
+        break;
+      default:
+        alert("Wrong Grade.........");
+
+    }
+  }
+  getPaymentTypesButtons() : any []
+  {
+    let buttons : any[] = [] ;
+    for(let i = 0 ; i < this.paymentTypes.length ; i++) {
+      let button =
+        {
+          text: this.paymentTypes[i].payment_name,
+          icon: 'cash',
+          handler: () => {
+            this.handlePaymentTypes(this.paymentTypes[i].PaymentID);
+          }
+        };
+      buttons.push(button);
+    }
+    return buttons ;
   }
   showPaymentMethod()
   {
     this.commonService.translateArray(
-      ['Payment Method',
-        'VISA',
-        'MADA',
-        'PAYPAL',
-        'SADAD',
-        'CASH']).subscribe((translatedArray : string[])=>{
+      ['Payment Method']).subscribe((translatedArray : string[])=>{
       let actionSheet = this.actionSheetCtrl.create({
         title: translatedArray[0],
         cssClass: 'action-sheets-basic-page',
-        buttons: [
-          {
-            text: translatedArray[1],
-            icon: 'cash',
-            handler: () => {
-              console.log('VISA');
-            }
-          },
-          {
-            text: translatedArray[2],
-            icon: 'cash',
-            handler: () => {
-              console.log('MADA');
-            }
-          },
-          {
-            text: translatedArray[3],
-            icon: 'cash',
-            handler: () => {
-              console.log('PAYPAL');
-              this.payPalPayment('10');
-            }
-          },
-          {
-            text: translatedArray[4],
-            icon: 'cash',
-            handler: () => {
-              console.log('SADAD');
-            }
-          },
-          {
-            text: translatedArray[5],
-            icon: 'cash',
-            handler: () => {
-              console.log('CASH');
-            }
-          }
-        ]
+        buttons: this.getPaymentTypesButtons()
       });
       actionSheet.present();
-
     });
   }
   payPalPayment(amount : string)
   {
+    //temp
+    this.PaymentID = CustomerService.paymentPaypalCode ;
     this.payPal.init({
       PayPalEnvironmentProduction: MainService.payPalEnvironmentProduction ,//'YOUR_PRODUCTION_CLIENT_ID'
       PayPalEnvironmentSandbox: MainService.payPalEnvironmentSandbox//'YOUR_SANDBOX_CLIENT_ID'
@@ -123,6 +133,7 @@ export class SummaryPage {
           // Successfully paid
           console.log(res);
           this.commonService.successToast();
+          this.PaymentID = CustomerService.paymentPaypalCode ;
 
         }, (res) => {
           // Error or render dialog closed without being successful
@@ -138,6 +149,18 @@ export class SummaryPage {
       // Error in initialization, maybe PayPal isn't supported or something else
       console.log(res);
       this.commonService.presentToast('Error in initialization, maybe PayPal isnt supported or something else');
+    });
+  }
+  confirmOrder()
+  {
+    this.customerService.confirmOrder(this.PaymentID,this.LocationID).subscribe((res)=>{
+      if(res.state == '202')
+      {
+        this.commonService.successToast();
+        this.navCtrl.push(HomePage);
+      }
+      else
+        this.commonService.errorToast();
     });
   }
 

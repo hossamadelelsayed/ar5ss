@@ -94,8 +94,8 @@
     <hr>
     </ion-list>
 <div style="background-color: #E6E6E6;">
-  <p class="total">TOTAL</p>
-  <h4 class="price">3,000 SAR</h4>
+  <p class="total">{{ 'Total' | translate}}</p>
+  <h4 class="price">3,000 {{'SAR' | translate}}</h4>
 </div>
-<button ion-button block (click)="goaddlocation()"  >confirm buying</button>
+<button [disabled]="PaymentID == 0 || LocationID == 0" ion-button block (click)="confirmOrder()">{{'Confirm' | translate}}</button>
 </ion-content>
