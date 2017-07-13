@@ -38,7 +38,6 @@ export class HomePage {
         this.wishList = res;
         this.getGroupShow();
       });
-
   }
   checkProductInFav(ProductID : number)
   {
@@ -63,16 +62,32 @@ export class HomePage {
 
   addToWishList(ProductID : number)
   {
-    this.customerService.addToWishList(ProductID).subscribe((res)=>{
-      if(res == true)
-      {
+    let iconFilter :any ;
+    iconFilter = this.elRef.toArray().filter((icon) => {
+      return (icon.nativeElement.id == ProductID);
+    });
+    if(iconFilter[0].nativeElement.style.color == 'red')
+      this.removeFav(ProductID , iconFilter[0].nativeElement);
+    else
+      this.addFav(ProductID , iconFilter[0].nativeElement);
+  }
+  addFav(ProductID : number , element : any ) {
+    this.customerService.addToWishList(ProductID).subscribe((res) => {
+      if (res == true) {
         this.commonService.successToast();
-        let iconFilter :any ;
-        iconFilter = this.elRef.toArray().filter((icon) => {
-          return (icon.nativeElement.id == ProductID);
-        });
-        iconFilter[0].nativeElement.style.color = 'red';
+        element.style.color = 'red';
       }
+      else
+        this.commonService.errorToast();
+    });
+  }
+  removeFav(ProductID : number , element : any)
+  {
+    this.customerService.deleteFav(ProductID).subscribe((res)=>{
+      if (res.state == '202') {
+            this.commonService.successToast();
+        element.style.color = 'darkgrey';
+          }
       else
         this.commonService.errorToast();
     });
@@ -101,5 +116,8 @@ export class HomePage {
   {
     this.navCtrl.push(ShoppingcartsPage);
   }
-
+  icons(rate : number)
+  {
+    return this.commonService.icons(rate);
+  }
 }

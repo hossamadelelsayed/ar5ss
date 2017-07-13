@@ -21,11 +21,7 @@
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
       <img class="prodimg" [src]="product.Image" height="140px">
       <ion-row>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon ios="ios-star" md="md-star"></ion-icon>
+          <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
       </ion-row>
       <h4>{{product.product_name}} , {{product.size}}</h4>
       <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
@@ -42,7 +38,7 @@
           [attr.id]="product.ProductID"
           #productsIcon
           style="color: red;"
-          class="hearticon" ios="ios-heart" md="md-heart" ></ion-icon>
+          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
     </div>
   </ion-col>
 </ion-row>

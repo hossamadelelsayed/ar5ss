@@ -51,11 +51,8 @@
         <img *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
         <img  class="prodimg" [src]="product.Image" height="140px">
         <ion-row>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon ios="ios-star" md="md-star"></ion-icon>
+          <ion-icon *ngFor="let icon of icons(product.Rate); let i = index"
+                    style="color:orange" [name]="icon"></ion-icon>
       </ion-row>
       <h4>{{product.product_name}} , {{product.size}}</h4>
       <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
@@ -72,7 +69,7 @@
         [attr.id]="product.ProductID"
         #productsIcon
         style="color: red"
-        class="hearticon" ios="ios-heart" md="md-heart" ></ion-icon>
+        class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
 
 
     </div>
@@ -92,11 +89,7 @@
       </ion-col>
       <ion-col col-9>
           <ion-row class="starrow">
-              <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-              <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-              <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-              <ion-icon ios="ios-star" md="md-star"></ion-icon>
-              <ion-icon ios="ios-star" md="md-star"></ion-icon>
+              <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
         </ion-row>
               <h4>{{product.product_name}} , {{product.size}}</h4>
               <h5>{{product.CategroyName}}</h5>
@@ -114,7 +107,7 @@
       *ngIf="checkProductInFav(product.ProductID)"
       [attr.id]="product.ProductID+'2'"
       #productsIcon2
-      style="color:red" class="botticon"ios="ios-heart" md="md-heart"></ion-icon>
+      style="color:red" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
        <ion-icon style="color:gray" class="botticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID)"></ion-icon>
 
   </ion-card>

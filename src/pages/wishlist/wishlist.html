@@ -29,12 +29,7 @@
     <h4>{{product.product_name}} , {{product.size}}</h4>
     <h6>{{product.ProductPrice}} SAR</h6>
     <ion-row class="stars">
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon style="color:orange" ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon ios="ios-star" md="md-star"></ion-icon>
-          <ion-icon ios="ios-star" md="md-star"></ion-icon>
-
+          <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
       <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID)"></ion-icon>
     </ion-row>
 

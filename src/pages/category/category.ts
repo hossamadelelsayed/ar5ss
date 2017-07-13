@@ -29,6 +29,10 @@ export class CategoryPage {
 
   ionViewWillEnter()
   {
+    this.getWishList();
+  }
+  getWishList()
+  {
     this.customerService.getWishList().subscribe((res)=>{
       this.wishList = res;
       this.getcategoryProducts();
@@ -36,7 +40,7 @@ export class CategoryPage {
   }
   checkProductInFav(ProductID : number)
   {
-    return this.commonService.checkProductIsExistInFavorite(this.wishList , ProductID);
+     return this.commonService.checkProductIsExistInFavorite(this.wishList , ProductID);
   }
   getcategoryProducts()
   {
@@ -59,29 +63,50 @@ export class CategoryPage {
   }
   addToWishList(ProductID : number)
   {
-    this.customerService.addToWishList(ProductID).subscribe((res)=>{
-      if(res == true)
-      {
-        this.commonService.successToast();
-        let iconFilter :any ;
-        iconFilter = this.elRef.toArray().filter((icon) => {
-          return (icon.nativeElement.id == ProductID);
-        });
-        iconFilter.forEach( function (iconFiltered)
-        {
-          iconFiltered.nativeElement.style.color = 'red';
-        });
-        let iconFilter2 :any ;
-        console.log(this.elRef2.toArray());
-        iconFilter2 = this.elRef2.toArray().filter((icon) => {
-          return (icon.nativeElement.id == ProductID+'2');
-        });
-        iconFilter2.forEach( function (iconFiltered)
-        {
-          iconFiltered.nativeElement.style.color = 'red';
-        });
-      }
+    let iconFilter :any[] = [] ;
+    iconFilter = this.elRef.toArray().filter((icon) => {
+      return (icon.nativeElement.id == ProductID);
+    });
+    for(let i = 0 ; i < iconFilter.length ; i++)
+    {
+      if(iconFilter[i].nativeElement.style.color == 'red')
+        this.removeFav(ProductID , iconFilter[i].nativeElement);
+      else
+        this.addFav(ProductID , iconFilter[i].nativeElement);
+    }
 
+
+    let iconFilter2 :any[] = [];
+    iconFilter2 = this.elRef2.toArray().filter((icon) => {
+      return (icon.nativeElement.id == ProductID+'2');
+    });
+    for(let i = 0 ; i < iconFilter2.length ; i++)
+    {
+      if(iconFilter2[i].nativeElement.style.color == 'red')
+        this.removeFav(ProductID , iconFilter2[i].nativeElement);
+      else
+        this.addFav(ProductID , iconFilter2[i].nativeElement);
+    }
+  }
+  addFav(ProductID : number , element : any ) {
+    this.customerService.addToWishList(ProductID).subscribe((res) => {
+      if (res == true) {
+        this.commonService.successToast();
+        element.style.color = 'red';
+        this.getWishList();
+      }
+      else
+        this.commonService.errorToast();
+    });
+  }
+  removeFav(ProductID : number , element : any)
+  {
+    this.customerService.deleteFav(ProductID).subscribe((res)=>{
+      if (res.state == '202') {
+        this.commonService.successToast();
+        element.style.color = 'darkgrey';
+        this.getWishList();
+      }
       else
         this.commonService.errorToast();
     });
@@ -91,6 +116,8 @@ export class CategoryPage {
     this.customerService.addToCart(ProductID).subscribe((res)=>{
       if(res == true)
         this.commonService.successToast();
+      else if(res.error)
+        this.commonService.translateAndToast(res.error);
       else
         this.commonService.errorToast();
     });
@@ -115,5 +142,9 @@ export class CategoryPage {
     this.navCtrl.push(DetailsPage,{
       ProductID :ProductID
     });
+  }
+  icons(rate : number)
+  {
+    return this.commonService.icons(rate);
   }
 }

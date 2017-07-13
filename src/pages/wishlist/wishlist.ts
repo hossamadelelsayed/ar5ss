@@ -58,4 +58,8 @@ export class WishlistPage {
       ProductID :ProductID
     });
   }
+  icons(rate : number)
+  {
+    return this.commonService.icons(rate);
+  }
 }

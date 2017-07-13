@@ -29,6 +29,7 @@ export class CustomerService {
   public getCartByCustomerUrl : string = MainService.baseUrl+"cart/";
   public getCartByTokenUrl : string = MainService.baseUrl+"cartunregtsiter/";
   public deleteWishlistUrl : string = MainService.baseUrl+"deletWishlist/";
+  public deleteFavUrl : string = MainService.baseUrl+"deletefav";
   public getComplainTypesUrl : string = MainService.baseUrl+"complaintype?lang=";
   public insertComplainUrl : string = MainService.baseUrl+"insertcomplain";
   public contactUrl : string = MainService.baseUrl+"contact";
@@ -41,6 +42,10 @@ export class CustomerService {
   public getPaymentTypesUrl : string = MainService.baseUrl+"payment?lang=";
   public confirmOrderUrl : string = MainService.baseUrl+"insertorder";
   public orderHistoryUrl : string = MainService.baseUrl+"orderhiostry/";
+  public customerRateUrl : string = MainService.baseUrl+"rate";
+  public getRelatedProductUrl : string = MainService.baseUrl+" getrelatedproduct/";
+
+
 
 
 
@@ -57,6 +62,38 @@ export class CustomerService {
   constructor(public http: Http,public nativeStorage : NativeStorage,
               public commonService : CommonService, public translateService :TranslateService) {
     console.log('Hello CustomerService Provider');
+  }
+  getRelatedProduct(CategoryID : number)
+  {
+    return this.http.get(this.getRelatedProductUrl + CategoryID ).map((res) => res.json());
+  }
+  customerRate(ProductID : number , Rate : number)
+  {
+    let body = {
+      ProductID : ProductID,
+      Rate : Rate,
+      UserID : this.customer.UserID
+    };
+    return this.http.post(this.customerRateUrl , body ).map((res) => res.json());
+  }
+  deleteFav(ProductID : number)
+  {
+    let body ;
+    if(this.customer != null)
+    {
+      body = {
+        ProductID : ProductID ,
+        UserID : this.customer.UserID
+      };
+    }
+    else
+    {
+      body = {
+        ProductID : ProductID ,
+        TokenID : this.deviceToken
+      };
+    }
+    return this.http.post(this.deleteFavUrl , body ).map((res) => res.json());
   }
   orderHistory(OrderState : number)
   {

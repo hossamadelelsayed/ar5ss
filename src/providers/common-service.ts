@@ -14,6 +14,9 @@ import {Observable, Subscriber} from "rxjs";
 @Injectable()
 export class CommonService {
   public loader : Loading;
+  public readonly maxRate: number = 5;
+  public iconEmpty: string = 'star-outline';
+  public iconFull: string = 'star';
   constructor(public http: Http,public toastCtrl : ToastController ,
               public translateService : TranslateService , public loadingCtrl : LoadingController) {
     console.log('Hello CommonService Provider');
@@ -114,6 +117,19 @@ export class CommonService {
     for(let i = 0 ; i < inputs.length ; i++)
       sum += inputs[i].value ;
     return sum;
+  }
+  // Rate Service
+  public icons(rate : number): string[] {
+    let icons = [];
+    for (let i = 1; i <= this.maxRate; i++) {
+      if (i <= rate) {
+        icons.push(this.iconFull);
+      }
+      else {
+        icons.push(this.iconEmpty);
+      }
+    }
+    return icons;
   }
   /*let ArrayFilter :any[] ;
   ArrayFilter = inputs.filter((item) => {

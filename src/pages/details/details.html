@@ -3,7 +3,7 @@
 
   <ion-navbar>
     <ion-title>{{ 'Product Details' | translate}}
-       <ion-icon style="float: right ;color: darkgray"  name="heart" (click)="addToWishList(ProductID)" item-right></ion-icon>
+       <ion-icon style="float: right ;color: darkgray" #fav name="heart" (click)="addToWishList(ProductID)" item-right></ion-icon>
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -21,11 +21,7 @@
 <h2 text-center>{{productDetails?.product_name}}<small>{{productDetails?.size}}</small></h2>
 <p class="style">{{productDetails?.ProductPrice}} {{ 'SAR' | translate}}</p>
 <div style="text-align: center">
- <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="style" name="star-outline"></ion-icon>
- <ion-icon class="style" name="star-outline"></ion-icon>
+ <ion-icon *ngFor="let icon of icons(productDetails?.Rate); let i = index;" class="iconcolor" [name]="icon"></ion-icon>
 <br>
   <button class="btn1" ion-button round
           *ngFor="let color of productDetails?.product_color"
@@ -34,7 +30,6 @@
 </div>
 <hr>
     <button class="btn3" (click)="otherOffer()" > {{ 'Other Offers found' | translate}}</button>
-
  <hr>
   <!--<div class="btna">
     <h4>Shipping</h4>
