@@ -41,7 +41,7 @@
         <h5>{{product.product_name}} , {{product.size}}</h5>
         <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
         </div>
-          <ion-icon class="cardfoot" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID)"></ion-icon>
+          <ion-icon class="cardfoot" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
           <ion-icon
             *ngIf="!checkProductInFav(product.ProductID)"
             [attr.id]="product.ProductID"

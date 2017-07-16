@@ -111,7 +111,7 @@ export class CategoryPage {
         this.commonService.errorToast();
     });
   }
-  addToCart(ProductID : number)
+  addToCart(ProductID : number )
   {
     this.customerService.addToCart(ProductID).subscribe((res)=>{
       if(res == true)

@@ -1,58 +1,25 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title class="ti">Other Offer</ion-title>
+    <ion-title class="ti">{{ 'Other Offer' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-row>
-      <ion-col col-4>
-        <img class="img" src="assets/imgs/cat_refrigerator.png">
-          <button ion-button round ></button>
-      </ion-col>
-      <ion-col col-8>
-      <h2 style="font-family: inherit; color: #4A4D4D;">SAMSUNG,18 <small>FT</small></h2>
-    <p style="font-size: 16px; color:gray;">5,100 SAR</p>
-    <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor2" name="md-star"></ion-icon>
- <ion-icon class="iconcolor2" name="md-star"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <hr>
-    <ion-row>
-      <ion-col col-4>
-        <img class="img" src="assets/imgs/cat_refrigerator.png">
-          <button  ion-button round ></button>
-      </ion-col>
-      <ion-col col-8>
-      <h2 style="font-family: inherit; color: #4A4D4D;">SAMSUNG,18 <small>FT</small></h2>
-    <p style="font-size: 16px; color:gray;">5,250 SAR</p>
-    <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor" name="star"></ion-icon>
-<ion-icon class="iconcolor2" name="md-star"></ion-icon>
- <ion-icon class="iconcolor2" name="md-star"></ion-icon>
- <ion-icon class="iconcolor2" name="md-star"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <hr>
-    <ion-row>
-      <ion-col col-4>
-        <img class="img" src="assets/imgs/cat_refrigerator.png">
-          <button  ion-button round ></button>
-      </ion-col>
-      <ion-col col-8>
-      <h2 style="font-family: inherit; color: #4A4D4D;">SAMSUNG,18 <small>FT</small></h2>
-    <p style="font-size: 16px; color:gray;">5,600 SAR</p>
-    <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor" name="star"></ion-icon>
- <ion-icon class="iconcolor2" name="md-star"></ion-icon>
- <ion-icon class="iconcolor2" name="md-star"></ion-icon>
- <ion-icon class="iconcolor2" name="md-star"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <hr>
+    <div *ngFor="let product of relatedProduct" (click)="viewProduct(product.ProductID)">
+      <ion-row>
+        <ion-col col-4>
+          <img class="img" [src]="product.Image">
+          <button ion-button round [style.background]="product.ColorHexa"></button>
+        </ion-col>
+        <ion-col col-8>
+          <h2 style="font-family: inherit; color: #4A4D4D;">{{product.product_name}} ,  <small>{{product.size}}</small></h2>
+          <p style="font-size: 16px; color:gray;">{{product.ProductPrice}} {{ 'SAR' | translate}}</p>
+          <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon">
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+      <hr>
+    </div>
   </ion-list>
 </ion-content>

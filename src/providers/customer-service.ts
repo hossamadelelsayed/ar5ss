@@ -5,6 +5,7 @@ import {MainService} from "./main-service";
 import {NativeStorage} from "@ionic-native/native-storage";
 import {CommonService} from "./common-service";
 import {TranslateService} from "@ngx-translate/core";
+import {Geolocation} from "@ionic-native/geolocation";
 
 /*
   Generated class for the CustomerService provider.
@@ -18,6 +19,8 @@ import {TranslateService} from "@ngx-translate/core";
 export class CustomerService {
 
   public customer ;
+  public lat : any ;
+  public lang : any ;
   public deviceToken : string ="xyzx";
   public customerCreateUrl : string = MainService.baseUrl+"register/";
   public customerLoginUrl : string = MainService.baseUrl+"login/";
@@ -43,7 +46,7 @@ export class CustomerService {
   public confirmOrderUrl : string = MainService.baseUrl+"insertorder";
   public orderHistoryUrl : string = MainService.baseUrl+"orderhiostry/";
   public customerRateUrl : string = MainService.baseUrl+"rate";
-  public getRelatedProductUrl : string = MainService.baseUrl+" getrelatedproduct/";
+  public getRelatedProductUrl : string = MainService.baseUrl+"getrelatedproduct/";
 
 
 
@@ -60,12 +63,13 @@ export class CustomerService {
 
 
   constructor(public http: Http,public nativeStorage : NativeStorage,
-              public commonService : CommonService, public translateService :TranslateService) {
+              public commonService : CommonService, public translateService :TranslateService ,
+              public geolocation: Geolocation) {
     console.log('Hello CustomerService Provider');
   }
-  getRelatedProduct(CategoryID : number)
+  getRelatedProduct(ProductID : number)
   {
-    return this.http.get(this.getRelatedProductUrl + CategoryID ).map((res) => res.json());
+    return this.http.get(this.getRelatedProductUrl + ProductID ).map((res) => res.json());
   }
   customerRate(ProductID : number , Rate : number)
   {
@@ -181,7 +185,7 @@ export class CustomerService {
   {
       return this.http.delete(this.deleteWishlistUrl+favoritID).map((res) => res.json());
   }
-  addToCart(ProductID : number)
+  addToCart(ProductID : number )
   {
     let body ;
     if(this.customer != null)
@@ -189,7 +193,9 @@ export class CustomerService {
       body = {
         ProductID : ProductID ,
         UserID : this.customer.UserID,
-        QTY: 1
+        QTY: 1 ,
+        Lang : this.lang ,
+        Lat : this.lat
       };
     }
     else
@@ -197,7 +203,9 @@ export class CustomerService {
       body = {
         ProductID : ProductID ,
         TokenID : this.deviceToken ,
-        QTY: 1
+        QTY: 1 ,
+        Lang : this.lang ,
+        Lat : this.lat
       };
     }
     return this.http.post(this.addToCartUrl,body).map((res) => res.json());
@@ -296,5 +304,14 @@ export class CustomerService {
         },
         error => console.error(error)
       );
+  }
+
+  customerSetLocation()
+  {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lat = resp.coords.latitude ;
+      this.lang = resp.coords.longitude ;
+      console.log(this.lat + ' ' + this.lat);
+    });
   }
 }

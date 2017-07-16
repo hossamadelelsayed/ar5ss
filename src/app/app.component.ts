@@ -33,6 +33,8 @@ export class MyApp {
       splashScreen.hide();
       // chseck for any customer
       this.customerService.customerStorageGet();
+      // get location
+      this.customerService.customerSetLocation();
       // push
       this.pushInit();
       // rtl init

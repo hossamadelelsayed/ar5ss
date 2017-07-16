@@ -19,13 +19,21 @@ export class ProductService {
   public hotOfferUrl : string = MainService.baseUrl+"hotoffer";
   public productDetailsUrl : string = MainService.baseUrl+"productDetails/";
   public productBarcodeUrl : string = MainService.baseUrl+"productBarcode/";
-
+  public productColorUrl : string = MainService.baseUrl+"productcolor";
 
 
 
 
   constructor(public http: Http) {
     console.log('Hello ProductService Provider');
+  }
+  productColor(ProductID : number , ColorID : number)
+  {
+    let body = {
+      ProductID : ProductID ,
+      ColorID : ColorID
+      };
+    return this.http.post(this.productColorUrl , body ).map((res) => res.json());
   }
   productBarcode(barcode : any)
   {
@@ -55,4 +63,5 @@ export class ProductService {
   {
     return this.http.get(this.groupShowUrl).map((res) => res.json());
   }
+
 }

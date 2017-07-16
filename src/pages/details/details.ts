@@ -1,9 +1,10 @@
 import {Component, ViewChildren} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {ProductService} from "../../providers/product-service";
 import {CommonService} from "../../providers/common-service";
 import {OtherofferPage} from "../otheroffer/otheroffer";
+import {SliderImagePage} from "../slider-image/slider-image";
 
 @Component({
   selector: 'page-details',
@@ -17,7 +18,7 @@ export class DetailsPage {
   @ViewChildren('fav') fav;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService : CustomerService , public productService: ProductService ,
-              public commonService : CommonService) {
+              public commonService : CommonService , public modalCtrl: ModalController ) {
     this.ProductID = this.navParams.data.ProductID ;
   }
 
@@ -41,7 +42,9 @@ export class DetailsPage {
     return this.commonService.checkProductIsExistInFavorite(this.wishList , ProductID);
   }
   otherOffer(){
-      this.navCtrl.push(OtherofferPage);
+      this.navCtrl.push(OtherofferPage,{
+        ProductID : this.ProductID
+      });
     }
 
   addToWishList(ProductID : number)
@@ -81,8 +84,17 @@ export class DetailsPage {
         this.commonService.errorToast();
     });
   }
+  goToSliderImage(ColorID : number)
+  {
+    let modal = this.modalCtrl.create(SliderImagePage,{
+      ProductID : this.ProductID ,
+      ColorID : ColorID
+    });
+    modal.present();
+  }
   icons(rate : number)
   {
     return this.commonService.icons(rate);
   }
+
 }

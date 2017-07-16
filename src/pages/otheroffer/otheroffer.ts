@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CommonService} from "../../providers/common-service";
 import {CustomerService} from "../../providers/customer-service";
+import {DetailsPage} from "../details/details";
 
 
 @Component({
@@ -10,10 +11,11 @@ import {CustomerService} from "../../providers/customer-service";
 })
 export class OtherofferPage {
 
-  public CategoryID : number ;
+  public ProductID : number ;
+  public relatedProduct : any[] ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
-              public commonService : CommonService , public customerService : CustomerService) {
-
+              public commonService : CommonService , public customerService : CustomerService ) {
+      this.ProductID = this.navParams.data.ProductID;
   }
 
   ionViewDidLoad() {
@@ -21,9 +23,19 @@ export class OtherofferPage {
   }
   ionViewWillEnter()
   {
-    this.customerService.getRelatedProduct(this.CategoryID).subscribe((res)=>{
-
+    this.customerService.getRelatedProduct(this.ProductID).subscribe((res)=>{
+        this.relatedProduct = res ;
     });
+  }
+  viewProduct(ProductID : number)
+  {
+    this.navCtrl.push(DetailsPage,{
+      ProductID :ProductID
+    });
+  }
+  icons(rate : number)
+  {
+    return this.commonService.icons(rate);
   }
 
 }

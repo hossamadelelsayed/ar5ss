@@ -25,7 +25,8 @@
 <br>
   <button class="btn1" ion-button round
           *ngFor="let color of productDetails?.product_color"
-          [style.background]="color.colors_of_product.ColorHexa" >
+          [style.background]="color.colors_of_product.ColorHexa"
+          (click)="goToSliderImage(color.ColorID)">
   </button>
 </div>
 <hr>

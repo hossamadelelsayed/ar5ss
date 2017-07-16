@@ -94,7 +94,7 @@ export class HomePage {
   }
   addToCart(ProductID : number)
   {
-    this.customerService.addToCart(ProductID).subscribe((res)=>{
+    this.customerService.addToCart(ProductID ).subscribe((res)=>{
       if(res == true)
       {
         this.commonService.successToast();
