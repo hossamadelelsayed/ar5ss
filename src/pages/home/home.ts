@@ -9,6 +9,7 @@ import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {DetailsPage} from "../details/details";
 import {ShoppingcartsPage} from "../shoppingcarts/shoppingcarts";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 
 
 @Component({
@@ -20,10 +21,13 @@ export class HomePage {
   public groupShow : any ;
   public wishList : any ;
   public cartNo : number = 0 ;
+  public productSearchResult : any[] ;
+  public showSearch : boolean = false ;
+  public KeyWord : string  ;
   @ViewChildren('productsIcon') elRef;
   constructor(public navCtrl: NavController , public productService : ProductService ,
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
-              public commonService : CommonService) {
+              public commonService : CommonService , private barcodeScanner: BarcodeScanner) {
 
   }
   ionViewWillEnter()
@@ -115,6 +119,31 @@ export class HomePage {
   goToCart()
   {
     this.navCtrl.push(ShoppingcartsPage);
+  }
+  searchProduct(){
+  if(this.KeyWord != ''){
+      this.commonService.presentLoading('Please Wait ...');
+      this.showSearch = true ;
+      this.productService.searchProduct(this.KeyWord).subscribe((res)=>{
+        this.productSearchResult = res ;
+        this.commonService.dismissLoading();
+      });
+    }
+    else
+      this.showSearch = false ;
+  }
+  scan()
+  {
+    this.barcodeScanner.scan().then((barcodeData) => {
+      // Success! Barcode data is here
+      if(!barcodeData.cancelled){
+        this.KeyWord = barcodeData.text ;
+        this.searchProduct();
+      }
+    }, (err) => {
+      // An error occurred
+      console.log(err);
+    });
   }
   icons(rate : number)
   {

@@ -52,6 +52,7 @@ export class CustomerService {
 
 
 
+
   public static readonly paymentVisaCode = 1 ;
   public static readonly paymentPaypalCode = 2 ;
   public static readonly paymentMadaCode = 3 ;

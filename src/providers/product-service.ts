@@ -20,12 +20,20 @@ export class ProductService {
   public productDetailsUrl : string = MainService.baseUrl+"productDetails/";
   public productBarcodeUrl : string = MainService.baseUrl+"productBarcode/";
   public productColorUrl : string = MainService.baseUrl+"productcolor";
+  public searchProductUrl : string = MainService.baseUrl+"serachproduct";
 
 
 
 
   constructor(public http: Http) {
     console.log('Hello ProductService Provider');
+  }
+  searchProduct(KeyWord : string)
+  {
+    let body = {
+      KeyWord : KeyWord
+    };
+    return this.http.post(this.searchProductUrl , body ).map((res) => res.json());
   }
   productColor(ProductID : number , ColorID : number)
   {

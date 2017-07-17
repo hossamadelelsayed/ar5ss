@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-       
+
         <span>{{ 'Main' | translate }}</span>
        <div style="float:right" >
        <!--<ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>-->
@@ -10,15 +10,14 @@
        </div>
     </ion-title>
   </ion-navbar>
-  
+
   <ion-item class="headitem">
-   
-     <ion-input class="headinput"style="width:100px" type="text">
-       
-    </ion-input>   
-    
+
+     <ion-searchbar [(ngModel)]="KeyWord" (ionInput)="searchProduct()" class="headinput"style="width:100px" type="text">
+    </ion-searchbar>
+
   </ion-item>
-   <div style="text-align: center;background: white;padding-top: 10px;height: 54px;">
+   <div style="text-align: center;background: white;padding-top: 10px;height: 54px;" (click)="scan()" >
       <img src="assets/imgs/barcode.png">
   </div>
 </ion-header>
@@ -34,11 +33,11 @@
   </ion-slides>
 </div>
 
-
-<div class="products" *ngFor="let group of groupShow">
+<div *ngIf="!showSearch">
+  <div class="products" *ngFor="let group of groupShow">
      <h6>{{group.GroupName}}</h6>
      <span>{{ 'More' | translate}}</span>
-     
+
       <ion-scroll direction="y">
 
        <ion-card *ngFor="let product of group.product">
@@ -46,7 +45,7 @@
           <div class="imagesdiv">
             <img class="leftimg" [style.background]="product.ColorHexa">
             <img *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
-          </div>  
+          </div>
             <img class="prodimg"  [src]="product.Image" >
             <ion-row class="starrow">
             <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon">
@@ -83,10 +82,10 @@
       </ion-card>
     </ion-scroll>
   </div>
+</div>
 
-
-   <ion-row>
-  <ion-col col-6 *ngFor="let product of hotOffer">
+<ion-row *ngIf="showSearch" >
+  <ion-col col-6 *ngFor="let product of productSearchResult">
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
       <img class="prodimg" [src]="product.Image" height="140px">
       <ion-row>
@@ -111,7 +110,7 @@
     </div>
   </ion-col>
 </ion-row>
-   
+
 
 
 
