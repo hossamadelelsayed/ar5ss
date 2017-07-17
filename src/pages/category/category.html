@@ -5,7 +5,7 @@
   <ion-navbar>
     <ion-title>
           <ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>
-      <span>{{ 'Category' | translate}}</span>
+          <span>{{ 'Category' | translate}}</span>
 
 
  <div class="headdiv">
@@ -47,15 +47,17 @@
     <ion-row>
       <ion-col col-6 *ngFor="let product of categoryProducts">
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
+       <div class="imagesdiv">
         <img class="leftimg" [style.background]="product.ColorHexa">
         <img *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
-        <img  class="prodimg" [src]="product.Image" height="140px">
+       </div>
+        <div style="text-align:center;height: 130px;"><img  class="prodimg" [src]="product.Image" height="140px"></div>
         <ion-row>
           <ion-icon *ngFor="let icon of icons(product.Rate); let i = index"
                     style="color:orange" [name]="icon"></ion-icon>
       </ion-row>
       <h4>{{product.product_name}} , {{product.size}}</h4>
-      <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
+      <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
     <div class="iconsdiv">
        <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
@@ -70,8 +72,6 @@
         #productsIcon
         style="color: red"
         class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID , product.SellerID)"></ion-icon>
-
-
     </div>
   </ion-col>
     </ion-row>

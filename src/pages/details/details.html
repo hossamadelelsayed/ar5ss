@@ -2,13 +2,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'Product Details' | translate}}
+    <ion-title><span>{{ 'Product Details' | translate}}</span>
        <ion-icon style="float: right ;color: darkgray" #fav name="heart" (click)="addToWishList(ProductID)" item-right></ion-icon>
     </ion-title>
-  </ion-navbar>
+    
+    </ion-navbar>
 </ion-header>
 <ion-content class="content" padding>
-  <ion-slides class="slider" style="direction:ltr">
+  <ion-slides pagre class="slider" style="direction:ltr">
     <div *ngFor="let color of productDetails?.product_color">
       <ion-slide *ngFor="let image of color.product_image">
         <ion-item class= "align" >
