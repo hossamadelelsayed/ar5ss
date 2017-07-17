@@ -10,7 +10,7 @@ page-wishlist {
 
 
 .delete{
-     float: right;
+    
     color: gray;
     font-size: 1.8em;
 }
@@ -27,22 +27,23 @@ h6{
 
 .stars{
  color: gray;
- width: 90%;
- float: left;
+
 }
 
 .carticon{
     font-size: 30px;
     margin-top: -10px;
     color: gray;
-    float: right;
-  position: absolute;
-  right: 0px;
+    
 }
 
 .search{
        padding-right: 15px;
        padding-left: 0px;
        float: left;
+}
+
+[col-3] ,[col-9]{
+    padding: 0 5px ;
 }
 }

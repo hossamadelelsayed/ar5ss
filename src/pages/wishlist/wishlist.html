@@ -25,12 +25,17 @@
    <img [src]="product.Image" height="100%" (click)="viewProduct(product.ProductID)">
   </ion-col>
   <ion-col col-9>
-    <ion-icon class="delete" ios="ios-trash" md="md-trash" (click)="deleteWishlist(product.FavoritID)"></ion-icon>
-    <h4>{{product.product_name}} , {{product.size}}</h4>
-    <h6>{{product.ProductPrice}} SAR</h6>
+    <ion-row>
+       <ion-col col-9> <h4>{{product.product_name}} , {{product.size}}</h4></ion-col>
+       <ion-col col-3 style="text-align:end"><ion-icon class="delete" ios="ios-trash" md="md-trash" (click)="deleteWishlist(product.FavoritID)"></ion-icon></ion-col>
+     
+    </ion-row>
+    <ion-row>
+      <ion-col col-12> <h6>{{product.ProductPrice}} SAR</h6></ion-col>
+    </ion-row>
     <ion-row class="stars">
-          <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
-      <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
+          <ion-col col-9><ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon></ion-col>
+          <ion-col col-3 style="text-align:end"><ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon></ion-col>
     </ion-row>
 
   </ion-col>

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-       <ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>
+       
         <span>{{ 'Main' | translate }}</span>
        <div style="float:right" >
        <!--<ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>-->
@@ -10,6 +10,17 @@
        </div>
     </ion-title>
   </ion-navbar>
+  
+  <ion-item class="headitem">
+   
+     <ion-input class="headinput"style="width:100px" type="text">
+       
+    </ion-input>   
+    
+  </ion-item>
+   <div style="text-align: center;background: white;padding-top: 10px;height: 54px;">
+      <img src="assets/imgs/barcode.png">
+  </div>
 </ion-header>
 
 <ion-content>
@@ -25,40 +36,83 @@
 
 
 <div class="products" *ngFor="let group of groupShow">
-      <h6>{{group.GroupName}}</h6>
-      <span>{{ 'More' | translate}}</span>
+     <h6>{{group.GroupName}}</h6>
+     <span>{{ 'More' | translate}}</span>
+     
       <ion-scroll direction="y">
 
        <ion-card *ngFor="let product of group.product">
         <div class="detaildiv" (click)="viewProduct(product.ProductID)">
+          <div class="imagesdiv">
             <img class="leftimg" [style.background]="product.ColorHexa">
             <img *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
+          </div>  
             <img class="prodimg"  [src]="product.Image" >
             <ion-row class="starrow">
             <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon">
             </ion-icon>
             </ion-row>
-        <h5>{{product.product_name}} , {{product.size}}</h5>
-        <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
+        <h4>{{product.product_name}} , {{product.size}}</h4>
+        <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
         </div>
-          <ion-icon class="cardfoot" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
-          <ion-icon
+
+        <ion-row>
+          <ion-col col-3>
+            <ion-icon class="cardfoot" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
+          </ion-col>
+          <ion-col col-6></ion-col>
+          <ion-col col-3>
+             <ion-icon
             *ngIf="!checkProductInFav(product.ProductID)"
             [attr.id]="product.ProductID"
             #productsIcon
             class="cardfoot"
-            style="float:right"
             ios="ios-heart"  md="md-heart"
             (click)="addToWishList(product.ProductID)"></ion-icon>
+
+
          <ion-icon
            *ngIf="checkProductInFav(product.ProductID)"
            [attr.id]="product.ProductID"
            #productsIcon
            class="cardfoot"
-           style="float:right;color: red"
+           style="color: red"
            ios="ios-heart"  md="md-heart" (click)="addToWishList(product.ProductID , product.SellerID)"></ion-icon>
+          </ion-col>
+        </ion-row>
       </ion-card>
-
     </ion-scroll>
-</div>
+  </div>
+
+
+   <ion-row>
+  <ion-col col-6 *ngFor="let product of hotOffer">
+    <div class="contdiv" (click)="viewProduct(product.ProductID)">
+      <img class="prodimg" [src]="product.Image" height="140px">
+      <ion-row>
+          <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
+      </ion-row>
+      <h4>{{product.product_name}} , {{product.size}}</h4>
+      <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
+    </div>
+    <div class="iconsdiv">
+       <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
+        <ion-icon
+          *ngIf="!checkProductInFav(product.ProductID)"
+          [attr.id]="product.ProductID"
+          #productsIcon
+          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+        <ion-icon
+          *ngIf="checkProductInFav(product.ProductID)"
+          [attr.id]="product.ProductID"
+          #productsIcon
+          style="color: red;"
+          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+    </div>
+  </ion-col>
+</ion-row>
+   
+
+
+
 </ion-content>

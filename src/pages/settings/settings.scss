@@ -28,4 +28,9 @@ page-settings {
 .list-md .item-block .item-inner{
     border-bottom: none;
 }
+
+[dir="rtl"] .item-md {
+    padding-right: 0px !important;
+    padding-left: 0;
+}
 }
