@@ -87,10 +87,7 @@ page-category {
             padding-top: 7px;
             font-size: 20px;
     }
-  h5{
-      color:gray;
-  }
-
+ 
  h6{
         width: 50%;
         float: left;
@@ -113,18 +110,31 @@ h4{
         color:lightgray;
     }
 }
-
+ .imagesdiv{
+        height: 40px;
+        max-height: 60px;
+        direction:ltr
+    }
 .leftimg{
-        width: 23px;
-        height: 23px;
-        border-radius: 20px;
+            width: 23px;
+            margin: 10px 0 0 5px;
+            height: 23px;
+            padding: 10px;
+            border: 1px solid lightgray;
+            border-radius: 20px;
     }
 
-
+   .prodimg{
+            max-height: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+                
+   }
 
 
 .contdiv{
-
+        
         background: white;
         height: 260px;
         border-radius: 7px;
@@ -134,35 +144,26 @@ h4{
        margin: 5px;
        }
 
-        .prodimg{
-            height: 100px;
-            width: 65%;
-            margin-left: 15%;
-            margin-top: 5%;
-        }
+      
 
         .row{
-            padding-left: 10px;
-             padding-top:15px;
+          padding: 0 10px;
             ion-icon{
                 color:gray;
             }
         }
+        h4{
+            padding:0 10px;
+            margin: 5px 0;
+            font-size: 15px;
 
-         h4{
-                text-align: left;
-                padding-left: 10px;
-                margin: 0;
-                padding-top: 5px;
-                font-weight: normal;
-            }
-            h6{
-                margin: 0;
-                text-align: left;
-                padding-left:10px;
-                padding-top: 5px;
-                color:gray;
-            }
+            
+        }
+        h5{
+            color:gray;
+            font-size: 11px;
+            padding: 0 10px;
+          }
 }
 .iconsdiv{
         height: 41px;
