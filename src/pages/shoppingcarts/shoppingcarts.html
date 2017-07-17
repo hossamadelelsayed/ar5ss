@@ -26,7 +26,7 @@
     <p style="font-size: 16px; color:red;">
       <ion-input [attr.id]="'price'+product.ProductID" [hidden]="true" #prices [value]="quantity?.value * product.ProductPrice" ></ion-input>
       {{ quantity?.value * product.ProductPrice}} {{ 'SAR' | translate}}</p>
-    <p class="shipping">(15 SAR Shipping)</p>
+    <p class="shipping">({{product.Shiping}} {{'SAR' | translate}} {{'Shipping' | translate}})</p>
        <ion-item style="background-color: inherit;">
         <ion-select class="sel" #quantity [(ngModel)]="product.QTY" el (ionChange)="updateQTY(quantity?.value,product.CartID)" placeholder="{{1}}QTY" >
              <ion-option value="1">1</ion-option>

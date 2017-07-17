@@ -74,9 +74,9 @@ export class HotoffersPage {
     else
       this.addFav(ProductID , iconFilter[0].nativeElement);
   }
-  addToCart(ProductID : number)
+  addToCart(ProductID : number , SellerID : number)
   {
-    this.customerService.addToCart(ProductID).subscribe((res)=>{
+    this.customerService.addToCart(ProductID , SellerID).subscribe((res)=>{
       if(res == true)
         this.commonService.successToast();
       else if(res.error)

@@ -185,7 +185,7 @@ export class CustomerService {
   {
       return this.http.delete(this.deleteWishlistUrl+favoritID).map((res) => res.json());
   }
-  addToCart(ProductID : number )
+  addToCart(ProductID : number , SellerID : number)
   {
     let body ;
     if(this.customer != null)
@@ -195,7 +195,8 @@ export class CustomerService {
         UserID : this.customer.UserID,
         QTY: 1 ,
         Lang : this.lang ,
-        Lat : this.lat
+        Lat : this.lat ,
+        SellerID : SellerID
       };
     }
     else
@@ -205,7 +206,8 @@ export class CustomerService {
         TokenID : this.deviceToken ,
         QTY: 1 ,
         Lang : this.lang ,
-        Lat : this.lat
+        Lat : this.lat ,
+        SellerID : SellerID
       };
     }
     return this.http.post(this.addToCartUrl,body).map((res) => res.json());

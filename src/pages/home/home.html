@@ -4,7 +4,7 @@
        <ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>
         <span>{{ 'Main' | translate }}</span>
        <div style="float:right" >
-       <ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+       <!--<ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>-->
        <p class="cartNo">{{cartNo}}</p>
        <ion-icon ios="ios-cart" md="md-cart" (click)="goToCart()"></ion-icon>
        </div>
@@ -15,7 +15,7 @@
 <ion-content>
 <div class="imgdiv">
   <ion-slides>
-    <ion-slide
+    <ion-slide dir="ltr"
       *ngFor="let image of hotads"
       style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
       (click)="goToHotOffers()">
@@ -56,7 +56,7 @@
            #productsIcon
            class="cardfoot"
            style="float:right;color: red"
-           ios="ios-heart"  md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+           ios="ios-heart"  md="md-heart" (click)="addToWishList(product.ProductID , product.SellerID)"></ion-icon>
       </ion-card>
 
     </ion-scroll>

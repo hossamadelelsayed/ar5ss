@@ -39,7 +39,7 @@ export class MyApp {
       this.pushInit();
       // rtl init
       this.translate.setDefaultLang('ar');
-      //platform.setDir('rtl', true);
+      platform.setDir('rtl', true);
     });
   }
   pushInit()

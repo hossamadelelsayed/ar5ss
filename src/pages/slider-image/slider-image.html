@@ -14,7 +14,7 @@
 
 
 <ion-content class="content" padding>
-  <ion-slides class="slider">
+  <ion-slides class="slider" dir="ltr">
     <ion-slide *ngFor="let image of images"
                style="background-size: cover;" [style.background-image]="getBackground(image.Image)">
     </ion-slide>

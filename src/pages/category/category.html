@@ -69,7 +69,7 @@
         [attr.id]="product.ProductID"
         #productsIcon
         style="color: red"
-        class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+        class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID , product.SellerID)"></ion-icon>
 
 
     </div>
@@ -108,7 +108,7 @@
       [attr.id]="product.ProductID+'2'"
       #productsIcon2
       style="color:red" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
-       <ion-icon style="color:gray" class="botticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID )"></ion-icon>
+       <ion-icon style="color:gray" class="botticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
 
   </ion-card>
   </ion-list>

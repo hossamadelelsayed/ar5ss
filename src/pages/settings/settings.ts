@@ -37,9 +37,9 @@ export class Settings {
   changeLang(type){
     this.translate.setDefaultLang(type);
     MainService.lang = type;
-    /*if(type == 'en')
+    if(type == 'en')
       this.platform.setDir('ltr', true);
     else
-      this.platform.setDir('rtl', true);*/
+      this.platform.setDir('rtl', true);
   }
 }

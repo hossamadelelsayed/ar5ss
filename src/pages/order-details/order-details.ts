@@ -18,6 +18,7 @@ export class OrderDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public commonService : CommonService , public customerService : CustomerService) {
     this.orderDetails = this.navParams.data.order.order_details ;
+    console.log(this.orderDetails);
   }
 
   ionViewDidLoad() {
