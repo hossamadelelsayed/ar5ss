@@ -49,7 +49,7 @@ export class DetailsPage {
 
   addToWishList(ProductID : number)
   {
-    if(this.fav._results[0].nativeElement.style.color == 'red')
+    if(this.fav._results[0].nativeElement.style.color == 'crimson')
       this.removeFav(ProductID , this.fav._results[0].nativeElement);
     else
       this.addFav(ProductID , this.fav._results[0].nativeElement);
@@ -58,7 +58,7 @@ export class DetailsPage {
     this.customerService.addToWishList(ProductID).subscribe((res) => {
       if (res == true) {
         this.commonService.successToast();
-        element.style.color = 'red';
+        element.style.color = 'crimson';
       }
       else
         this.commonService.errorToast();

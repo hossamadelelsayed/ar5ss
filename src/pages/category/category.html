@@ -70,7 +70,7 @@
         *ngIf="checkProductInFav(product.ProductID)"
         [attr.id]="product.ProductID"
         #productsIcon
-        style="color: red"
+        style="color: crimson"
         class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID , product.SellerID)"></ion-icon>
     </div>
   </ion-col>
@@ -81,9 +81,12 @@
   <ion-list *ngSwitchCase="'list'">
   <ion-card *ngFor="let product of categoryProducts">
     <div class="product" (click)="viewProduct(product.ProductID)">
-      <img class="leftimg" [style.background]="product.ColorHexa">
-      <img  *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
-       <ion-row>
+      <div style="height:35px">
+        <img class="leftimg" [style.background]="product.ColorHexa">
+        <img  *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
+      </div>
+     
+       <ion-row style="width:100%">
       <ion-col col-3>
         <img [src]="product.Image" (click)="gotohistory()">
       </ion-col>
@@ -96,20 +99,30 @@
       </ion-col>
     </ion-row>
     </div>
-       <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
-        <ion-icon
-          *ngIf="!checkProductInFav(product.ProductID)"
-          [attr.id]="product.ProductID+'2'"
-          #productsIcon2
-          style="color:darkgray"
-          class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
-    <ion-icon
-      *ngIf="checkProductInFav(product.ProductID)"
-      [attr.id]="product.ProductID+'2'"
-      #productsIcon2
-      style="color:red" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
-       <ion-icon style="color:gray" class="botticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
-
+    <ion-row>
+        <ion-col col-6>
+            <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
+      </ion-col>   
+      <ion-col col-6 style="text-align: end">    
+       <ion-icon style="color:gray" class="botticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"> 
+          <ion-icon
+              *ngIf="!checkProductInFav(product.ProductID)"
+              [attr.id]="product.ProductID+'2'"
+              #productsIcon2
+              style="color:darkgray"
+              class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+          <ion-icon
+              *ngIf="checkProductInFav(product.ProductID)"
+              [attr.id]="product.ProductID+'2'"
+              #productsIcon2
+              style="color:crimson" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
+              </ion-icon>
+              </ion-icon>
+      </ion-col>
+          
+    </ion-row>
+       
+   
   </ion-card>
   </ion-list>
 </div>

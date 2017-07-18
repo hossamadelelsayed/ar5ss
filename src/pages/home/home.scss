@@ -1,6 +1,6 @@
 page-home {
 .toolbar-title span{
-        padding-right: 30px;
+        padding-right:0 !important;
 }
   .content{
     background:#f1f5f5;
@@ -122,6 +122,12 @@ page-home {
        padding:0 5px;
 
    }
+ 
+ 
+.searchbar {
+    background: inherit;
+    padding:  0;
+}
 
 .headitem{
     padding-right: 16px;
@@ -130,15 +136,15 @@ page-home {
     float: left;
 }
 
-.headinput{
-    background-image: url('../assets/imgs/search.png');
-    background-repeat: no-repeat;
-    margin: 10px 0 0;
-    width: 90%;
-    .text-input{
-        width: 88% !important;
-    }
-}
+// .headinput{
+//     background-image: url('../assets/imgs/search.png');
+//     background-repeat: no-repeat;
+//     margin: 10px 0 0;
+//     width: 90%;
+//     .text-input{
+//         width: 88% !important;
+//     }
+// }
 
  .cardfoot{
      font-size: 22px;
@@ -193,18 +199,14 @@ page-home {
     }
 
     h4{
-      text-align: left;
-      padding-left: 10px;
-      margin: 0;
-      padding-top: 5px;
-      font-weight: normal;
+            padding:0 10px;
+            margin: 5px 0;
+            font-size: 15px;
     }
-    h6{
-      margin: 0;
-      text-align: left;
-      padding-left:10px;
-      padding-top: 5px;
-      color:gray;
+      h5{
+        color:gray;
+        font-size: 11px;
+        padding: 0 10px;
     }
   }
   .iconsdiv{
@@ -227,5 +229,10 @@ page-home {
       float: right;
       padding-right: 10px;
     }
+  }
+
+  .prodimg1{
+    width: 65%;
+    margin-top: 26%;
   }
 }

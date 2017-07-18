@@ -17,6 +17,11 @@
 
 $tabs-md-tab-icon-color:crimson;
 
+
+
+.toolbar-title{
+color:crimson !important;
+}
 .toolbar-ios ion-title{
   padding: 5px ;
 }
@@ -31,7 +36,7 @@ $tabs-md-tab-icon-color:crimson;
 .toolbar-title{
    span{
      color: crimson;
-     padding-right: 30px;
+     
    }
 
  .back-button-md{

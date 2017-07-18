@@ -3,18 +3,18 @@
 
   <ion-navbar>
     <ion-title><span>{{ 'Product Details' | translate}}</span>
-       <ion-icon style="float: right ;color: darkgray" #fav name="heart" (click)="addToWishList(ProductID)" item-right></ion-icon>
     </ion-title>
-    
+     <ion-icon style="font-size:25px;color: darkgray" #fav name="heart"
+        (click)="addToWishList(ProductID)"></ion-icon>
     </ion-navbar>
 </ion-header>
-<ion-content class="content" padding>
+<ion-content class="content">
   <ion-slides pagre class="slider" style="direction:ltr">
     <div *ngFor="let color of productDetails?.product_color">
       <ion-slide *ngFor="let image of color.product_image">
         <ion-item class= "align" >
-          <img width="100" height="100" [src]="image.Image">
-          <img *ngIf="productDetails?.HotOfferID != 0" class="hot" src="assets/imgs/hot.png">
+          <img  [src]="image.Image">
+          <img *ngIf="productDetails?.HotOfferID != 0" class="hot" src="assets/imgs/oldhot.png">
         </ion-item>
       </ion-slide>
     </div>
@@ -31,11 +31,23 @@
   </button>
 </div>
 <hr>
+    
     <button class="btn3" (click)="otherOffer()" > {{ 'Other Offers found' | translate}}</button>
  <hr>
   <!--<div class="btna">
     <h4>Shipping</h4>
     <p style="color:red;">SAR 50</p>
   </div>-->
-<button class="addtocar" ion-button large (click)="addToCart(ProductID)">{{ 'Add To Cart' | translate}}</button>
+<ion-row>
+  <ion-col col-6>
+    <button class="addtocar" ion-button large (click)="addToCart(ProductID)">{{ 'Add To Cart' | translate}}</button>
+  </ion-col>
+  <ion-col col-6>
+    <h6 style="    text-align: end;
+    margin: 0 10px;">{{'Shipping' |translate }}</h6>
+    <p style="    text-align: end;
+    margin: 10px;
+    color: #dc143c;">5000 {{ 'SAR' | translate}}<p>
+  </ion-col>
+</ion-row>
 </ion-content>
