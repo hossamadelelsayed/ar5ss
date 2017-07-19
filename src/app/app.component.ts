@@ -11,12 +11,12 @@ import {Push, PushObject, PushOptions} from "@ionic-native/push";
 import {Profile} from "../pages/profile/profile";
 import {Settings} from "../pages/settings/settings";
 import {TranslateService} from "@ngx-translate/core";
+import {ProductService} from "../providers/product-service";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage= LoginPage;
   tab1 = HomePage;
   tab2 = CategoryPage;
   tab3 = WishlistPage;
@@ -31,12 +31,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      // push
+      this.pushInit();
       // chseck for any customer
       this.customerService.customerStorageGet();
       // get location
       this.customerService.customerSetLocation();
-      // push
-      this.pushInit();
       // rtl init
       this.translate.setDefaultLang('ar');
       platform.setDir('rtl', true);
@@ -63,10 +63,10 @@ export class MyApp {
     pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
 
     pushObject.on('registration').subscribe((registration: any) => {
-
       this.customerService.deviceToken = registration.registrationId ;
-      console.log('Device registered', registration)
-    });
+      this.customerService.tokenStorageSave(registration.registrationId);
+      console.log('Device registered', registration);
+     });
 
     pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
   }

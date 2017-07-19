@@ -21,7 +21,7 @@ export class CustomerService {
   public customer ;
   public lat : any ;
   public lang : any ;
-  public deviceToken : string ="xyzx";
+  public deviceToken : string = null;
   public customerCreateUrl : string = MainService.baseUrl+"register/";
   public customerLoginUrl : string = MainService.baseUrl+"login/";
   public customerForgetPasswordUrl : string = MainService.baseUrl+"forgetpassword/";
@@ -287,6 +287,37 @@ export class CustomerService {
         error => console.error('Error storing item', error)
       );
   }
+  tokenStorageSave(token:any){
+    this.nativeStorage.setItem('token', token)
+      .then(
+        () => {
+          this.deviceToken = token;
+          console.log('Token Is Stored!');
+        },
+        error => console.error('Error storing item', error)
+      );
+  }
+  tokenStorageErase(){
+    this.nativeStorage.remove('token')
+      .then(
+        () => {
+          this.deviceToken = null;
+          console.log('Token Is Erased!');
+        },
+        error => console.error(error)
+      );
+  }
+  tokenStorageGet(){
+    this.nativeStorage.getItem('token')
+      .then(
+        (token) => {
+          this.deviceToken = token;
+          console.log('Token Is Geted!');
+          //return customer
+        },
+        error => console.error(error)
+      );
+  }
   customerStorageErase(){
     this.nativeStorage.remove('customer')
       .then(
@@ -308,7 +339,6 @@ export class CustomerService {
         error => console.error(error)
       );
   }
-
   customerSetLocation()
   {
     this.geolocation.getCurrentPosition().then((resp) => {

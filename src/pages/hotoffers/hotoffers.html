@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title>
-    <ion-icon class="search" ios="ios-search" md="md-search"></ion-icon>
+   <!-- <ion-icon class="search" ios="ios-search" md="md-search"></ion-icon> -->
       <span>{{'Hot Offers' | translate}}</span></ion-title>
   </ion-navbar>
 
@@ -27,7 +27,9 @@
       <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
     <div class="iconsdiv">
-       <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
+       <ion-icon class="carticon" (click)="addToCart(product.ProductID , product.SellerID)">
+         <img style="width: 25px;" src="assets/imgs/cart_off.png" >
+       </ion-icon>
         <ion-icon
           *ngIf="!checkProductInFav(product.ProductID)"
           [attr.id]="product.ProductID"
