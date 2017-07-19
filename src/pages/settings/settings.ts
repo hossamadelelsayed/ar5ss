@@ -7,7 +7,10 @@ import {MainService} from "../../providers/main-service";
 import {TranslateService} from "@ngx-translate/core";
 import {CommonService} from "../../providers/common-service";
 import {AboutPage} from "../about/about";
-
+import {CategoryPage} from "../category/category";
+import {Profile}from "../profile/profile";
+import {HomePage} from "../home/home";
+import {WishlistPage} from "../wishlist/wishlist";
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',
@@ -42,4 +45,18 @@ export class Settings {
     else
       this.platform.setDir('rtl', true);
   }
+
+   openhome(){
+     this.navCtrl.push(HomePage)
+   }
+   opencat(){
+    this.navCtrl.push(CategoryPage);
+  }
+  openfav(){
+    this.navCtrl.push(WishlistPage);
+  }
+  openpro(){
+    this.navCtrl.push(Profile);
+  }
+
 }

@@ -9,6 +9,9 @@ import {ProductService} from "../../providers/product-service";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {DetailsPage} from "../details/details";
+import {Profile}from "../profile/profile";
+import {Settings} from "../settings/settings";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-category',
@@ -69,7 +72,7 @@ export class CategoryPage {
     });
     for(let i = 0 ; i < iconFilter.length ; i++)
     {
-      if(iconFilter[i].nativeElement.style.color == 'red')
+      if(iconFilter[i].nativeElement.style.color == 'crimson')
         this.removeFav(ProductID , iconFilter[i].nativeElement);
       else
         this.addFav(ProductID , iconFilter[i].nativeElement);
@@ -82,7 +85,7 @@ export class CategoryPage {
     });
     for(let i = 0 ; i < iconFilter2.length ; i++)
     {
-      if(iconFilter2[i].nativeElement.style.color == 'red')
+      if(iconFilter2[i].nativeElement.style.color == 'crimson')
         this.removeFav(ProductID , iconFilter2[i].nativeElement);
       else
         this.addFav(ProductID , iconFilter2[i].nativeElement);
@@ -92,7 +95,7 @@ export class CategoryPage {
     this.customerService.addToWishList(ProductID).subscribe((res) => {
       if (res == true) {
         this.commonService.successToast();
-        element.style.color = 'red';
+        element.style.color = 'crimson';
         this.getWishList();
       }
       else
@@ -146,5 +149,21 @@ export class CategoryPage {
   icons(rate : number)
   {
     return this.commonService.icons(rate);
+  }
+
+
+
+   openhome(){
+     this.navCtrl.push(HomePage)
+   }
+
+  openfav(){
+    this.navCtrl.push(WishlistPage);
+  }
+  openpro(){
+    this.navCtrl.push(Profile);
+  }
+  opensett(){
+    this.navCtrl.push(Settings)
   }
 }

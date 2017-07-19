@@ -5,8 +5,11 @@
         <span>{{ 'Main' | translate }}</span>
        <div style="float:right" >
        <!--<ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>-->
-       <p class="cartNo">{{cartNo}}</p>
-       <ion-icon ios="ios-cart" md="md-cart" (click)="goToCart()"></ion-icon>
+       <p class="cartNo">{{ cartNo }}</p>
+       <ion-icon (click)="goToCart()">
+         <img style="width: 20px;" *ngIf="cartNo == 0" src="assets/imgs/cart_off.png">
+         <img style="width: 20px;" *ngIf="cartNo > 0" src="assets/imgs/cart_on.png">
+       </ion-icon>
        </div>
     </ion-title>
   </ion-navbar>
@@ -24,12 +27,12 @@
        </div>
     </ion-col>
 </ion-row>
-  
-       
-   
+
+
+
 
   <!--</ion-item>-->
-     
+
 
 </ion-header>
 
@@ -68,7 +71,10 @@
 
         <ion-row>
           <ion-col col-3>
-            <ion-icon class="cardfoot" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
+            <ion-icon class="cardfoot" (click)="addToCart(product.ProductID , product.SellerID)">
+              <img style="width: 25px;" src="assets/imgs/cart_off.png" >
+               <!--<img style="width: 25px;" src="assets/imgs/cart_off.png" >-->
+            </ion-icon>
           </ion-col>
           <ion-col col-6></ion-col>
           <ion-col col-3>
@@ -99,7 +105,7 @@
   <ion-col col-6 *ngFor="let product of productSearchResult">
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
       <div style="text-align:center;height:162px"><img class="prodimg1" [src]="product.Image"></div>
-      
+
       <ion-row class="starrow">
           <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
       </ion-row>
@@ -107,7 +113,10 @@
       <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
     <div class="iconsdiv">
-       <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
+       <ion-icon class="carticon" (click)="addToCart(product.ProductID , product.SellerID)">
+         <img style="width: 25px;" src="assets/imgs/cart_off.png" >
+         <!--<img style="width: 25px;" src="assets/imgs/cart_on.png" >-->
+       </ion-icon>
         <ion-icon
           *ngIf="!checkProductInFav(product.ProductID)"
           [attr.id]="product.ProductID"
@@ -122,8 +131,23 @@
     </div>
   </ion-col>
 </ion-row>
-
-
-
-
 </ion-content>
+
+
+
+<ion-footer>
+  <ion-row class="tabrow">
+  
+    <ion-col col-2 class="cen"> 
+      <img src="assets/imgs/tab_bar_home_active.png">
+      </ion-col>
+    <ion-col col-2 class="cen" (click)="opencat()">
+      <img src="assets/imgs/tab_bar_category.png"></ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-2 class="cen" (click)="openfav()"><img src="assets/imgs/tab_bar_heart.png"></ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-2 class="cen" (click)="openpro()"><img src="assets/imgs/tab_bar_profile.png"></ion-col>
+    <ion-col col-2 class="cen" (click)="opensett()"><img src="assets/imgs/tab_bar_settings.png"></ion-col>
+    
+  </ion-row>
+</ion-footer>

@@ -1,6 +1,5 @@
 import {Component, ElementRef, ViewChildren} from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {CategoryPage} from "../category/category";
 import {SearchPage} from "../search/search";
 import {ProductService} from "../../providers/product-service";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -10,6 +9,10 @@ import {CommonService} from "../../providers/common-service";
 import {DetailsPage} from "../details/details";
 import {ShoppingcartsPage} from "../shoppingcarts/shoppingcarts";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {CategoryPage} from "../category/category";
+import {Profile}from "../profile/profile";
+import {Settings} from "../settings/settings";
+import {WishlistPage} from "../wishlist/wishlist";
 
 
 @Component({
@@ -29,19 +32,24 @@ export class HomePage {
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
               public commonService : CommonService , private barcodeScanner: BarcodeScanner) {
 
+    setTimeout(()=> this.initObjects() , 1000);
+  }
+  initObjects(){
+    this.customerService.getCart().subscribe((res)=>{
+      this.cartNo = res.length ;
+    });
+    this.productService.hotads().subscribe((res)=>{
+      this.hotads = res ;
+    });
+    this.customerService.getWishList().subscribe((res)=>{
+      this.wishList = res;
+      this.getGroupShow();
+    });
+    console.log('fired');
   }
   ionViewWillEnter()
   {
-     this.customerService.getCart().subscribe((res)=>{
-      this.cartNo = res.length ;
-     });
-      this.productService.hotads().subscribe((res)=>{
-        this.hotads = res ;
-      });
-      this.customerService.getWishList().subscribe((res)=>{
-        this.wishList = res;
-        this.getGroupShow();
-      });
+    this.initObjects();
   }
   checkProductInFav(ProductID : number)
   {
@@ -70,7 +78,7 @@ export class HomePage {
     iconFilter = this.elRef.toArray().filter((icon) => {
       return (icon.nativeElement.id == ProductID);
     });
-    if(iconFilter[0].nativeElement.style.color == 'red')
+    if(iconFilter[0].nativeElement.style.color == 'crimson')
       this.removeFav(ProductID , iconFilter[0].nativeElement);
     else
       this.addFav(ProductID , iconFilter[0].nativeElement);
@@ -79,7 +87,7 @@ export class HomePage {
     this.customerService.addToWishList(ProductID).subscribe((res) => {
       if (res == true) {
         this.commonService.successToast();
-        element.style.color = 'red';
+        element.style.color = 'crimson';
       }
       else
         this.commonService.errorToast();
@@ -122,11 +130,11 @@ export class HomePage {
   }
   searchProduct(){
   if(this.KeyWord != ''){
-      this.commonService.presentLoading('Please Wait ...');
+      //this.commonService.presentLoading('Please Wait ...');
       this.showSearch = true ;
       this.productService.searchProduct(this.KeyWord).subscribe((res)=>{
         this.productSearchResult = res ;
-        this.commonService.dismissLoading();
+        //this.commonService.dismissLoading();
       });
     }
     else
@@ -148,5 +156,18 @@ export class HomePage {
   icons(rate : number)
   {
     return this.commonService.icons(rate);
+  }
+ 
+   opencat(){
+    this.navCtrl.push(CategoryPage);
+  }
+  openfav(){
+    this.navCtrl.push(WishlistPage);
+  }
+  openpro(){
+    this.navCtrl.push(Profile);
+  }
+  opensett(){
+    this.navCtrl.push(Settings)
   }
 }

@@ -76,7 +76,8 @@ export function createTranslateLoader(http: Http) {
     ShoppingcartsPage ,
     SummaryPage ,
     OrderDetailsPage ,
-    SliderImagePage
+    SliderImagePage,
+    
   ],
   imports: [
     BrowserModule,

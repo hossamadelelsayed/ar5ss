@@ -17,7 +17,16 @@
 
 $tabs-md-tab-icon-color:crimson;
 
+.home{
+  background-image: url('assets/imgs/tab_bar_home_active.png');
+  background-repeat: no-repeat;
+  background-position:center;
+}
 
+.content{
+      height: 91%;
+      overflow: scroll;
+}
 
 .toolbar-title{
 color:crimson !important;
@@ -59,4 +68,21 @@ color:crimson !important;
 $tabs-md-tab-text-color-active:crimson;
 
 
+}
+.scroll-content{
+  margin-bottom: 0 !important;
+}
+.tabrow{
+  padding: 10px 0;
+    .col 
+    { 
+        img{
+        height: 25px;
+        width: 25px;
+          }
+    }
+
+    .cen{
+      text-align: center;
+    }
 }

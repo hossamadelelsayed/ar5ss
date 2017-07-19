@@ -17,6 +17,7 @@ export class AllcategoriesPage {
   {
     this.productService.category().subscribe((res)=>{
       this.category = res ;
+      console.log(res);
     });
   }
   goToCategoryDetails(category_id : number)

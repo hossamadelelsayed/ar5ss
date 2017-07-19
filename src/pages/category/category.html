@@ -4,7 +4,7 @@
 
   <ion-navbar>
     <ion-title>
-          <ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>
+          <!--<ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>-->
           <span>{{ 'Category' | translate}}</span>
 
 
@@ -60,7 +60,10 @@
       <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
     <div class="iconsdiv">
-       <ion-icon class="carticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"></ion-icon>
+       <ion-icon class="carticon" (click)="addToCart(product.ProductID , product.SellerID)">
+         <img style="width: 25px;" src="assets/imgs/cart_off.png" >
+         <!--<img style="width: 25px;" src="assets/imgs/cart_on.png" >-->
+       </ion-icon>
         <ion-icon
           *ngIf="!checkProductInFav(product.ProductID)"
           [attr.id]="product.ProductID"
@@ -85,7 +88,7 @@
         <img class="leftimg" [style.background]="product.ColorHexa">
         <img  *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
       </div>
-     
+
        <ion-row style="width:100%">
       <ion-col col-3>
         <img [src]="product.Image" (click)="gotohistory()">
@@ -102,30 +105,50 @@
     <ion-row>
         <ion-col col-6>
             <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
-      </ion-col>   
-      <ion-col col-6 style="text-align: end">    
-       <ion-icon style="color:gray" class="botticon" ios="ios-cart" md="md-cart" (click)="addToCart(product.ProductID , product.SellerID)"> 
-           </ion-icon>
+      </ion-col> 
+      <ion-col col-6 style="text-align: end">
+       <ion-icon style="color:gray" class="botticon" (click)="addToCart(product.ProductID , product.SellerID)">
+         <img style="width: 18px;" src="assets/imgs/cart_off.png" >
+          <!--<img style="width: 18px;" src="assets/imgs/cart_on.png" >-->
+         </ion-icon>
+
           <ion-icon
               *ngIf="!checkProductInFav(product.ProductID)"
               [attr.id]="product.ProductID+'2'"
               #productsIcon2
               style="color:darkgray"
-              class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+              class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
+          </ion-icon>
           <ion-icon
               *ngIf="checkProductInFav(product.ProductID)"
               [attr.id]="product.ProductID+'2'"
               #productsIcon2
               style="color:crimson" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
-              </ion-icon>
-             
+           </ion-icon>
+      
       </ion-col>
-          
+
     </ion-row>
-       
-   
+
+
   </ion-card>
   </ion-list>
 </div>
 
 </ion-content>
+<ion-footer>
+  <ion-row class="tabrow">
+  
+    <ion-col col-2 class="cen" (click)="openhome()">
+      <img src="assets/imgs/tab_bar_home.png">
+      <!--<img src="assets/imgs/tab_bar_home_active.png">-->
+      </ion-col>
+    <ion-col col-2 class="cen" (click)="opencat()"><img src="assets/imgs/tab_bar_category_active.png"></ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-2 class="cen" (click)="openfav()"><img src="assets/imgs/tab_bar_heart.png"></ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-2 class="cen" (click)="openpro()"><img src="assets/imgs/tab_bar_profile.png"></ion-col>
+    <ion-col col-2 class="cen" (click)="opensett()"><img src="assets/imgs/tab_bar_settings.png"></ion-col>
+    
+  </ion-row>
+</ion-footer>

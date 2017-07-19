@@ -3,7 +3,10 @@ import { NavController, NavParams } from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {DetailsPage} from "../details/details";
-
+import {CategoryPage} from "../category/category";
+import {Profile}from "../profile/profile";
+import {Settings} from "../settings/settings";
+import {HomePage} from "../home/home";
 
 
 @Component({
@@ -61,5 +64,19 @@ export class WishlistPage {
   icons(rate : number)
   {
     return this.commonService.icons(rate);
+  }
+
+
+   openhome(){
+     this.navCtrl.push(HomePage)
+   }
+   opencat(){
+    this.navCtrl.push(CategoryPage);
+  }
+  openpro(){
+    this.navCtrl.push(Profile);
+  }
+  opensett(){
+    this.navCtrl.push(Settings)
   }
 }

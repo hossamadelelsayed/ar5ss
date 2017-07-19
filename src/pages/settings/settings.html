@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>
 
-       <ion-icon class="search" ios="ios-search" md="md-search"></ion-icon>
+      <!-- <ion-icon class="search" ios="ios-search" md="md-search"></ion-icon> -->
      <span>{{ 'Setting' | translate}}</span>
 
       </ion-title>
@@ -57,3 +57,19 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-row class="tabrow">
+  
+    <ion-col col-2 class="cen" (click)="openhome()">
+      <img src="assets/imgs/tab_bar_home.png">
+      <!--<img src="assets/imgs/tab_bar_home_active.png">-->
+      </ion-col>
+    <ion-col col-2 class="cen" (click)="opencat()"><img src="assets/imgs/tab_bar_category.png"></ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-2 class="cen" (click)="openfav()"><img src="assets/imgs/tab_bar_heart.png"></ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-2 class="cen" (click)="openpro()"><img src="assets/imgs/tab_bar_profile.png"></ion-col>
+    <ion-col col-2 class="cen" (click)="opensett()"><img src="assets/imgs/tab_bar_settings_active.png"></ion-col>
+    
+  </ion-row>
+</ion-footer>
