@@ -22,9 +22,9 @@ export class ForgetpassPage {
   customerForgetPassword(email)
   {
     this.customerService.customerForgetPassword(email).subscribe((res)=>{
-      if(res.success)
+      if(res.Message)
       {
-        this.commonService.presentToast(res.success);
+        this.commonService.presentToast(res.Message);
       }
       else
       {

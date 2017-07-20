@@ -19,7 +19,7 @@
 
 
   <ion-col col-9 style="padding:0">
-    <ion-searchbar [(ngModel)]="KeyWord" (ionInput)="searchProduct()"  type="text"> </ion-searchbar></ion-col>
+    <ion-searchbar [(ngModel)]="KeyWord" (ionInput)="searchProduct()"  type="text" placeholder="{{ 'Search' | translate}}"> </ion-searchbar></ion-col>
 
   <ion-col col-3 style="padding:0">
        <div style="text-align: center;background: white;padding-top: 10px;height: 42px;" (click)="scan()">

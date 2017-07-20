@@ -21,6 +21,7 @@ export class CategoryPage {
   public category_id : number ;
   public categoryProducts : any ;
   public wishList : any ;
+  public sortType : number  = this.productService.sortByASC;
   public showing : string = 'list';
   @ViewChildren('productsIcon') elRef;
   @ViewChildren('productsIcon2') elRef2;
@@ -34,6 +35,13 @@ export class CategoryPage {
   ionViewWillEnter()
   {
     this.getWishList();
+  }
+  sortBy()
+  {
+    if(this.sortType == this.productService.sortByASC)
+      this.sortType = this.productService.sortByDESC;
+    else this.sortType = this.productService.sortByASC;
+    this.getcategoryProducts();
   }
   getWishList()
   {
@@ -50,7 +58,7 @@ export class CategoryPage {
   {
     if(this.category_id)
     {
-      this.productService.categoryProducts(this.category_id).subscribe((res) => {
+      this.productService.categoryProducts(this.category_id,this.sortType).subscribe((res) => {
         this.categoryProducts = res;
       });
     }

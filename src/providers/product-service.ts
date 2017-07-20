@@ -21,6 +21,8 @@ export class ProductService {
   public productBarcodeUrl : string = MainService.baseUrl+"productBarcode/";
   public productColorUrl : string = MainService.baseUrl+"productcolor";
   public searchProductUrl : string = MainService.baseUrl+"serachproduct";
+  public readonly sortByASC : number = 1 ;
+  public readonly sortByDESC : number = 2 ;
 
 
 
@@ -57,11 +59,13 @@ export class ProductService {
   }
   category()
   {
-    return this.http.get(this.categoryUrl+MainService.lang).map((res) => res.json());
+    return this.http.get(this.categoryUrl + MainService.lang).map((res) => res.json());
   }
-  categoryProducts(category_id : number)
+  categoryProducts(category_id : number , sortBy? : number)
   {
-    return this.http.get(this.categoryProductsUrl+category_id).map((res) => res.json());
+    if(sortBy == null)
+      sortBy = this.sortByASC ;
+    return this.http.get(this.categoryProductsUrl+category_id+'/'+sortBy).map((res) => res.json());
   }
   hotads()
   {
@@ -71,5 +75,4 @@ export class ProductService {
   {
     return this.http.get(this.groupShowUrl).map((res) => res.json());
   }
-
 }
