@@ -84,10 +84,10 @@ export class HomePage {
       this.addFav(ProductID , iconFilter[0].nativeElement);
   }
   addFav(ProductID : number , element : any ) {
+    element.style.color = 'crimson';
     this.customerService.addToWishList(ProductID).subscribe((res) => {
       if (res == true) {
         this.commonService.successToast();
-        element.style.color = 'crimson';
       }
       else
         this.commonService.errorToast();
@@ -95,10 +95,10 @@ export class HomePage {
   }
   removeFav(ProductID : number , element : any)
   {
+    element.style.color = 'darkgrey';
     this.customerService.deleteFav(ProductID).subscribe((res)=>{
       if (res.state == '202') {
             this.commonService.successToast();
-        element.style.color = 'darkgrey';
           }
       else
         this.commonService.errorToast();
@@ -157,7 +157,7 @@ export class HomePage {
   {
     return this.commonService.icons(rate);
   }
- 
+
    opencat(){
     this.navCtrl.push(CategoryPage);
   }
