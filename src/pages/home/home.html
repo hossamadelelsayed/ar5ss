@@ -22,8 +22,8 @@
     <ion-searchbar [(ngModel)]="KeyWord" (ionInput)="searchProduct()"  type="text"> </ion-searchbar></ion-col>
 
   <ion-col col-3 style="padding:0">
-       <div style="text-align: center;background: white;padding-top: 5px;height: 42px;" (click)="scan()">
-    <img src="assets/imgs/barcode.png">
+       <div style="text-align: center;background: white;padding-top: 10px;height: 42px;" (click)="scan()">
+    <img style="width: 22px;" src="assets/imgs/barcode.png">
        </div>
     </ion-col>
 </ion-row>
@@ -102,6 +102,10 @@
 </div>
 
 <ion-row *ngIf="showSearch" >
+  <ion-row *ngIf="productSearchResult?.length == 0">
+    <img style="height: 200px;width: 100%;" src="assets/imgs/new_search.png">
+    <button ion-button block class="explore">{{ 'There Is No Items' | translate}}</button>
+  </ion-row>
   <ion-col col-6 *ngFor="let product of productSearchResult">
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
       <div style="text-align:center;height:162px"><img class="prodimg1" [src]="product.Image"></div>
@@ -131,14 +135,16 @@
     </div>
   </ion-col>
 </ion-row>
+
 </ion-content>
 
 
 
+<!--
 <ion-footer>
   <ion-row class="tabrow">
-  
-    <ion-col col-2 class="cen"> 
+
+    <ion-col col-2 class="cen">
       <img src="assets/imgs/tab_bar_home_active.png">
       </ion-col>
     <ion-col col-2 class="cen" (click)="opencat()">
@@ -148,6 +154,7 @@
     <ion-col col-1></ion-col>
     <ion-col col-2 class="cen" (click)="openpro()"><img src="assets/imgs/tab_bar_profile.png"></ion-col>
     <ion-col col-2 class="cen" (click)="opensett()"><img src="assets/imgs/tab_bar_settings.png"></ion-col>
-    
+
   </ion-row>
 </ion-footer>
+-->

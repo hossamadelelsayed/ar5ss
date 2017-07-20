@@ -21,6 +21,7 @@ export class CategoryPage {
   public category_id : number ;
   public categoryProducts : any ;
   public wishList : any ;
+  public showing : string = 'list';
   @ViewChildren('productsIcon') elRef;
   @ViewChildren('productsIcon2') elRef2;
   constructor(public navCtrl: NavController, public navParams: NavParams,

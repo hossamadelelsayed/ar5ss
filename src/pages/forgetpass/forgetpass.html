@@ -18,9 +18,9 @@
   <img src="../assets/imgs/key.png">
    </div>
 <form #f="ngForm">
-<ion-label>Forget Password?</ion-label>
+<ion-label>{{ 'Forget Password ?' | translate}}</ion-label>
  <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
- <ion-input type="text" #email name="Email" ngModel required placeholder="Email"></ion-input>
- <button [disabled]="!f.valid" ion-button block class="Reset" (click)="customerForgetPassword(email.value)">Reset Password </button>
+ <ion-input type="text" #email name="Email" ngModel required placeholder="{{ 'Email' | translate}}"></ion-input>
+ <button [disabled]="!f.valid" ion-button block class="Reset" (click)="customerForgetPassword(email.value)"> {{'Reset Password' | translate}}</button>
 </form>
 </ion-content>

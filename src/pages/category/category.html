@@ -10,10 +10,10 @@
 
  <div class="headdiv">
     <ion-segment [(ngModel)]="showing">
-        <ion-segment-button value="grid">
+        <ion-segment-button [hidden]="showing == 'grid'" value="grid">
             <ion-icon style="padding-right:3px" ios="ios-grid" md="md-grid"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button value="list">
+        <ion-segment-button [hidden]="showing == 'list'" value="list">
             <ion-icon ios="ios-list" md="md-list"></ion-icon>
         </ion-segment-button>
      </ion-segment>
@@ -42,8 +42,8 @@
 <ion-content>
 
 
-  <div [ngSwitch]="showing">
-  <ion-list  *ngSwitchDefault >
+  <div [ngSwitch]="showing" >
+  <ion-list *ngSwitchCase="'grid'">
     <ion-row>
       <ion-col col-6 *ngFor="let product of categoryProducts">
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
@@ -81,7 +81,7 @@
 </ion-list>
 
 
-  <ion-list *ngSwitchCase="'list'">
+  <ion-list *ngSwitchDefault>
   <ion-card *ngFor="let product of categoryProducts">
     <div class="product" (click)="viewProduct(product.ProductID)">
       <div style="height:35px">
@@ -105,7 +105,7 @@
     <ion-row>
         <ion-col col-6>
             <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
-      </ion-col> 
+      </ion-col>
       <ion-col col-6 style="text-align: end">
        <ion-icon style="color:gray" class="botticon" (click)="addToCart(product.ProductID , product.SellerID)">
          <img style="width: 18px;" src="assets/imgs/cart_off.png" >
@@ -125,7 +125,7 @@
               #productsIcon2
               style="color:crimson" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
            </ion-icon>
-      
+
       </ion-col>
 
     </ion-row>
@@ -136,12 +136,13 @@
 </div>
 
 </ion-content>
+<!--
 <ion-footer>
   <ion-row class="tabrow">
-  
+
     <ion-col col-2 class="cen" (click)="openhome()">
       <img src="assets/imgs/tab_bar_home.png">
-      <!--<img src="assets/imgs/tab_bar_home_active.png">-->
+      <img src="assets/imgs/tab_bar_home_active.png">
       </ion-col>
     <ion-col col-2 class="cen" (click)="opencat()"><img src="assets/imgs/tab_bar_category_active.png"></ion-col>
     <ion-col col-1></ion-col>
@@ -149,6 +150,7 @@
     <ion-col col-1></ion-col>
     <ion-col col-2 class="cen" (click)="openpro()"><img src="assets/imgs/tab_bar_profile.png"></ion-col>
     <ion-col col-2 class="cen" (click)="opensett()"><img src="assets/imgs/tab_bar_settings.png"></ion-col>
-    
+
   </ion-row>
 </ion-footer>
+-->

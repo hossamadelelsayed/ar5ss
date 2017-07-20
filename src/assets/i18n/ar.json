@@ -68,5 +68,14 @@
   "Other Offer" : "العروض ذات الصلة" ,
   "Product Images" : "صور المنتج" ,
   "Close" : "إغلاق" ,
-  "Shipping" : "الشحن"
+  "Shipping" : "الشحن" ,
+  "There Is No Items" : "لا يوجد حاليا عاود البحث مرة أخرى" ,
+  "Full Name" : "الاسم" ,
+  "Password" : "الباسورد" ,
+  "Phone Number" : "رقم الهاتف" ,
+  "Sign Up" : "تسجيل جديد"  ,
+  "Already have an Account." : "بالفعل لديك حساب" ,
+  "Don't Have Account?" : "ليس لديك حساب" ,
+  "Forget Password ?" : "لا أتذكر كلمة المرور" ,
+  "Reset Password" : "استعادة كلمة المرور"
 }

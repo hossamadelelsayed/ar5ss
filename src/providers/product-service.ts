@@ -12,7 +12,7 @@ import {MainService} from "./main-service";
 @Injectable()
 export class ProductService {
 
-  public categoryUrl : string = MainService.baseUrl+"category";
+  public categoryUrl : string = MainService.baseUrl+"category?lang=";
   public categoryProductsUrl : string = MainService.baseUrl+"getcategorydeatails/";
   public hotadsUrl : string = MainService.baseUrl+"hotads";
   public groupShowUrl : string = MainService.baseUrl+"groupshow";
@@ -57,7 +57,7 @@ export class ProductService {
   }
   category()
   {
-    return this.http.get(this.categoryUrl).map((res) => res.json());
+    return this.http.get(this.categoryUrl+MainService.lang).map((res) => res.json());
   }
   categoryProducts(category_id : number)
   {

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>signup</ion-title>
+    <ion-title>{{ 'Sign Up' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,21 +21,21 @@
 
 <form #f="ngForm">
 <ion-icon ios="ios-person" md="md-person"></ion-icon>
-<ion-input [(ngModel)]="customer.Name" name="Name" type="text" placeholder="Full Name" required></ion-input>
+<ion-input [(ngModel)]="customer.Name" name="Name" type="text" placeholder="{{ 'Full Name' | translate}}" required></ion-input>
 
  <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
- <ion-input [(ngModel)]="customer.Email" name="Email" type="email" placeholder="Email" required></ion-input>
+ <ion-input [(ngModel)]="customer.Email" name="Email" type="email" placeholder="{{ 'Email' | translate}}" required></ion-input>
 
  <ion-icon ios="ios-lock" md="md-lock"></ion-icon>
- <ion-input [(ngModel)]="customer.Password" name="Password" type="password" placeholder="Password" required></ion-input>
+ <ion-input [(ngModel)]="customer.Password" name="Password" type="password" placeholder="{{ 'Password' | translate}}" required></ion-input>
 
  <ion-icon ios="ios-call" md="md-call"></ion-icon>
 
- <ion-input [(ngModel)]="customer.Mobile" name="Mobile" style="width:65%" type="number" placeholder="Phone Number" required></ion-input>
+ <ion-input [(ngModel)]="customer.Mobile" name="Mobile" style="width:65%" type="number" placeholder="{{ 'Phone Number' | translate}}" required></ion-input>
   <ion-input style="width:20%;margin-right: 5%;" type="number" placeholder="+966" value="974" readonly></ion-input>
-<button [disabled]="!f.valid"  ion-button block class="signup" (click)="register()">Sign up</button>
+<button [disabled]="!f.valid"  ion-button block class="signup" (click)="register()">{{ 'Sign Up' | translate}}</button>
 
-<button ion-button clear class="signin" (click)="gotosignin()"><p>Already have an Account.</p> Sign in</button>
+<button ion-button clear class="signin" (click)="gotosignin()"><p>{{ 'Already have an Account.' | translate}}</p> &nbsp;{{ 'Login' | translate}}</button>
 
 </form>
 

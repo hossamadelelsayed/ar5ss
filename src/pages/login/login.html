@@ -21,11 +21,11 @@
 
 <form #f="ngForm">
   <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
-    <ion-input type="text" [(ngModel)]="customer.Email" name="Email" required placeholder="Email"></ion-input>
+    <ion-input type="text" [(ngModel)]="customer.Email" name="Email" required placeholder="{{ 'Email' | translate}}"></ion-input>
   <ion-icon name="Password" ios="ios-lock" md="md-lock"></ion-icon>
-    <ion-input type="password" [(ngModel)]="customer.Password" name="Password" required placeholder="Password"></ion-input>
-  <button ion-button block class="login" [disabled]="!f.valid"  (click)="customerLogin()">Login</button>
-  <button ion-button clear class="forget" (click)="gotoforget()">Forget Password ?</button>
-  <button ion-button clear class="signup" (click)="gotosignup()"><p>Dont't Have Account?</p> Sign Up</button>
+    <ion-input type="password" [(ngModel)]="customer.Password" name="Password" required placeholder="{{ 'Password' | translate}}"></ion-input>
+  <button ion-button block class="login" [disabled]="!f.valid"  (click)="customerLogin()"> {{ 'Login' | translate}} </button>
+  <button ion-button clear class="forget" (click)="gotoforget()"> {{ 'Forget Password ?' | translate}} </button>
+  <button ion-button clear class="signup" (click)="gotosignup()"><p>{{ "Don't Have Account?" | translate}}</p> {{'Sign Up' | translate}}</button>
 </form>
 </ion-content>

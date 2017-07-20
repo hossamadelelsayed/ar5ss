@@ -12,13 +12,14 @@ import {Profile} from "../pages/profile/profile";
 import {Settings} from "../pages/settings/settings";
 import {TranslateService} from "@ngx-translate/core";
 import {ProductService} from "../providers/product-service";
+import {AllcategoriesPage} from "../pages/allcategories/allcategories";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   tab1 = HomePage;
-  tab2 = CategoryPage;
+  tab2 = AllcategoriesPage;
   tab3 = WishlistPage;
   tab4 = Profile;
   tab5 = Settings;
@@ -73,6 +74,6 @@ export class MyApp {
 
 
 
- 
+
 }
 

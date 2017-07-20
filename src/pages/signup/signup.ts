@@ -5,6 +5,7 @@ import {CustomerService} from "../../providers/customer-service";
 import {TranslateService} from "@ngx-translate/core";
 import {Camera} from "@ionic-native/camera";
 import {HomePage} from "../home/home";
+import {LoginPage} from "../login/login";
 
 
 @Component({
@@ -105,5 +106,8 @@ export class SignupPage {
   {
       this.image = "data:image/jpeg;base64," + imageData;
       this.customer.Image = this.image; //imageData;
+  }
+  gotosignin(){
+    this.navCtrl.push(LoginPage);
   }
 }

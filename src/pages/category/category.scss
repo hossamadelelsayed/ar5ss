@@ -1,7 +1,7 @@
 page-category {
    .back-button.show-back-button{
       display: none;
-  }   
+  }
 .content{
     background:#f1f5f5;
 }
@@ -26,11 +26,9 @@ page-category {
  }
 .headdiv{
         float: right;
-        border: 1px solid gray;
-        width: 85px;
+        width: 40px;
         height: 40px;
         text-align: center;
-        border-radius: 20px;
 }
 .hot{
     height: 37px;
@@ -47,7 +45,7 @@ page-category {
 }
 
 .segment-md .segment-button ion-icon{
-    font-size: 18px !important;
+    font-size: 27px !important;
 }
 .segment-md .segment-button.segment-activated{
     border:none;
@@ -194,7 +192,7 @@ h4{
         clear: both;
         color:gray;
         margin-top: 5px;
-    
+
 }
 
 }
