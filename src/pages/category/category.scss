@@ -75,7 +75,10 @@ page-category {
       }
 }
 
-
+  .gridicon{
+    padding-left: 5px;
+    padding-top: 5px;
+  }
 .card{
     height: 160px;
     border: 1px solid lightgray;
@@ -84,7 +87,7 @@ page-category {
 
     .botticon{
             padding-right: 10px;
-             padding-left: 10px;
+            padding-left: 10px;
             font-size: 20px;
     }
 
@@ -116,13 +119,10 @@ h4{
         direction:ltr
     }
 .leftimg{
-            width: 23px;
-            margin: 10px 0 0 5px;
-            float:left;
-            height: 23px;
-            padding: 10px;
-            border: 1px solid lightgray;
-            border-radius: 20px;
+        margin: 10px 0 0 5px;
+        float:left;
+        height: 23px;
+        border-radius: 20px;
     }
 
    .prodimg{

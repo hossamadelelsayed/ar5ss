@@ -12,6 +12,7 @@ declare var google;
 })
 export class AddlocationPage {
   @ViewChild('map') mapElement: ElementRef;
+  public location : any ;
   public map: any;
   public markers = [];
   public lat : number = 0 ;
@@ -29,26 +30,22 @@ export class AddlocationPage {
   loadMap() {
     this.geolocation.getCurrentPosition().then((resp) => {
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-
+      this.location = latLng ;
       let mapOptions = {
         center: latLng,
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
-
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       google.maps.event.addListener(this.map, 'click', (event) => {
         this.setMapOnAll(null);
-        var location  = event.latLng;
-        this.addMarker(location);
-        this.sendCustomerLocation(location);
-      });
+        this.location  = event.latLng;
+        this.addMarker(this.location);
+        });
       this.addMarker(this.map.getCenter());
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-
-
   }
   sendCustomerLocation(location)
   {
@@ -74,6 +71,10 @@ export class AddlocationPage {
     });
     infoWindow.open(this.map,marker);
     this.markers.push(marker);
+  }
+  confirm()
+  {
+    this.sendCustomerLocation(this.location);
   }
   // Sets the map on all markers in the array.
   setMapOnAll(map) {

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController} from 'ionic-angular';
+import {NavController, NavParams, ActionSheetController, ModalController} from 'ionic-angular';
 import {AddlocationPage} from "../../pages/addlocation/addlocation";
 import {CommonService} from "../../providers/common-service";
 import {MainService} from "../../providers/main-service";
 import {PayPal, PayPalConfiguration, PayPalPayment} from "@ionic-native/paypal";
 import {CustomerService} from "../../providers/customer-service";
 import {HomePage} from "../home/home";
+import {PaymentsPage} from "../payments/payments";
 @Component({
   selector: 'page-summary',
   templateUrl: 'summary.html',
@@ -17,7 +18,7 @@ export class SummaryPage {
   public LocationID : number = 0 ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public actionSheetCtrl :  ActionSheetController , public commonService : CommonService ,
-              public payPal: PayPal , public customerService : CustomerService) {
+              public payPal: PayPal , public customerService : CustomerService , public modalCtrl :ModalController) {
   }
 
   ionViewDidLoad() {
@@ -93,8 +94,7 @@ export class SummaryPage {
     for(let i = 0 ; i < this.paymentTypes.length ; i++) {
       let button =
         {
-          text: this.paymentTypes[i].payment_name,
-          icon: 'cash',
+          text: this.paymentTypes[i].payment_nameen,
           handler: () => {
             this.handlePaymentTypes(this.paymentTypes[i].PaymentID);
           }
@@ -105,15 +105,21 @@ export class SummaryPage {
   }
   showPaymentMethod()
   {
-    this.commonService.translateArray(
+    let modal = this.modalCtrl.create(PaymentsPage,this.paymentTypes);
+    modal.present();
+    modal.onDidDismiss((res)=>{
+      this.PaymentID = res.PaymentID ;
+      this.handlePaymentTypes(this.PaymentID);
+    });
+    /*this.commonService.translateArray(
       ['Payment Method']).subscribe((translatedArray : string[])=>{
       let actionSheet = this.actionSheetCtrl.create({
         title: translatedArray[0],
-        cssClass: 'action-sheets-basic-page',
+        cssClass: 'payment',
         buttons: this.getPaymentTypesButtons()
       });
       actionSheet.present();
-    });
+    });*/
   }
   payPalPayment(amount : string)
   {

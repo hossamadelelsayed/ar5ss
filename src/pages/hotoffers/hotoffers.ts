@@ -4,6 +4,7 @@ import {ProductService} from "../../providers/product-service";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {DetailsPage} from "../details/details";
+import {MainService} from "../../providers/main-service";
 
 
 
@@ -14,16 +15,22 @@ import {DetailsPage} from "../details/details";
 export class HotoffersPage {
   public hotOffer : any ;
   public wishList : any ;
+  public cart : any[] = [] ;
+  public MainService : MainService = MainService ;
   @ViewChildren('productsIcon') elRef;
+  @ViewChildren('productsCartIcon') cartIconRef ;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public productService : ProductService , public customerService : CustomerService ,
               public commonService : CommonService) {
   }
   ionViewWillEnter()
   {
-    this.customerService.getWishList().subscribe((res)=>{
-      this.wishList = res;
-      this.getHotOffer();
+    this.customerService.getWishList().subscribe((wishRes)=>{
+      this.wishList = wishRes;
+      this.customerService.getCart().subscribe((cartRes)=>{
+        this.cart = cartRes;
+        this.getHotOffer();
+      });
     });
 
   }
@@ -34,6 +41,10 @@ export class HotoffersPage {
   {
     return this.commonService.checkProductIsExistInFavorite(this.wishList , ProductID);
   }
+  checkProductInCart(ProductID : number)
+  {
+    return this.commonService.checkProductIsExistInCart(this.cart , ProductID);
+  }
   getHotOffer()
   {
     this.productService.hotOffer().subscribe((res)=>{
@@ -41,22 +52,20 @@ export class HotoffersPage {
     });
   }
   addFav(ProductID : number , element : any ) {
+    element.style.color = 'crimson';
     this.customerService.addToWishList(ProductID).subscribe((res) => {
-      if (res == true) {
+      if (res == true)
         this.commonService.successToast();
-        element.style.color = 'crimson';
-      }
       else
         this.commonService.errorToast();
     });
   }
   removeFav(ProductID : number , element : any)
   {
+    element.style.color = 'darkgrey';
     this.customerService.deleteFav(ProductID).subscribe((res)=>{
-      if (res.state == '202') {
+      if (res.state == '202')
         this.commonService.successToast();
-        element.style.color = 'darkgrey';
-      }
       else
         this.commonService.errorToast();
     });
@@ -76,11 +85,32 @@ export class HotoffersPage {
   }
   addToCart(ProductID : number , SellerID : number)
   {
+    let iconFilter :any ;
+    iconFilter = this.cartIconRef.toArray().filter((icon) => {
+      return (icon.nativeElement.id == ProductID);
+    });
+    if(this.commonService.splitFromLastBackSlash(iconFilter[0].nativeElement.src) == 'cart_on.png')
+      this.removeCart(ProductID , iconFilter[0].nativeElement);
+    else
+      this.addCart(ProductID , SellerID ,iconFilter[0].nativeElement);
+  }
+  addCart(ProductID : number , SellerID : number ,element : any ) {
+    element.src = 'assets/imgs/cart_on.png';
     this.customerService.addToCart(ProductID , SellerID).subscribe((res)=>{
       if(res == true)
         this.commonService.successToast();
       else if(res.error)
         this.commonService.translateAndToast(res.error);
+      else
+        this.commonService.errorToast();
+    });
+  }
+  removeCart(ProductID : number , element : any)
+  {
+    element.src = 'assets/imgs/cart_off.png';
+    this.customerService.delCart(ProductID).subscribe((res)=>{
+      if(res.state == '202')
+        this.commonService.successToast();
       else
         this.commonService.errorToast();
     });

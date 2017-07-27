@@ -5,6 +5,7 @@ import {ProductService} from "../../providers/product-service";
 import {CommonService} from "../../providers/common-service";
 import {OtherofferPage} from "../otheroffer/otheroffer";
 import {SliderImagePage} from "../slider-image/slider-image";
+import {MainService} from "../../providers/main-service";
 
 @Component({
   selector: 'page-details',
@@ -13,9 +14,12 @@ import {SliderImagePage} from "../slider-image/slider-image";
 export class DetailsPage {
   public ProductID : number ;
   public productDetails : any ;
+  public productProperty : any ;
   public wishList : any ;
-
+  public cart : any[] = [] ;
+  public MainService : MainService = MainService ;
   @ViewChildren('fav') fav;
+  @ViewChildren('cartImg') cartImg;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService : CustomerService , public productService: ProductService ,
               public commonService : CommonService , public modalCtrl: ModalController ) {
@@ -28,10 +32,19 @@ export class DetailsPage {
       this.productDetails = res ;
       console.log(res);
     });
+    this.productService.getProductProperty(this.ProductID).subscribe((res)=>{
+      this.productProperty = res ;
+      console.log(res);
+    });
     this.customerService.getWishList().subscribe((res)=>{
       this.wishList = res;
       if(this.checkProductInFav(this.ProductID))
-        this.fav._results[0].nativeElement.style.color = 'red' ;
+        this.fav._results[0].nativeElement.style.color = 'crimson' ;
+    });
+    this.customerService.getCart().subscribe((res)=>{
+      this.cart = res;
+      if(this.checkProductInCart(this.ProductID))
+        this.cartImg._results[0].nativeElement.src = 'assets/imgs/cart_on.png' ;
     });
   }
   ionViewDidLoad() {
@@ -40,6 +53,10 @@ export class DetailsPage {
   checkProductInFav(ProductID : number)
   {
     return this.commonService.checkProductIsExistInFavorite(this.wishList , ProductID);
+  }
+  checkProductInCart(ProductID : number)
+  {
+    return this.commonService.checkProductIsExistInCart(this.cart , ProductID);
   }
   otherOffer(){
       this.navCtrl.push(OtherofferPage,{
@@ -55,10 +72,10 @@ export class DetailsPage {
       this.addFav(ProductID , this.fav._results[0].nativeElement);
   }
   addFav(ProductID : number , element : any ) {
+    element.style.color = 'crimson';
     this.customerService.addToWishList(ProductID).subscribe((res) => {
       if (res == true) {
         this.commonService.successToast();
-        element.style.color = 'crimson';
       }
       else
         this.commonService.errorToast();
@@ -66,10 +83,10 @@ export class DetailsPage {
   }
   removeFav(ProductID : number , element : any)
   {
+    element.style.color = 'darkgrey';
     this.customerService.deleteFav(ProductID).subscribe((res)=>{
       if (res.state == '202') {
         this.commonService.successToast();
-        element.style.color = 'darkgrey';
       }
       else
         this.commonService.errorToast();
@@ -77,8 +94,27 @@ export class DetailsPage {
   }
   addToCart(ProductID : number , SellerID : number)
   {
-    this.customerService.addToCart(ProductID , SellerID ).subscribe((res)=>{
+    if(this.commonService.splitFromLastBackSlash(this.cartImg._results[0].nativeElement.src) == 'cart_on.png')
+      this.removeCart(ProductID , this.cartImg._results[0].nativeElement);
+    else
+      this.addCart(ProductID , SellerID ,this.cartImg._results[0].nativeElement);
+  }
+  addCart(ProductID : number , SellerID : number ,element : any ) {
+    element.src = 'assets/imgs/cart_on.png';
+    this.customerService.addToCart(ProductID , SellerID).subscribe((res)=>{
       if(res == true)
+        this.commonService.successToast();
+      else if(res.error)
+        this.commonService.translateAndToast(res.error);
+      else
+        this.commonService.errorToast();
+    });
+  }
+  removeCart(ProductID : number , element : any)
+  {
+    element.src = 'assets/imgs/cart_off.png';
+    this.customerService.delCart(ProductID).subscribe((res)=>{
+      if(res.state == '202')
         this.commonService.successToast();
       else
         this.commonService.errorToast();

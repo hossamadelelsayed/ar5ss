@@ -3,10 +3,17 @@
 
   <ion-navbar>
     <ion-title><span>{{ 'Product Details' | translate}}</span>
+      <div class="cartfavicon">
+        <ion-icon style="font-size:25px;color: darkgray" #fav name="heart"
+                  (click)="addToWishList(ProductID)">
+        </ion-icon>
+        <ion-icon style="font-size:25px;" (click)="addToCart(ProductID , productDetails?.SellerID)">
+          <img [attr.id]="ProductID" #cartImg style="width: 25px;" src="assets/imgs/cart_off.png" >
+        </ion-icon>
+      </div>
     </ion-title>
-     <ion-icon style="font-size:25px;color: darkgray" #fav name="heart"
-        (click)="addToWishList(ProductID)"></ion-icon>
-    </ion-navbar>
+
+  </ion-navbar>
 </ion-header>
 <ion-content class="content">
   <ion-slides pagre class="slider" style="direction:ltr">
@@ -19,7 +26,7 @@
       </ion-slide>
     </div>
   </ion-slides>
-<h2 text-center>{{productDetails?.product_name}}<small>{{productDetails?.size}}</small></h2>
+<h2 text-center>{{productDetails?.product_name}} , <small>{{(MainService.lang == 'ar') ? productDetails?.size : productDetails?.sizeen}}</small></h2>
 <p class="style">{{productDetails?.ProductPrice}} {{ 'SAR' | translate}}</p>
 <div style="text-align: center">
  <ion-icon *ngFor="let icon of icons(productDetails?.Rate); let i = index;" class="iconcolor" [name]="icon"></ion-icon>
@@ -30,8 +37,17 @@
           (click)="goToSliderImage(color.ColorID)">
   </button>
 </div>
-<hr>
-    
+  <table>
+    <tr>
+      <th >{{ 'Property' | translate}}</th>
+      <th>{{ 'Value' | translate}}</th>
+    </tr>
+    <tr *ngFor="let prop of productProperty">
+      <td>{{prop.property_name}}</td>
+      <td>{{(MainService.lang == 'ar') ? prop.value : prop.valuee}}</td>
+    </tr>
+
+  </table>
     <button class="btn3" (click)="otherOffer()" > {{ 'Other Offers found' | translate}}</button>
  <hr>
   <!--<div class="btna">
@@ -40,7 +56,7 @@
   </div>-->
 <ion-row>
   <ion-col col-6>
-    <button class="addtocar" ion-button large (click)="addToCart(ProductID)">{{ 'Add To Cart' | translate}}</button>
+    <button class="addtocar" ion-button large (click)="addToCart(ProductID , productDetails?.SellerID)">{{ 'Add To Cart' | translate}}</button>
   </ion-col>
   <ion-col col-6>
     <h6 style="    text-align: end;

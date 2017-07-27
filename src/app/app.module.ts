@@ -43,6 +43,7 @@ import {PayPal} from "@ionic-native/paypal";
 import {Geolocation} from "@ionic-native/geolocation";
 import {OrderDetailsPage} from "../pages/order-details/order-details";
 import {SliderImagePage} from "../pages/slider-image/slider-image";
+import {PaymentsPage} from "../pages/payments/payments";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -77,7 +78,8 @@ export function createTranslateLoader(http: Http) {
     SummaryPage ,
     OrderDetailsPage ,
     SliderImagePage,
-    
+    PaymentsPage
+
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,8 @@ export function createTranslateLoader(http: Http) {
     ShoppingcartsPage ,
     SummaryPage ,
     OrderDetailsPage ,
-    SliderImagePage
+    SliderImagePage ,
+    PaymentsPage
   ],
   providers: [
     StatusBar,

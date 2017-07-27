@@ -86,7 +86,93 @@ $tabs-md-tab-text-color-active:crimson;
       text-align: center;
     }
 }
-.tabs-md .tab-button[id=tab-t0-0] {
+[dir="ltr"] .tabs-md .tab-button[id=tab-t0-0] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_home_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_home_active_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[id=tab-t0-1] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_category_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_category_active_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[id=tab-t0-2] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_heart_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_heart_active_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[id=tab-t0-3] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_profile_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_profile_active_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[id=tab-t0-4] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_settings_en.png');
+}
+[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_settings_active_en.png');
+}
+
+
+
+
+
+
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-0] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -95,14 +181,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_home.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_home_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-1] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-1] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -111,14 +197,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_category.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_category_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-2] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-2] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -127,14 +213,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_heart.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_heart_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-3] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-3] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -143,14 +229,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_profile.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_profile_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-4] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-4] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -159,7 +245,7 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_settings.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
@@ -250,20 +336,34 @@ $tabs-md-tab-text-color-active:crimson;
   background-image: url('../assets/imgs/tab_bar_settings_active.png');
 }
 .toast-md .toast-message {
-  font-size: 1.5em;
   color: white;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 19px;
-  padding-bottom: 17px;
   background-color: crimson;
+  margin: auto;
+  padding: 10px 2px;
+  text-align: center;
+  max-width: 70%;
+  min-width: 30%;
 }
 .toast-ios .toast-message {
-  font-size: 1.5em;
   color: white;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 19px;
-  padding-bottom: 17px;
   background-color: crimson;
+  margin: auto;
+  padding: 10px 2px;
+  text-align: center;
+  max-width: 70%;
+  min-width: 30%;
 }
+.toast-md .toast-wrapper {
+  background: transparent;
+}
+.toast-ios .toast-wrapper {
+  background: transparent;
+}
+.cartfavicon{
+  float: right;
+
+}
+[dir="rtl"] .cartfavicon{
+  float: left;
+}
+

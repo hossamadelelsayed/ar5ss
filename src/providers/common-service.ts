@@ -24,7 +24,8 @@ export class CommonService {
   presentToast(txt:string) {
     let toast = this.toastCtrl.create({
       message: txt,
-      duration: 750
+      duration: 750,
+      position: 'middle'
     });
     toast.present();
   }
@@ -111,6 +112,16 @@ export class CommonService {
       return true ;
     else return false ;
   }
+  checkProductIsExistInCart(CartArray : any ,value: any)
+  {
+    let ArrayFilter :any[] ;
+    ArrayFilter = CartArray.filter((item) => {
+      return (item.ProductID == value);
+    });
+    if(ArrayFilter.length > 0)
+      return true ;
+    else return false ;
+  }
   sumInputValuesWithFilter(inputs : any[]) : number
   {
     let sum : number = 0;
@@ -135,4 +146,11 @@ export class CommonService {
   ArrayFilter = inputs.filter((item) => {
     return (item._native._elementRef.nativeElement.parentElement.id != 'price'+ProductID);
   });*/
+  splitFromLastBackSlash(str : string) : string
+  {
+    let target = str;
+    let rest = target.substring(target.lastIndexOf("/")+1,target.length );
+    console.log(rest);
+    return rest ;
+  }
 }

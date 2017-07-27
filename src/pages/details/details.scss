@@ -2,7 +2,7 @@ page-details {
   .content{
         background-color: #f0f9f7;
   }
-  
+
 .slider{
     height: 35%;
     max-height: 35%;
@@ -10,7 +10,7 @@ page-details {
     max-width: 35%;
     margin: 15px auto;
     background-color: #f0f9f7;
-   
+
 }
 .style{
     font-size: 20px;
@@ -20,23 +20,26 @@ page-details {
 }
 .iconcolor{
     color: #FACC2E;
-    text-align: center; 
+    text-align: center;
     font-size:160%;
 }
 .btna{
   width: 50%;
   float: left;
-    
+
 }
+  .toolbar-content{
+    text-align: center;
+  }
 
 ion-title{
-    width: 90%;
+    width: 100%;
     display: inline-block;
 }
 .align{
     text-align: center;
      background-color: #f0f9f7;
-     
+
    }
 .hot{
     position: fixed;
@@ -67,7 +70,22 @@ ion-title{
     color: gray;
     margin-left: auto;
     margin-right: auto;
-    margin-left: auto; 
+    margin-left: auto;
     background-color: transparent;
 }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
 }

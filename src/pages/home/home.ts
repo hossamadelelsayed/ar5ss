@@ -13,6 +13,7 @@ import {CategoryPage} from "../category/category";
 import {Profile}from "../profile/profile";
 import {Settings} from "../settings/settings";
 import {WishlistPage} from "../wishlist/wishlist";
+import {MainService} from "../../providers/main-service";
 
 
 @Component({
@@ -23,11 +24,14 @@ export class HomePage {
   public hotads : any ;
   public groupShow : any ;
   public wishList : any ;
+  public cart : any[] = [] ;
   public cartNo : number = 0 ;
   public productSearchResult : any[] ;
   public showSearch : boolean = false ;
   public KeyWord : string  ;
+  public MainService : MainService =  MainService ;
   @ViewChildren('productsIcon') elRef;
+  @ViewChildren('productsCartIcon') cartIconRef ;
   constructor(public navCtrl: NavController , public productService : ProductService ,
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
               public commonService : CommonService , private barcodeScanner: BarcodeScanner) {
@@ -35,15 +39,16 @@ export class HomePage {
     setTimeout(()=> this.initObjects() , 1000);
   }
   initObjects(){
-    this.customerService.getCart().subscribe((res)=>{
-      this.cartNo = res.length ;
-    });
     this.productService.hotads().subscribe((res)=>{
       this.hotads = res ;
     });
-    this.customerService.getWishList().subscribe((res)=>{
-      this.wishList = res;
-      this.getGroupShow();
+    this.customerService.getWishList().subscribe((wishRes)=>{
+      this.wishList = wishRes;
+      this.customerService.getCart().subscribe((cartRes)=>{
+        this.cart = cartRes ;
+        this.cartNo = this.cart.length ;
+        this.getGroupShow();
+      });
     });
     console.log('fired');
   }
@@ -54,6 +59,10 @@ export class HomePage {
   checkProductInFav(ProductID : number)
   {
     return this.commonService.checkProductIsExistInFavorite(this.wishList , ProductID);
+  }
+  checkProductInCart(ProductID : number)
+  {
+    return this.commonService.checkProductIsExistInCart(this.cart , ProductID);
   }
   getGroupShow()
   {
@@ -106,6 +115,17 @@ export class HomePage {
   }
   addToCart(ProductID : number , SellerID : number)
   {
+    let iconFilter :any ;
+    iconFilter = this.cartIconRef.toArray().filter((icon) => {
+      return (icon.nativeElement.id == ProductID);
+    });
+    if(this.commonService.splitFromLastBackSlash(iconFilter[0].nativeElement.src) == 'cart_on.png')
+      this.removeCart(ProductID , iconFilter[0].nativeElement);
+    else
+      this.addCart(ProductID , SellerID ,iconFilter[0].nativeElement);
+  }
+  addCart(ProductID : number , SellerID : number ,element : any ) {
+    element.src = 'assets/imgs/cart_on.png';
     this.customerService.addToCart(ProductID , SellerID).subscribe((res)=>{
       if(res == true)
       {
@@ -114,6 +134,19 @@ export class HomePage {
       }
       else if(res.error)
         this.commonService.translateAndToast(res.error);
+      else
+        this.commonService.errorToast();
+    });
+  }
+  removeCart(ProductID : number , element : any)
+  {
+    element.src = 'assets/imgs/cart_off.png';
+    this.customerService.delCart(ProductID).subscribe((res)=>{
+      if(res.state == '202')
+      {
+        this.commonService.successToast();
+        this.cartNo--;
+      }
       else
         this.commonService.errorToast();
     });

@@ -21,7 +21,7 @@ export class CustomerService {
   public customer ;
   public lat : any ;
   public lang : any ;
-  public deviceToken : string = null;
+  public deviceToken : string = 'xyzx';
   public customerCreateUrl : string = MainService.baseUrl+"register/";
   public customerLoginUrl : string = MainService.baseUrl+"login/";
   public customerForgetPasswordUrl : string = MainService.baseUrl+"forgetpassword/";
@@ -40,6 +40,7 @@ export class CustomerService {
   public updateUserUrl : string = MainService.baseUrl+"updateuser/";
   public updateQtyUrl : string = MainService.baseUrl+"modifaycart/";
   public deleteCartUrl : string = MainService.baseUrl+"deletecart/";
+  public delCartUrl : string = MainService.baseUrl+"deleteproductfromcart";
   public addLocationUrl : string = MainService.baseUrl+"addlocation";
   public getUserLocationUrl : string = MainService.baseUrl+"userlocation/";
   public getPaymentTypesUrl : string = MainService.baseUrl+"payment?lang=";
@@ -135,6 +136,24 @@ export class CustomerService {
   }
   deleteCart(CartID : number  ) {
     return this.http.delete(this.deleteCartUrl + CartID ).map((res) => res.json());
+  }
+  delCart(ProductID : number){
+    let body ;
+    if(this.customer != null)
+    {
+      body = {
+        ProductID : ProductID ,
+        UserID : this.customer.UserID
+      };
+    }
+    else
+    {
+      body = {
+        ProductID : ProductID ,
+        TokenID : this.deviceToken
+      };
+    }
+    return this.http.post(this.delCartUrl , body ).map((res) => res.json());
   }
   updateQTY(QTY : number ,  CartID : number  ) {
     let body = {

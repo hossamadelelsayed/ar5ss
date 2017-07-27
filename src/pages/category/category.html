@@ -23,16 +23,22 @@
     <ion-row class="headrow">
       <ion-col col-4 (click)="gotoall()">
       <ion-icon style="padding-right:3px" ios="ios-grid" md="md-grid"></ion-icon>
-      <h6>{{ 'Category' | translate}}</h6><span> {{ 'Refrigerator' | translate}}</span>
+      <h6>{{ 'Category' | translate}}</h6><br><span> {{ category_name }}</span>
       </ion-col>
       <ion-col col-4 (click)="sortBy()" style="border-right:1px solid lightgray;border-left:1px solid lightgray;">
         <ion-icon ios="ios-arrow-round-down" md="md-arrow-round-down"></ion-icon>
         <ion-icon ios="ios-arrow-round-up" md="md-arrow-round-up"></ion-icon>
-        <h6>{{ 'Sort By' | translate}}</h6><br><span>{{ 'Lowest Price' | translate}}</span>
+        <h6>{{ 'Sort By' | translate}}</h6><br>
+        <span>
+          {{(sortType == productService.sortByASC && MainService.lang == 'ar') ?  'الأعلى سعر' : ''}}
+          {{(sortType == productService.sortByASC && MainService.lang == 'en') ?  'Heighest Price' : ''}}
+          {{(sortType == productService.sortByDESC && MainService.lang == 'ar') ?  'الأقل سعر' : ''}}
+          {{(sortType == productService.sortByDESC && MainService.lang == 'en') ?  'Lowest Price' : ''}}
+          </span>
       </ion-col>
       <ion-col col-4 (click)="gotohot()">
          <img src="assets/imgs/sort.png "height="12px">
-        <h6>{{ 'Hot Offers' | translate}}</h6><br><span>{{ 'Refrigerator' | translate}}</span>
+        <h6>{{ 'Hot Offers' | translate}}</h6><br>
       </ion-col>
     </ion-row>
 
@@ -48,22 +54,30 @@
       <ion-col col-6 *ngFor="let product of categoryProducts">
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
        <div class="imagesdiv">
-        <img class="leftimg" [style.background]="product.ColorHexa">
-        <img *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
+        <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
+         <div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>
+         <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
+         <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
        </div>
         <div style="text-align:center;height: 130px;"><img  class="prodimg" [src]="product.Image" height="140px"></div>
         <ion-row>
           <ion-icon *ngFor="let icon of icons(product.Rate); let i = index"
                     style="color:orange" [name]="icon"></ion-icon>
       </ion-row>
-      <h4>{{product.product_name}} , {{product.size}}</h4>
+      <h4>{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</h4>
       <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
     <div class="iconsdiv">
-       <ion-icon class="carticon" (click)="addToCart(product.ProductID , product.SellerID)">
-         <img style="width: 25px;" src="assets/imgs/cart_off.png" >
-         <!--<img style="width: 25px;" src="assets/imgs/cart_on.png" >-->
-       </ion-icon>
+      <ion-icon
+        *ngIf="!checkProductInCart(product.ProductID)"
+        class="gridicon" (click)="addToCart(product.ProductID , product.SellerID)">
+        <img [attr.id]="product.ProductID" #productsCartIcon style="width: 25px;" src="assets/imgs/cart_off.png" >
+      </ion-icon>
+      <ion-icon
+        *ngIf="checkProductInCart(product.ProductID)"
+        class="gridicon" (click)="addToCart(product.ProductID , product.SellerID)">
+        <img [attr.id]="product.ProductID" #productsCartIcon style="width: 25px;" src="assets/imgs/cart_on.png" >
+      </ion-icon>
         <ion-icon
           *ngIf="!checkProductInFav(product.ProductID)"
           [attr.id]="product.ProductID"
@@ -85,8 +99,10 @@
   <ion-card *ngFor="let product of categoryProducts">
     <div class="product" (click)="viewProduct(product.ProductID)">
       <div style="height:35px">
-        <img class="leftimg" [style.background]="product.ColorHexa">
-        <img  *ngIf="product.HotOfferID > 0" class="hot" src="assets/imgs/hot.png">
+        <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
+        <div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>
+        <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
+        <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
       </div>
 
        <ion-row style="width:100%">
@@ -97,7 +113,7 @@
           <ion-row class="starrow">
               <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
         </ion-row>
-              <h4>{{product.product_name}} , {{product.size}}</h4>
+              <h4>{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</h4>
               <h5>{{product.CategroyName}}</h5>
       </ion-col>
     </ion-row>
@@ -107,22 +123,28 @@
             <h6>{{product.ProductPrice}} {{ 'SAR' | translate}}</h6>
       </ion-col>
       <ion-col col-6 style="text-align: end">
-       <ion-icon style="color:gray" class="botticon" (click)="addToCart(product.ProductID , product.SellerID)">
-         <img style="width: 18px;" src="assets/imgs/cart_off.png" >
-          <!--<img style="width: 18px;" src="assets/imgs/cart_on.png" >-->
-         </ion-icon>
+        <ion-icon
+          *ngIf="!checkProductInCart(product.ProductID)"
+          class="botticon" (click)="addToCart(product.ProductID , product.SellerID)">
+          <img [attr.id]="product.ProductID" #productsCartIcon style="width: 18px;" src="assets/imgs/cart_off.png" >
+        </ion-icon>
+        <ion-icon
+          *ngIf="checkProductInCart(product.ProductID)"
+          class="botticon" (click)="addToCart(product.ProductID , product.SellerID)">
+          <img [attr.id]="product.ProductID" #productsCartIcon style="width: 18px;" src="assets/imgs/cart_on.png" >
+        </ion-icon>
 
           <ion-icon
               *ngIf="!checkProductInFav(product.ProductID)"
-              [attr.id]="product.ProductID+'2'"
-              #productsIcon2
+              [attr.id]="product.ProductID"
+              #productsIcon
               style="color:darkgray"
               class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
           </ion-icon>
           <ion-icon
               *ngIf="checkProductInFav(product.ProductID)"
-              [attr.id]="product.ProductID+'2'"
-              #productsIcon2
+              [attr.id]="product.ProductID"
+              #productsIcon
               style="color:crimson" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
            </ion-icon>
 

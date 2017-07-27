@@ -12,6 +12,7 @@ import {DetailsPage} from "../details/details";
 import {Profile}from "../profile/profile";
 import {Settings} from "../settings/settings";
 import {HomePage} from "../home/home";
+import {MainService} from "../../providers/main-service";
 
 @Component({
   selector: 'page-category',
@@ -19,22 +20,44 @@ import {HomePage} from "../home/home";
 })
 export class CategoryPage {
   public category_id : number ;
+  public category_name : string ;
   public categoryProducts : any ;
   public wishList : any ;
+  public cart : any ;
   public sortType : number  = this.productService.sortByASC;
   public showing : string = 'list';
+  public MainService : MainService = MainService ;
+
   @ViewChildren('productsIcon') elRef;
   @ViewChildren('productsIcon2') elRef2;
+  @ViewChildren('productsCartIcon') cartIconRef ;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public productService : ProductService , public customerService : CustomerService ,
               public commonService : CommonService) {
     if(this.navParams.data.category_id)
+    {
       this.category_id = this.navParams.data.category_id;
+      this.category_name = this.navParams.data.category_name;
+    }
+
 }
 
   ionViewWillEnter()
   {
-    this.getWishList();
+    this.customerService.getWishList().subscribe((wishRes)=>{
+      this.wishList = wishRes;
+      this.customerService.getCart().subscribe((cartRes)=>{
+        this.cart = cartRes ;
+        this.getcategoryProducts();
+      });
+    });
+
+  }
+  getCart()
+  {
+    this.customerService.getCart().subscribe((res)=>{
+      this.cart = res ;
+    });
   }
   sortBy()
   {
@@ -47,7 +70,7 @@ export class CategoryPage {
   {
     this.customerService.getWishList().subscribe((res)=>{
       this.wishList = res;
-      this.getcategoryProducts();
+      //this.getcategoryProducts();
     });
   }
   checkProductInFav(ProductID : number)
@@ -86,25 +109,12 @@ export class CategoryPage {
       else
         this.addFav(ProductID , iconFilter[i].nativeElement);
     }
-
-
-    let iconFilter2 :any[] = [];
-    iconFilter2 = this.elRef2.toArray().filter((icon) => {
-      return (icon.nativeElement.id == ProductID+'2');
-    });
-    for(let i = 0 ; i < iconFilter2.length ; i++)
-    {
-      if(iconFilter2[i].nativeElement.style.color == 'crimson')
-        this.removeFav(ProductID , iconFilter2[i].nativeElement);
-      else
-        this.addFav(ProductID , iconFilter2[i].nativeElement);
-    }
   }
   addFav(ProductID : number , element : any ) {
+    element.style.color = 'crimson';
     this.customerService.addToWishList(ProductID).subscribe((res) => {
       if (res == true) {
         this.commonService.successToast();
-        element.style.color = 'crimson';
         this.getWishList();
       }
       else
@@ -113,23 +123,54 @@ export class CategoryPage {
   }
   removeFav(ProductID : number , element : any)
   {
+    element.style.color = 'darkgrey';
     this.customerService.deleteFav(ProductID).subscribe((res)=>{
       if (res.state == '202') {
         this.commonService.successToast();
-        element.style.color = 'darkgrey';
         this.getWishList();
       }
       else
         this.commonService.errorToast();
     });
   }
+  checkProductInCart(ProductID : number)
+  {
+    return this.commonService.checkProductIsExistInCart(this.cart , ProductID);
+  }
   addToCart(ProductID : number , SellerID : number)
   {
+    let iconFilter :any ;
+    iconFilter = this.cartIconRef.toArray().filter((icon) => {
+      return (icon.nativeElement.id == ProductID);
+    });
+    if(this.commonService.splitFromLastBackSlash(iconFilter[0].nativeElement.src) == 'cart_on.png')
+      this.removeCart(ProductID , iconFilter[0].nativeElement);
+    else
+      this.addCart(ProductID , SellerID ,iconFilter[0].nativeElement);
+  }
+  addCart(ProductID : number , SellerID : number ,element : any ) {
+    element.src = 'assets/imgs/cart_on.png';
     this.customerService.addToCart(ProductID , SellerID).subscribe((res)=>{
       if(res == true)
+      {
         this.commonService.successToast();
+        this.getCart();
+      }
       else if(res.error)
         this.commonService.translateAndToast(res.error);
+      else
+        this.commonService.errorToast();
+    });
+  }
+  removeCart(ProductID : number , element : any)
+  {
+    element.src = 'assets/imgs/cart_off.png';
+    this.customerService.delCart(ProductID).subscribe((res)=>{
+      if(res.state == '202')
+      {
+        this.commonService.successToast();
+        this.getCart();
+      }
       else
         this.commonService.errorToast();
     });

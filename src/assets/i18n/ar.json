@@ -78,5 +78,7 @@
   "Don't Have Account?" : "ليس لديك حساب" ,
   "Forget Password ?" : "لا أتذكر كلمة المرور" ,
   "Reset Password" : "استعادة كلمة المرور" ,
-  "Search" : "بحث"
+  "Search" : "بحث" ,
+  "Property" : "الخاصية" ,
+  "Value" : "القيمة"
 }

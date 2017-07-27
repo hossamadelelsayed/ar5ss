@@ -2,16 +2,13 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {LoginPage} from "../pages/login/login";
 import { HomePage } from '../pages/home/home';
-import {CategoryPage} from "../pages/category/category";
 import {WishlistPage} from "../pages/wishlist/wishlist";
 import {CustomerService} from "../providers/customer-service";
 import {Push, PushObject, PushOptions} from "@ionic-native/push";
 import {Profile} from "../pages/profile/profile";
 import {Settings} from "../pages/settings/settings";
 import {TranslateService} from "@ngx-translate/core";
-import {ProductService} from "../providers/product-service";
 import {AllcategoriesPage} from "../pages/allcategories/allcategories";
 
 @Component({
@@ -31,7 +28,9 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      splashScreen.hide();
+      setTimeout(function() {
+        splashScreen.hide();
+      }, 5000);
       // push
       this.pushInit();
       // chseck for any customer
@@ -46,7 +45,6 @@ export class MyApp {
   pushInit()
   {
     // to initialize push notifications
-
     const options: PushOptions = {
       android: {
         senderID: '204319874451'
@@ -71,7 +69,6 @@ export class MyApp {
 
     pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
   }
-
 
 
 

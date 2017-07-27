@@ -23,15 +23,21 @@
       <ion-row class="starrow">
           <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
       </ion-row>
-      <h4>{{product.product_name}} , {{product.size}}</h4>
+      <h4>{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</h4>
       <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
     <div class="iconsdiv">
-       <ion-icon class="carticon" (click)="addToCart(product.ProductID , product.SellerID)">
-         <img style="width: 25px;" src="assets/imgs/cart_off.png" >
-         <!--<img style="width: 25px;" src="assets/imgs/cart_on.png" >-->
-       </ion-icon>
-        <ion-icon
+       <ion-icon
+        *ngIf="!checkProductInCart(product.ProductID)"
+        class="carticon" (click)="addToCart(product.ProductID , product.SellerID)">
+        <img [attr.id]="product.ProductID" #productsCartIcon style="width: 25px;" src="assets/imgs/cart_off.png" >
+      </ion-icon>
+      <ion-icon
+        *ngIf="checkProductInCart(product.ProductID)"
+        class="carticon" (click)="addToCart(product.ProductID , product.SellerID)">
+        <img [attr.id]="product.ProductID" #productsCartIcon style="width: 25px;" src="assets/imgs/cart_on.png" >
+      </ion-icon>
+      <ion-icon
           *ngIf="!checkProductInFav(product.ProductID)"
           [attr.id]="product.ProductID"
           #productsIcon
@@ -40,7 +46,7 @@
           *ngIf="checkProductInFav(product.ProductID)"
           [attr.id]="product.ProductID"
           #productsIcon
-          style="color: red;"
+          style="color: crimson;"
           class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
     </div>
   </ion-col>

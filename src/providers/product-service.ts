@@ -15,12 +15,13 @@ export class ProductService {
   public categoryUrl : string = MainService.baseUrl+"category?lang=";
   public categoryProductsUrl : string = MainService.baseUrl+"getcategorydeatails/";
   public hotadsUrl : string = MainService.baseUrl+"hotads";
-  public groupShowUrl : string = MainService.baseUrl+"groupshow";
-  public hotOfferUrl : string = MainService.baseUrl+"hotoffer";
+  public groupShowUrl : string = MainService.baseUrl+"groupshow?lang=";
+  public hotOfferUrl : string = MainService.baseUrl+"hotoffer?lang=";
   public productDetailsUrl : string = MainService.baseUrl+"productDetails/";
   public productBarcodeUrl : string = MainService.baseUrl+"productBarcode/";
   public productColorUrl : string = MainService.baseUrl+"productcolor";
   public searchProductUrl : string = MainService.baseUrl+"serachproduct";
+  public getProductPropertyUrl : string = MainService.baseUrl+"getPoductValue/";
   public readonly sortByASC : number = 1 ;
   public readonly sortByDESC : number = 2 ;
 
@@ -37,6 +38,10 @@ export class ProductService {
     };
     return this.http.post(this.searchProductUrl , body ).map((res) => res.json());
   }
+  getProductProperty(ProductID : number)
+  {
+    return this.http.get(this.getProductPropertyUrl + ProductID + '?lang=' + MainService.lang).map((res) => res.json());
+  }
   productColor(ProductID : number , ColorID : number)
   {
     let body = {
@@ -51,11 +56,11 @@ export class ProductService {
   }
   productDetails(ProductID : number)
   {
-    return this.http.get(this.productDetailsUrl+ProductID).map((res) => res.json());
+    return this.http.get(this.productDetailsUrl+ProductID + '?lang=' + MainService.lang).map((res) => res.json());
   }
   hotOffer()
   {
-    return this.http.get(this.hotOfferUrl).map((res) => res.json());
+    return this.http.get(this.hotOfferUrl + MainService.lang).map((res) => res.json());
   }
   category()
   {
@@ -65,7 +70,7 @@ export class ProductService {
   {
     if(sortBy == null)
       sortBy = this.sortByASC ;
-    return this.http.get(this.categoryProductsUrl+category_id+'/'+sortBy).map((res) => res.json());
+    return this.http.get(this.categoryProductsUrl+category_id+'/'+sortBy + '?lang=' + MainService.lang).map((res) => res.json());
   }
   hotads()
   {
@@ -73,6 +78,6 @@ export class ProductService {
   }
   groupShow()
   {
-    return this.http.get(this.groupShowUrl).map((res) => res.json());
+    return this.http.get(this.groupShowUrl + MainService.lang).map((res) => res.json());
   }
 }

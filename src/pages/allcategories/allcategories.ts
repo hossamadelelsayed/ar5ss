@@ -20,10 +20,11 @@ export class AllcategoriesPage {
       console.log(res);
     });
   }
-  goToCategoryDetails(category_id : number)
+  goToCategoryDetails(category_id : number , category_name : string)
   {
     this.navCtrl.push(CategoryPage,{
-      category_id : category_id
+      category_id : category_id ,
+      category_name : category_name
     })
   }
   ionViewDidLoad() {
