@@ -235,9 +235,9 @@ export class CustomerService {
   getCart()
   {
     if(this.customer != null)
-      return this.http.get(this.getCartByCustomerUrl+this.customer.UserID).map((res) => res.json());
+      return this.http.get(this.getCartByCustomerUrl+this.customer.UserID + '?lang=' + MainService.lang).map((res) => res.json());
     else
-      return this.http.get(this.getCartByTokenUrl+this.deviceToken).map((res) => res.json());
+      return this.http.get(this.getCartByTokenUrl+this.deviceToken + '?lang=' + MainService.lang).map((res) => res.json());
   }
   addToWishList(ProductID : number)
   {

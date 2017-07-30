@@ -88,7 +88,7 @@
         *ngIf="checkProductInFav(product.ProductID)"
         [attr.id]="product.ProductID"
         #productsIcon
-        style="color: crimson"
+        style="color: #f01666"
         class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID , product.SellerID)"></ion-icon>
     </div>
   </ion-col>
@@ -107,10 +107,10 @@
       </div>
 
        <ion-row style="width:100%">
-      <ion-col col-3>
+      <ion-col col-4>
         <img [src]="product.Image" (click)="gotohistory()">
       </ion-col>
-      <ion-col col-9>
+      <ion-col style="margin-top: -3px;" col-8>
           <ion-row class="starrow">
               <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
         </ion-row>
@@ -149,7 +149,7 @@
               *ngIf="checkProductInFav(product.ProductID)"
               [attr.id]="product.ProductID"
               #productsIcon
-              style="color:crimson" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
+              style="color:#f01666" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)">
            </ion-icon>
 
       </ion-col>

@@ -367,17 +367,17 @@ $tabs-md-tab-text-color-active:crimson;
   float: left;
 }
 .prodh6{
-  float: left;
+  float: right;
 }
 [dir="ltr"] .prodh6{
-  float: right;
-  padding-right:12px;
+  float: left;
+  padding-left:12px;
 }
 
 .products span {
-  float: right;
+  float: left;
 }
 [dir="ltr"] .products span{
-  float: left;
-  padding-left:12px;
+  float: right;
+  padding-right:12px;
 }

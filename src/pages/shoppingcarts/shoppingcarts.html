@@ -17,24 +17,24 @@
     </ion-row>
     <div *ngFor="let product of cartDetails">
     <ion-row >
-      <ion-col col-3>
+      <ion-col col-4>
          <button class="btn" ion-button round [style.background]="product.ColorHexa"></button>
           <img class="img" [src]="product.Image">
       </ion-col>
-      <ion-col col-9>
+      <ion-col col-8>
         <ion-row>
-          <ion-col col-9> <h2 style="font-family: inherit; color: #4A4D4D;">{{ product.product_name}} ,<small> {{ product.size }} </small></h2></ion-col>
-          <ion-col col-3 style="text-align:center"> 
+          <ion-col col-10> <h2 style="font-family: inherit; color: #4A4D4D;">{{ product.product_name}} ,<small> {{ product.size }} </small></h2></ion-col>
+          <ion-col col-2 style="text-align:center"> 
             <img src="assets/imgs/trash.png"height="30px" (click)="deleteCart(product.CartID,product.ProductID)">
             <!--<ion-icon class="search" name="trash" item-right (click)="deleteCart(product.CartID,product.ProductID)">
             </ion-icon>-->
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6><p style="font-size: 16px; color:crimson;">
+          <p style="font-size: 16px; color:crimson;">
       <ion-input [attr.id]="'price'+product.ProductID" [hidden]="true" #prices [value]="quantity?.value * product.ProductPrice" ></ion-input>
-      {{ quantity?.value * product.ProductPrice}} {{ 'SAR' | translate}}</p></ion-col>
-          <ion-col col-6><p class="shipping">({{product.Shiping}} {{'SAR' | translate}} {{'Shipping' | translate}})</p></ion-col>
+      {{ quantity?.value * product.ProductPrice}} {{ 'SAR' | translate}}</p>
+         <p class="shipping">({{product.Shiping}} {{'SAR' | translate}} {{'Shipping' | translate}})</p>
         </ion-row>
        
         

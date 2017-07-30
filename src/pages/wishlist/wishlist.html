@@ -22,7 +22,7 @@
 
 <ion-row class="totalrow" *ngFor="let product of wishList" >
   <ion-col col-3>
-   <img [src]="product.Image" height="100%" (click)="viewProduct(product.ProductID)">
+   <img [src]="product.Image" height="80px" width="80px" (click)="viewProduct(product.ProductID)">
   </ion-col>
   <ion-col col-9>
     <ion-row>

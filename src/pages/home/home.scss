@@ -3,6 +3,10 @@ page-home {
   .back-button.show-back-button{
       display: none;
   }
+  .titlespace{
+    padding-top: 20px;
+    background-color: #f8f8f8;
+  }
 
 .toolbar-title span{
         padding-right:0 !important;
@@ -44,9 +48,10 @@ page-home {
     height: 275px;
     margin-bottom: 30px;
     .prodh6{
-      text-align: end;
+      text-align: start;
       margin: 0;
-      padding-left: 15px;
+      padding-right: 15px;
+      
       font-weight: normal;
       font-size: 14px;
       width:50%;
@@ -54,7 +59,7 @@ page-home {
     }
     span{
 
-      padding-right:12px;
+      padding-left:12px;
       color:gray;
     }}
 
