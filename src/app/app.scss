@@ -366,4 +366,18 @@ $tabs-md-tab-text-color-active:crimson;
 [dir="rtl"] .cartfavicon{
   float: left;
 }
+.prodh6{
+  float: left;
+}
+[dir="ltr"] .prodh6{
+  float: right;
+  padding-right:12px;
+}
 
+.products span {
+  float: right;
+}
+[dir="ltr"] .products span{
+  float: left;
+  padding-left:12px;
+}

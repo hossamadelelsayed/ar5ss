@@ -4,6 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<!--
 <ion-header>
 
   <ion-navbar>
@@ -11,13 +12,12 @@
   </ion-navbar>
 
 </ion-header>
-
+-->
 
 <ion-content class="content" padding>
   <ion-slides class="slider" dir="ltr">
-    <ion-slide  *ngFor="let image of images"
-               style="background-size: 100%; background-repeat: no-repeat;width: 365px;
-    height: 293px;" [style.background-image]="getBackground(image.Image)">
+    <ion-slide *ngFor="let image of images"
+               style="background-size: cover;" [style.background-image]="getBackground(image.Image)">
     </ion-slide>
   </ion-slides>
   <button ion-button round (click)="close()">{{ 'Close' | translate}}</button>

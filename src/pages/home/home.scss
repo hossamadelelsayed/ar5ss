@@ -43,19 +43,21 @@ page-home {
   .products{
     height: 275px;
     margin-bottom: 30px;
-    h6{
-      float: left;
-      text-align: left;
+    .prodh6{
+      text-align: end;
       margin: 0;
       padding-left: 15px;
       font-weight: normal;
       font-size: 14px;
+      width:50%;
+
     }
     span{
-      float: right;
-      padding-right:11px;
+
+      padding-right:12px;
       color:gray;
     }}
+
   ion-scroll {
     position: relative;
     display: list-item;

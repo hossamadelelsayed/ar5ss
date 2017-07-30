@@ -48,7 +48,7 @@
 
 <div *ngIf="!showSearch">
   <div class="products" *ngFor="let group of groupShow">
-     <h6>{{group.group_name}}</h6>
+     <h6 class="prodh6">{{group.group_name}}</h6>
      <span>{{ 'More' | translate}}</span>
       <ion-scroll direction="y">
        <ion-card *ngFor="let product of group.product">
