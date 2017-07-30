@@ -1,6 +1,5 @@
 
 <ion-header>
-
   <ion-navbar>
     <ion-title><span>{{ 'Product Details' | translate}}</span>
       <div class="cartfavicon">
@@ -19,14 +18,14 @@
   <ion-slides pagre class="slider" style="direction:ltr">
     <div *ngFor="let color of productDetails?.product_color">
       <ion-slide *ngFor="let image of color.product_image">
-        <ion-item class= "align" >
-          <img  [src]="image.Image">
+        <ion-item class= "align" (click)="goToSliderImage(color.ColorID)">
+          <img  [src]="image.Image" >
           <img *ngIf="productDetails?.HotOfferID != 0" class="hot" src="assets/imgs/oldhot.png">
         </ion-item>
       </ion-slide>
     </div>
   </ion-slides>
-<h2 text-center>{{productDetails?.product_name}} , <small>{{(MainService.lang == 'ar') ? productDetails?.size : productDetails?.sizeen}}</small></h2>
+<h2 text-center style="direction: ltr"> {{productDetails?.product_name}} , <small>{{(MainService.lang == 'ar') ? productDetails?.size : productDetails?.sizeen}}</small></h2>
 <p class="style">{{productDetails?.ProductPrice}} {{ 'SAR' | translate}}</p>
 <div style="text-align: center">
  <ion-icon *ngFor="let icon of icons(productDetails?.Rate); let i = index;" class="iconcolor" [name]="icon"></ion-icon>

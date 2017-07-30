@@ -64,6 +64,7 @@
           <ion-icon *ngFor="let icon of icons(product.Rate); let i = index"
                     style="color:orange" [name]="icon"></ion-icon>
       </ion-row>
+
       <h4>{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</h4>
       <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
@@ -114,7 +115,10 @@
               <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
         </ion-row>
               <h4>{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</h4>
-              <h5>{{product.CategroyName}}</h5>
+              <h5>{{product.CategroyName}}
+                <span style="color: lightgrey"> {{ category_name }}</span>
+              </h5>
+
       </ion-col>
     </ion-row>
     </div>
