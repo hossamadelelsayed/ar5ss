@@ -4,7 +4,7 @@ page-home {
       display: none;
   }
   .titlespace{
-    padding-top: 20px;
+
     background-color: #f8f8f8;
   }
 
@@ -51,7 +51,7 @@ page-home {
       text-align: start;
       margin: 0;
       padding-right: 15px;
-      
+
       font-weight: normal;
       font-size: 14px;
       width:50%;
@@ -106,8 +106,13 @@ page-home {
         direction:ltr
     }
  }
+.imgbrand{
+  display: block;
+  width: 40%;
+  margin-top: 10px;
+}
 
-    .leftimg{
+.leftimg{
         width: 23px;
         margin: 10px 0 0 5px;
         height: 23px;
@@ -162,7 +167,7 @@ page-home {
      color: darkgrey;
  }
  .hot{
-    width: 30%;
+    width: 24%;
     float: right;
     margin-top: -23px;
  }

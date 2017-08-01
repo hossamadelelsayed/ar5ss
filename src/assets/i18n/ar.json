@@ -31,7 +31,7 @@
   "Other Offers found" : "العروض ذات الصلة" ,
   "More" : "المزيد" ,
   "Main" : "الرئيسية" ,
-  "Category" : "التصنيفات" ,
+  "Category" : "الاقسام" ,
   "Refrigerator" : "المبردات" ,
   "Sort By" : "ترتيب" ,
   "Lowest Price" : "الأقل سعرا" ,
@@ -80,5 +80,9 @@
   "Reset Password" : "استعادة كلمة المرور" ,
   "Search" : "بحث" ,
   "Property" : "الخاصية" ,
-  "Value" : "القيمة"
+  "Value" : "القيمة" ,
+  "Delete" : "حذف" ,
+  "Default" : "افتراضى" ,
+  "Total After Shipping" : "الاجمالى بعد الشحن" ,
+  "network was disconnected :-(" : "تعذر الاتصال بشبكة الانترنت"
 }

@@ -43,11 +43,14 @@ export class CustomerService {
   public delCartUrl : string = MainService.baseUrl+"deleteproductfromcart";
   public addLocationUrl : string = MainService.baseUrl+"addlocation";
   public getUserLocationUrl : string = MainService.baseUrl+"userlocation/";
+  public deleteUserLocationUrl : string = MainService.baseUrl+"deletelocation/";
+  public setDefaultLocationUrl : string = MainService.baseUrl+"setDefultLocation/";
   public getPaymentTypesUrl : string = MainService.baseUrl+"payment?lang=";
   public confirmOrderUrl : string = MainService.baseUrl+"insertorder";
   public orderHistoryUrl : string = MainService.baseUrl+"orderhiostry/";
   public customerRateUrl : string = MainService.baseUrl+"rate";
   public getRelatedProductUrl : string = MainService.baseUrl+"getrelatedproduct/";
+
 
 
 
@@ -68,6 +71,12 @@ export class CustomerService {
               public commonService : CommonService, public translateService :TranslateService ,
               public geolocation: Geolocation) {
     console.log('Hello CustomerService Provider');
+  }
+  setDefaultLocation(LocationID : number){
+    return this.http.put(this.setDefaultLocationUrl + LocationID , {} ).map((res) => res.json());
+  }
+  deleteUserLocation(LocationID : number){
+    return this.http.delete(this.deleteUserLocationUrl + LocationID ).map((res) => res.json());
   }
   getRelatedProduct(ProductID : number)
   {

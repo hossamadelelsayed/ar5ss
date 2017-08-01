@@ -36,7 +36,7 @@ export class HomePage {
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
               public commonService : CommonService , private barcodeScanner: BarcodeScanner) {
 
-    setTimeout(()=> this.initObjects() , 1000);
+    //setTimeout(()=> this.initObjects() , 1000);
   }
   initObjects(){
     this.productService.hotads().subscribe((res)=>{

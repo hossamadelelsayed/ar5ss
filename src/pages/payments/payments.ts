@@ -12,7 +12,7 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
   templateUrl: 'payments.html',
 })
 export class PaymentsPage {
-public paymentTypes : any[];
+  public paymentTypes : any[];
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public viewCtrl : ViewController) {
     this.paymentTypes = navParams.data ;

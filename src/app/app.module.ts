@@ -44,6 +44,8 @@ import {Geolocation} from "@ionic-native/geolocation";
 import {OrderDetailsPage} from "../pages/order-details/order-details";
 import {SliderImagePage} from "../pages/slider-image/slider-image";
 import {PaymentsPage} from "../pages/payments/payments";
+import {UserLocationsPage} from "../pages/user-locations/user-locations";
+import {Network} from "@ionic-native/network";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -78,7 +80,8 @@ export function createTranslateLoader(http: Http) {
     SummaryPage ,
     OrderDetailsPage ,
     SliderImagePage,
-    PaymentsPage
+    PaymentsPage ,
+    UserLocationsPage
 
   ],
   imports: [
@@ -121,7 +124,8 @@ export function createTranslateLoader(http: Http) {
     SummaryPage ,
     OrderDetailsPage ,
     SliderImagePage ,
-    PaymentsPage
+    PaymentsPage ,
+    UserLocationsPage
   ],
   providers: [
     StatusBar,
@@ -136,7 +140,8 @@ export function createTranslateLoader(http: Http) {
     Push,
     BarcodeScanner,
     PayPal ,
-    Geolocation
+    Geolocation ,
+    Network
   ]
 })
 export class AppModule {}

@@ -1,7 +1,8 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title><span>{{ 'Product Details' | translate}}</span>
+    <ion-title><ion-row> <img  class="logo" src="assets/imgs/applogo.png"></ion-row>
+      <span>{{ 'Product Details' | translate}}</span>
       <div class="cartfavicon">
         <ion-icon style="font-size:25px;color: darkgray" #fav name="heart"
                   (click)="addToWishList(ProductID)">
@@ -20,17 +21,18 @@
       <ion-slide *ngFor="let image of color.product_image">
         <ion-item class= "align" (click)="goToSliderImage(color.ColorID)">
           <img  [src]="image.Image" >
-          <img *ngIf="productDetails?.HotOfferID != 0" class="hot" src="assets/imgs/oldhot.png">
+          <!--<img *ngIf="productDetails?.HotOfferID != 0" class="hot" src="assets/imgs/oldhot.png">-->
         </ion-item>
       </ion-slide>
     </div>
   </ion-slides>
+  <div style="margin-top: -145px;">
 <h2 text-center style="direction: ltr"> {{productDetails?.product_name}} , <small>{{(MainService.lang == 'ar') ? productDetails?.size : productDetails?.sizeen}}</small></h2>
 <p class="style">{{productDetails?.ProductPrice}} {{ 'SAR' | translate}}</p>
 <div style="text-align: center">
  <ion-icon *ngFor="let icon of icons(productDetails?.Rate); let i = index;" class="iconcolor" [name]="icon"></ion-icon>
 <br>
-  <button class="btn1" ion-button round
+  <button class="btn1" ion-button
           *ngFor="let color of productDetails?.product_color"
           [style.background]="color.colors_of_product.ColorHexa"
           (click)="goToSliderImage(color.ColorID)">
@@ -65,4 +67,5 @@
     color: #dc143c;">5000 {{ 'SAR' | translate}}<p>
   </ion-col>
 </ion-row>
+  </div>
 </ion-content>

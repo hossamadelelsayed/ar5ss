@@ -11,6 +11,7 @@ import {LoginPage} from "../login/login";
 export class ShoppingcartsPage {
   public cartDetails : any[] ;
   public cartTotal : number = 0 ;
+  public cartShipping :  number = 0;
   @ViewChildren('prices') itemsPriceRef;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService: CustomerService , public commonService : CommonService ) {
@@ -19,8 +20,9 @@ export class ShoppingcartsPage {
   ionViewWillEnter()
   {
     this.customerService.getCart().subscribe((res)=>{
+      console.log(res);
       this.cartDetails = res ;
-      this.cartTotal = this.initCartTotsl();
+      this.cartTotal = this.initCartTotal();
     });
   }
   ionViewDidLoad() {
@@ -31,11 +33,16 @@ export class ShoppingcartsPage {
       this.navCtrl.push(SummaryPage);
     else this.navCtrl.push(LoginPage);
   }
-  initCartTotsl() : number
+  initCartTotal() : number
   {
     let sum : number = 0;
+    let shipping : number = 0;
     for(let i = 0 ; i < this.cartDetails.length ; i++)
+    {
       sum += this.cartDetails[i].ProductPrice * this.cartDetails[i].QTY;
+      shipping += this.cartDetails[i].Shiping ;
+    }
+    this.cartShipping = shipping ;
     return sum;
   }
   updateQTY(QTY : number ,CartID : number)
@@ -72,7 +79,6 @@ export class ShoppingcartsPage {
     setTimeout(() => {
       this.updateTotalCart();
     }, 500);
-
   }
 
 }

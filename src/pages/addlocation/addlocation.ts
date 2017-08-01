@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavController, NavParams,} from 'ionic-angular';
 import {CommonService} from "../../providers/common-service";
 import {Geolocation} from "@ionic-native/geolocation";
 import {CustomerService} from "../../providers/customer-service";

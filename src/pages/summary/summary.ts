@@ -7,6 +7,7 @@ import {PayPal, PayPalConfiguration, PayPalPayment} from "@ionic-native/paypal";
 import {CustomerService} from "../../providers/customer-service";
 import {HomePage} from "../home/home";
 import {PaymentsPage} from "../payments/payments";
+import {UserLocationsPage} from "../user-locations/user-locations";
 @Component({
   selector: 'page-summary',
   templateUrl: 'summary.html',
@@ -26,11 +27,21 @@ export class SummaryPage {
   }
   ionViewWillEnter()
   {
-    this.customerService.getUserLocation().subscribe((res)=>{
-        this.userLocations = res ;
-    });
+    this.getDefaultUserLocation();
     this.customerService.getPaymentTypes().subscribe((res)=>{
       this.paymentTypes = res ;
+    });
+  }
+  getDefaultUserLocation()
+  {
+    this.customerService.getUserLocation().subscribe((userLocations)=>{
+      let ArrayFilter :any[] ;
+      ArrayFilter = userLocations.filter((item) => {
+        return (item.Defualt == 1);
+      });
+      if(ArrayFilter.length > 0)
+        this.LocationID = ArrayFilter[0].LocationID ;
+      console.log(this.LocationID);
     });
   }
   goaddlocation(){
@@ -64,7 +75,12 @@ export class SummaryPage {
 
   showUserLocations()
   {
-    this.commonService.translateArray(
+    let modal = this.modalCtrl.create(UserLocationsPage);
+    modal.present();
+    modal.onDidDismiss((res)=>{
+      this.LocationID = res.LocationID ;
+    });
+    /*this.commonService.translateArray(
       [
         'Determine Your Location' ,
         'Add New Location'
@@ -75,7 +91,7 @@ export class SummaryPage {
         buttons: this.getUserLocationsButtons(translatedArray[1])
       });
       actionSheet.present();
-    });
+    });*/
   }
   handlePaymentTypes(code : number)
   {

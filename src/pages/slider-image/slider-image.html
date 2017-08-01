@@ -17,7 +17,7 @@
   <ion-slides class="slider" dir="ltr">
     <ion-slide  *ngFor="let image of images"
                style="background-size: 100%; background-repeat: no-repeat;width: 365px;
-    height: 293px;" [style.background-image]="getBackground(image.Image)">
+    height: 100%;" [style.background-image]="getBackground(image.Image)">
     </ion-slide>
   </ion-slides>
   <button ion-button round (click)="close()">{{ 'Close' | translate}}</button>

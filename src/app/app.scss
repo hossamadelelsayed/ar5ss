@@ -381,3 +381,33 @@ $tabs-md-tab-text-color-active:crimson;
   float: right;
   padding-right:12px;
 }
+*{
+  touch-action: manipulation;
+}
+.logo{
+  margin-right: 72px;
+}
+[dir="ltr"] .logo{
+  margin-left: 72px;
+}
+
+
+@font-face {
+  font-family: 'DINNextLTArabic-Light';
+  src: url('../assets/fonts/ar/DINNextLTArabic-Light.ttf') ;
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url('../assets/fonts/en/Montserrat-Bold.ttf') ;
+  font-weight: normal;
+  font-style: normal;
+}
+[dir="rtl"] :not(ion-icon) {
+  font-family: 'DINNextLTArabic-Light' !important;
+}
+[dir="ltr"] :not(ion-icon) {
+  font-family: 'Montserrat-Bold' !important;
+}
+

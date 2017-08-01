@@ -4,7 +4,8 @@
 
   <ion-navbar>
     <ion-title>
-          <!--<ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>-->
+      <img  style="margin: auto;" src="assets/imgs/applogo.png"><br>
+            <!--<ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>-->
           <span>{{ 'Category' | translate}}</span>
 
 
@@ -30,10 +31,10 @@
         <ion-icon ios="ios-arrow-round-up" md="md-arrow-round-up"></ion-icon>
         <h6>{{ 'Sort By' | translate}}</h6><br>
         <span>
-          {{(sortType == productService.sortByASC && MainService.lang == 'ar') ?  'الأعلى سعر' : ''}}
-          {{(sortType == productService.sortByASC && MainService.lang == 'en') ?  'Heighest Price' : ''}}
-          {{(sortType == productService.sortByDESC && MainService.lang == 'ar') ?  'الأقل سعر' : ''}}
-          {{(sortType == productService.sortByDESC && MainService.lang == 'en') ?  'Lowest Price' : ''}}
+          {{(sortType == productService.sortByDESC && MainService.lang == 'ar') ?  'الأعلى سعر' : ''}}
+          {{(sortType == productService.sortByDESC && MainService.lang == 'en') ?  'Heighest Price' : ''}}
+          {{(sortType == productService.sortByASC && MainService.lang == 'ar') ?  'الأقل سعر' : ''}}
+          {{(sortType == productService.sortByASC && MainService.lang == 'en') ?  'Lowest Price' : ''}}
           </span>
       </ion-col>
       <ion-col col-4 (click)="gotohot()">
@@ -107,8 +108,8 @@
       </div>
 
        <ion-row style="width:100%">
-      <ion-col col-4>
-        <img [src]="product.Image" (click)="gotohistory()">
+      <ion-col style="margin-top: -5px;" col-4>
+        <img style="height: 86px; width: 85%;" [src]="product.Image" (click)="gotohistory()">
       </ion-col>
       <ion-col style="margin-top: -3px;" col-8>
           <ion-row class="starrow">
