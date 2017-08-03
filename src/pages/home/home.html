@@ -46,63 +46,67 @@
   </ion-slides>
 </div>
 
-<div *ngIf="!showSearch">
+<div *ngIf="!showSearch" style="margin-bottom: 50px;">
   <div class="products" *ngFor="let group of groupShow">
-     <h6 class="prodh6">{{group.group_name}}</h6>
+     <h6 class="prodh6">{{group.Group.group_name}}</h6>
      <span>{{ 'More' | translate}}</span>
-      <ion-scroll direction="y">
-       <ion-card *ngFor="let product of group.product">
-        <div class="detaildiv" (click)="viewProduct(product.ProductID)">
-          <div class="imagesdiv">
-            <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
-            <img class="imgbrand"  [src]="product.Logo" >
-            <!--<div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>-->
-            <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
-            <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
+        <ion-scroll direction="y" >
+          <div class="infiniteScroll" infinite-scroll [lang]="MainService.lang" (onScrollMethod)="loadNext(group.Group.GroupShowID)">
+            <ion-card *ngFor="let product of group.Products">
+              <div class="detaildiv" (click)="viewProduct(product.ProductID)">
+                <div class="imagesdiv">
+                  <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
+                  <img class="imgbrand"  [src]="product.Logo" >
+                  <!--<div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>-->
+                  <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
+                  <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
+                </div>
+                <img class="prodimg"  [src]="product.Image" >
+                <ion-row class="starrow">
+                  <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon">
+                  </ion-icon>
+                </ion-row>
+                <h4>
+                  <marquee *ngIf="MainService.lang == 'en'" direction="left" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee>
+                  <marquee *ngIf="MainService.lang == 'ar'" direction="right" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee></h4>
+                <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
+              </div>
+              <ion-row>
+                <ion-col col-3>
+                  <ion-icon
+                    *ngIf="product.CartID == null" class="cardfoot" >
+                    <img [attr.id]="product.ProductID" #icon
+                         (click)="addToCart(product.ProductID , product.SellerID , icon)"
+                         style="width: 25px;" src="assets/imgs/cart_off.png" >
+                  </ion-icon>
+                  <ion-icon
+                    *ngIf="product.CartID != null" class="cardfoot" >
+                    <img [attr.id]="product.ProductID" #icon
+                         (click)="addToCart(product.ProductID , product.SellerID , icon)"
+                         style="width: 25px;" src="assets/imgs/cart_on.png" >
+                  </ion-icon>
+                </ion-col>
+                <ion-col col-6></ion-col>
+                <ion-col col-3>
+                  <ion-icon
+                    *ngIf="product.FavoritID == null"
+                    [attr.id]="product.ProductID"
+                    #icon
+                    class="cardfoot"
+                    ios="ios-heart"  md="md-heart"
+                    (click)="addToWishList(product.ProductID,icon)"></ion-icon>
+                  <ion-icon
+                    *ngIf="product.FavoritID != null"
+                    [attr.id]="product.ProductID"
+                    #icon
+                    class="cardfoot"
+                    style="color: crimson"
+                    ios="ios-heart"  md="md-heart" (click)="addToWishList(product.ProductID , icon)"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-card>
           </div>
-            <img class="prodimg"  [src]="product.Image" >
-            <ion-row class="starrow">
-            <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon">
-            </ion-icon>
-            </ion-row>
-        <h4>
-          <marquee *ngIf="MainService.lang == 'en'" direction="left" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee>
-          <marquee *ngIf="MainService.lang == 'ar'" direction="right" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee></h4>
-        <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
-        </div>
-        <ion-row>
-          <ion-col col-3>
-            <ion-icon
-              *ngIf="!checkProductInCart(product.ProductID)"
-              class="cardfoot" (click)="addToCart(product.ProductID , product.SellerID)">
-              <img [attr.id]="product.ProductID" #productsCartIcon style="width: 25px;" src="assets/imgs/cart_off.png" >
-            </ion-icon>
-            <ion-icon
-              *ngIf="checkProductInCart(product.ProductID)"
-              class="cardfoot" (click)="addToCart(product.ProductID , product.SellerID)">
-              <img [attr.id]="product.ProductID" #productsCartIcon style="width: 25px;" src="assets/imgs/cart_on.png" >
-            </ion-icon>
-          </ion-col>
-          <ion-col col-6></ion-col>
-          <ion-col col-3>
-             <ion-icon
-            *ngIf="!checkProductInFav(product.ProductID)"
-            [attr.id]="product.ProductID"
-            #productsIcon
-            class="cardfoot"
-            ios="ios-heart"  md="md-heart"
-            (click)="addToWishList(product.ProductID)"></ion-icon>
-         <ion-icon
-           *ngIf="checkProductInFav(product.ProductID)"
-           [attr.id]="product.ProductID"
-           #productsIcon
-           class="cardfoot"
-           style="color: crimson"
-           ios="ios-heart"  md="md-heart" (click)="addToWishList(product.ProductID , product.SellerID)"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-scroll>
+        </ion-scroll>
   </div>
 </div>
 

@@ -46,6 +46,8 @@ import {SliderImagePage} from "../pages/slider-image/slider-image";
 import {PaymentsPage} from "../pages/payments/payments";
 import {UserLocationsPage} from "../pages/user-locations/user-locations";
 import {Network} from "@ionic-native/network";
+import {InfiniteScrollDirective} from "../directives/infinite-scroll.directive";
+
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -81,7 +83,8 @@ export function createTranslateLoader(http: Http) {
     OrderDetailsPage ,
     SliderImagePage,
     PaymentsPage ,
-    UserLocationsPage
+    UserLocationsPage ,
+    InfiniteScrollDirective
 
   ],
   imports: [

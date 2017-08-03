@@ -86,93 +86,12 @@ $tabs-md-tab-text-color-active:crimson;
       text-align: center;
     }
 }
-[dir="ltr"] .tabs-md .tab-button[id=tab-t0-0] {
-  min-height: 5.6rem;
-  font-weight: normal;
-  color: rgba(60, 60, 60, 0.7);
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_home_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
-  color: crimson;
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_home_active_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[id=tab-t0-1] {
-  min-height: 5.6rem;
-  font-weight: normal;
-  color: rgba(60, 60, 60, 0.7);
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_category_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
-  color: crimson;
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_category_active_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[id=tab-t0-2] {
-  min-height: 5.6rem;
-  font-weight: normal;
-  color: rgba(60, 60, 60, 0.7);
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_heart_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
-  color: crimson;
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_heart_active_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[id=tab-t0-3] {
-  min-height: 5.6rem;
-  font-weight: normal;
-  color: rgba(60, 60, 60, 0.7);
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_profile_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
-  color: crimson;
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_profile_active_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[id=tab-t0-4] {
-  min-height: 5.6rem;
-  font-weight: normal;
-  color: rgba(60, 60, 60, 0.7);
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_settings_en.png');
-}
-[dir="ltr"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
-  color: crimson;
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position:center;
-  background-image: url('../assets/imgs/tab_bar_settings_active_en.png');
-}
 
 
 
 
 
-
-[dir="rtl"] .tabs-md .tab-button[id=tab-t0-0] {
+.tabs-md .tab-button[id=tab-t0-0] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -181,14 +100,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_home.png');
 }
-[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_home_active.png');
 }
-[dir="rtl"] .tabs-md .tab-button[id=tab-t0-1] {
+.tabs-md .tab-button[id=tab-t0-1] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -197,14 +116,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_category.png');
 }
-[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_category_active.png');
 }
-[dir="rtl"] .tabs-md .tab-button[id=tab-t0-2] {
+.tabs-md .tab-button[id=tab-t0-2] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -213,14 +132,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_heart.png');
 }
-[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_heart_active.png');
 }
-[dir="rtl"] .tabs-md .tab-button[id=tab-t0-3] {
+.tabs-md .tab-button[id=tab-t0-3] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -229,14 +148,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_profile.png');
 }
-[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_profile_active.png');
 }
-[dir="rtl"] .tabs-md .tab-button[id=tab-t0-4] {
+.tabs-md .tab-button[id=tab-t0-4] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -245,7 +164,7 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_settings.png');
 }
-[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
@@ -410,4 +329,24 @@ $tabs-md-tab-text-color-active:crimson;
 [dir="ltr"] :not(ion-icon) {
   font-family: 'Montserrat-Bold' !important;
 }
+.tabs-md .tabbar {
+  height: 80px;
+}
+.tabs-ios .tabbar {
+  height: 80px;
+}
+[dir="rtl"] .has-title-only .tab-button-text {
+  padding-top: 62px;
+  white-space: normal;
+  font-family: 'DINNextLTArabic-Light' !important;
 
+
+}
+[dir="ltr"] .has-title-only .tab-button-text {
+  padding-top: 62px;
+  white-space: normal;
+  font-family: 'Montserrat-Bold' !important;
+}
+.tab-button.has-title-only{
+  margin-top: -20px;
+}

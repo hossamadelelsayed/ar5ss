@@ -1,5 +1,7 @@
 page-home {
-
+.infiniteScroll{
+  overflow-y : auto;
+}
   .back-button.show-back-button{
       display: none;
   }

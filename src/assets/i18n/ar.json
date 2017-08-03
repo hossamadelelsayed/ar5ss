@@ -68,7 +68,6 @@
   "Other Offer" : "العروض ذات الصلة" ,
   "Product Images" : "صور المنتج" ,
   "Close" : "إغلاق" ,
-  "Shipping" : "الشحن" ,
   "There Is No Items" : "لا يوجد حاليا عاود البحث مرة أخرى" ,
   "Full Name" : "الاسم" ,
   "Password" : "الباسورد" ,
@@ -84,5 +83,6 @@
   "Delete" : "حذف" ,
   "Default" : "افتراضى" ,
   "Total After Shipping" : "الاجمالى بعد الشحن" ,
-  "network was disconnected :-(" : "تعذر الاتصال بشبكة الانترنت"
+  "network was disconnected :-(" : "تعذر الاتصال بشبكة الانترنت" ,
+  "Profile" : "بياناتى"
 }

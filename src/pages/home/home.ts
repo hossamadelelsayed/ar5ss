@@ -22,16 +22,13 @@ import {MainService} from "../../providers/main-service";
 })
 export class HomePage {
   public hotads : any ;
-  public groupShow : any ;
-  public wishList : any ;
+  public groupShow : any[] ;
   public cart : any[] = [] ;
   public cartNo : number = 0 ;
   public productSearchResult : any[] ;
   public showSearch : boolean = false ;
   public KeyWord : string  ;
   public MainService : MainService =  MainService ;
-  @ViewChildren('productsIcon') elRef;
-  @ViewChildren('productsCartIcon') cartIconRef ;
   constructor(public navCtrl: NavController , public productService : ProductService ,
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
               public commonService : CommonService , private barcodeScanner: BarcodeScanner) {
@@ -39,16 +36,13 @@ export class HomePage {
     //setTimeout(()=> this.initObjects() , 1000);
   }
   initObjects(){
+    this.getGroupShow();
     this.productService.hotads().subscribe((res)=>{
       this.hotads = res ;
     });
-    this.customerService.getWishList().subscribe((wishRes)=>{
-      this.wishList = wishRes;
-      this.customerService.getCart().subscribe((cartRes)=>{
-        this.cart = cartRes ;
-        this.cartNo = this.cart.length ;
-        this.getGroupShow();
-      });
+    this.customerService.getCart().subscribe((cartRes)=>{
+      this.cart = cartRes ;
+      this.cartNo = this.cart.length ;
     });
     console.log('fired');
   }
@@ -56,18 +50,15 @@ export class HomePage {
   {
     this.initObjects();
   }
-  checkProductInFav(ProductID : number)
-  {
-    return this.commonService.checkProductIsExistInFavorite(this.wishList , ProductID);
-  }
-  checkProductInCart(ProductID : number)
-  {
-    return this.commonService.checkProductIsExistInCart(this.cart , ProductID);
+  ionViewWillLeave(){
+    console.log('deallocate');
+    this.groupShow = [] ;
   }
   getGroupShow()
   {
     this.productService.groupShow().subscribe((res)=>{
       this.groupShow = res ;
+      console.log(this.groupShow);
     });
   }
   getBackground (image) {
@@ -81,16 +72,12 @@ export class HomePage {
     this.navCtrl.push(SearchPage);
   }
 
-  addToWishList(ProductID : number)
+  addToWishList(ProductID : number,element:any)
   {
-    let iconFilter :any ;
-    iconFilter = this.elRef.toArray().filter((icon) => {
-      return (icon.nativeElement.id == ProductID);
-    });
-    if(iconFilter[0].nativeElement.style.color == 'crimson')
-      this.removeFav(ProductID , iconFilter[0].nativeElement);
+    if(element.style.color == 'crimson')
+      this.removeFav(ProductID , element);
     else
-      this.addFav(ProductID , iconFilter[0].nativeElement);
+      this.addFav(ProductID , element);
   }
   addFav(ProductID : number , element : any ) {
     element.style.color = 'crimson';
@@ -113,16 +100,12 @@ export class HomePage {
         this.commonService.errorToast();
     });
   }
-  addToCart(ProductID : number , SellerID : number)
+  addToCart(ProductID : number , SellerID : number,element : any)
   {
-    let iconFilter :any ;
-    iconFilter = this.cartIconRef.toArray().filter((icon) => {
-      return (icon.nativeElement.id == ProductID);
-    });
-    if(this.commonService.splitFromLastBackSlash(iconFilter[0].nativeElement.src) == 'cart_on.png')
-      this.removeCart(ProductID , iconFilter[0].nativeElement);
+    if(this.commonService.splitFromLastBackSlash(element.src) == 'cart_on.png')
+      this.removeCart(ProductID , element);
     else
-      this.addCart(ProductID , SellerID ,iconFilter[0].nativeElement);
+      this.addCart(ProductID , SellerID ,element);
   }
   addCart(ProductID : number , SellerID : number ,element : any ) {
     element.src = 'assets/imgs/cart_on.png';
@@ -202,5 +185,36 @@ export class HomePage {
   }
   opensett(){
     this.navCtrl.push(Settings)
+  }
+  loadNext(GroupShowID : number)
+  {
+    let GroupIndex : number ;
+    for(GroupIndex = 0 ; GroupIndex < this.groupShow.length ; GroupIndex++)
+    {
+      if(this.groupShow[GroupIndex].Group.GroupShowID == GroupShowID)
+      {
+        if(this.groupShow[GroupIndex].Group.CurrentPage != null)
+        {
+          this.groupShow[GroupIndex].Group.CurrentPage++   ;
+          console.log('yes added');
+        }
+        else
+          this.groupShow[GroupIndex].Group.CurrentPage = 2 ;
+        break ;
+      }
+    }
+    this.paginateAndRender(GroupShowID ,this.groupShow[GroupIndex].Group.CurrentPage ,GroupIndex);
+    console.log('load');
+  }
+  paginateAndRender(GroupShowID : number ,CurrentPage : number ,GroupIndex : number)
+  {
+    this.commonService.presentLoading('Please Wait');
+    this.productService.groupProductPaginate(GroupShowID,CurrentPage).subscribe((products)=>{
+      this.commonService.dismissLoading();
+      for (let i = 0 ; i < products.data.length ; i++)
+      {
+        this.groupShow[GroupIndex].Products.push(products.data[i]);
+      }
+    });
   }
 }

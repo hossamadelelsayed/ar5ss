@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {MainService} from "./main-service";
+import {CustomerService} from "./customer-service";
 
 /*
   Generated class for the ProductService provider.
@@ -15,7 +16,8 @@ export class ProductService {
   public categoryUrl : string = MainService.baseUrl+"category?lang=";
   public categoryProductsUrl : string = MainService.baseUrl+"getcategorydeatails/";
   public hotadsUrl : string = MainService.baseUrl+"hotads";
-  public groupShowUrl : string = MainService.baseUrl+"groupshow?lang=";
+  public groupShowUrl : string = MainService.baseUrl+"groupshow/";
+  public groupProductPaginateUrl : string = MainService.baseUrl+ "getgrouppaginate/";
   public hotOfferUrl : string = MainService.baseUrl+"hotoffer?lang=";
   public productDetailsUrl : string = MainService.baseUrl+"productDetails/";
   public productBarcodeUrl : string = MainService.baseUrl+"productBarcode/";
@@ -28,7 +30,7 @@ export class ProductService {
 
 
 
-  constructor(public http: Http) {
+  constructor(public http: Http ,public customerService : CustomerService) {
     console.log('Hello ProductService Provider');
   }
   searchProduct(KeyWord : string)
@@ -66,18 +68,34 @@ export class ProductService {
   {
     return this.http.get(this.categoryUrl + MainService.lang).map((res) => res.json());
   }
-  categoryProducts(category_id : number , sortBy? : number)
-  {
-    if(sortBy == null)
-      sortBy = this.sortByASC ;
-    return this.http.get(this.categoryProductsUrl+category_id+'/'+sortBy + '?lang=' + MainService.lang).map((res) => res.json());
-  }
   hotads()
   {
     return this.http.get(this.hotadsUrl).map((res) => res.json());
   }
   groupShow()
   {
-    return this.http.get(this.groupShowUrl + MainService.lang).map((res) => res.json());
+    let userKey : string ;
+    if(this.customerService.customer != null)
+      userKey = this.customerService.customer.UserID;
+    else userKey = this.customerService.deviceToken ;
+    return this.http.get(this.groupShowUrl + userKey + '?lang=' + MainService.lang).map((res) => res.json());
+  }
+  groupProductPaginate(GroupID : number , CurrentPage : number)
+  {
+    let userKey : string ;
+    if(this.customerService.customer != null)
+      userKey = this.customerService.customer.UserID;
+    else userKey = this.customerService.deviceToken ;
+    return this.http.get(this.groupProductPaginateUrl + userKey + '/' + GroupID + '/' + CurrentPage +'?lang=' + MainService.lang).map((res) => res.json());
+  }
+  categoryProducts(category_id : number , CurrentPage : number ,sortBy? : number)
+  {
+    if(sortBy == null)
+      sortBy = this.sortByASC ;
+    let userKey : string ;
+    if(this.customerService.customer != null)
+      userKey = this.customerService.customer.UserID;
+    else userKey = this.customerService.deviceToken ;
+    return this.http.get(this.categoryProductsUrl + CurrentPage + '/' + userKey + '/' + category_id + '/' + sortBy + '?lang=' + MainService.lang).map((res) => res.json());
   }
 }
