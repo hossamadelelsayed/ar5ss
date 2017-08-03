@@ -21,10 +21,10 @@
 
 
 <ion-row class="totalrow" *ngFor="let product of wishList" >
-  <ion-col col-3>
-   <img [src]="product.Image" height="80px" width="80px" (click)="viewProduct(product.ProductID)">
+  <ion-col style="padding: 0;" col-4>
+   <img [src]="product.Image" height="100%" width="95px" (click)="viewProduct(product.ProductID)">
   </ion-col>
-  <ion-col col-9>
+  <ion-col col-8>
     <ion-row>
        <ion-col col-9> <h4>{{product.product_name}} , {{product.size}}</h4></ion-col>
        <ion-col col-3 style="text-align:end"><ion-icon class="delete" ios="ios-trash" md="md-trash" (click)="deleteWishlist(product.FavoritID)"></ion-icon></ion-col>

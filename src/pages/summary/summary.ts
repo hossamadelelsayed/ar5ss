@@ -17,6 +17,7 @@ export class SummaryPage {
   public paymentTypes : any[] ;
   public PaymentID : number = 0;
   public LocationID : number = 0 ;
+  public LocationName : string = '' ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public actionSheetCtrl :  ActionSheetController , public commonService : CommonService ,
               public payPal: PayPal , public customerService : CustomerService , public modalCtrl :ModalController) {
@@ -40,8 +41,11 @@ export class SummaryPage {
         return (item.Defualt == 1);
       });
       if(ArrayFilter.length > 0)
+      {
         this.LocationID = ArrayFilter[0].LocationID ;
-      console.log(this.LocationID);
+        this.LocationName =  ArrayFilter[0].Place ;
+      }
+      console.log(ArrayFilter[0]);
     });
   }
   goaddlocation(){

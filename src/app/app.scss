@@ -91,7 +91,7 @@ $tabs-md-tab-text-color-active:crimson;
 
 
 
-.tabs-md .tab-button[id=tab-t0-0] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-0] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -100,14 +100,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_home.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_home_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-1] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-1] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -116,14 +116,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_category.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_category_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-2] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-2] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -132,14 +132,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_heart.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_heart_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-3] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-3] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -148,14 +148,14 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_profile.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_profile_active.png');
 }
-.tabs-md .tab-button[id=tab-t0-4] {
+[dir="rtl"] .tabs-md .tab-button[id=tab-t0-4] {
   min-height: 5.6rem;
   font-weight: normal;
   color: rgba(60, 60, 60, 0.7);
@@ -164,12 +164,95 @@ $tabs-md-tab-text-color-active:crimson;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_settings.png');
 }
-.tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
+[dir="rtl"] .tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../assets/imgs/tab_bar_settings_active.png');
+}
+
+
+
+.tabs-md .tab-button[id=tab-t0-0] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_home_en.png');
+}
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-0]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_home_active_en.png');
+}
+.tabs-md .tab-button[id=tab-t0-1] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_category_en.png');
+}
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-1]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_category_active_en.png');
+}
+.tabs-md .tab-button[id=tab-t0-2] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_heart_en.png');
+}
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-2]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_heart_active_en.png');
+}
+.tabs-md .tab-button[id=tab-t0-3] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_profile_en.png');
+}
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-3]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_profile_active_en.png');
+}
+.tabs-md .tab-button[id=tab-t0-4] {
+  min-height: 5.6rem;
+  font-weight: normal;
+  color: rgba(60, 60, 60, 0.7);
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_settings_en.png');
+}
+.tabs-md .tab-button[aria-selected=true][id=tab-t0-4]   {
+  color: crimson;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../assets/imgs/tab_bar_settings_active_en.png');
 }
 
 
@@ -181,14 +264,14 @@ $tabs-md-tab-text-color-active:crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_home.png');
+  background-image: url('../assets/imgs/tab_bar_home_en.png');
 }
 .tabs-ios .tab-button[aria-selected=true][id=tab-t0-0]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_home_active.png');
+  background-image: url('../assets/imgs/tab_bar_home_active_en.png');
 }
 .tabs-ios .tab-button[id=tab-t0-1] {
   min-height: 5.6rem;
@@ -197,14 +280,14 @@ $tabs-md-tab-text-color-active:crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_category.png');
+  background-image: url('../assets/imgs/tab_bar_category_en.png');
 }
 .tabs-ios .tab-button[aria-selected=true][id=tab-t0-1]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_category_active.png');
+  background-image: url('../assets/imgs/tab_bar_category_active_en.png');
 }
 .tabs-ios .tab-button[id=tab-t0-2] {
   min-height: 5.6rem;
@@ -213,14 +296,14 @@ $tabs-md-tab-text-color-active:crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_heart.png');
+  background-image: url('../assets/imgs/tab_bar_heart_en.png');
 }
 .tabs-ios .tab-button[aria-selected=true][id=tab-t0-2]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_heart_active.png');
+  background-image: url('../assets/imgs/tab_bar_heart_active_en.png');
 }
 .tabs-ios .tab-button[id=tab-t0-3] {
   min-height: 5.6rem;
@@ -229,14 +312,14 @@ $tabs-md-tab-text-color-active:crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_profile.png');
+  background-image: url('../assets/imgs/tab_bar_profile_en.png');
 }
 .tabs-ios .tab-button[aria-selected=true][id=tab-t0-3]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_profile_active.png');
+  background-image: url('../assets/imgs/tab_bar_profile_active_en.png');
 }
 .tabs-ios .tab-button[id=tab-t0-4] {
   min-height: 5.6rem;
@@ -245,14 +328,14 @@ $tabs-md-tab-text-color-active:crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_settings.png');
+  background-image: url('../assets/imgs/tab_bar_settings_en.png');
 }
 .tabs-ios .tab-button[aria-selected=true][id=tab-t0-4]   {
   color: crimson;
   padding: 0;
   background-repeat: no-repeat;
   background-position:center;
-  background-image: url('../assets/imgs/tab_bar_settings_active.png');
+  background-image: url('../assets/imgs/tab_bar_settings_active_en.png');
 }
 .toast-md .toast-message {
   color: white;
@@ -329,12 +412,6 @@ $tabs-md-tab-text-color-active:crimson;
 [dir="ltr"] :not(ion-icon) {
   font-family: 'Montserrat-Bold' !important;
 }
-.tabs-md .tabbar {
-  height: 80px;
-}
-.tabs-ios .tabbar {
-  height: 80px;
-}
 [dir="rtl"] .has-title-only .tab-button-text {
   padding-top: 62px;
   white-space: normal;
@@ -349,4 +426,11 @@ $tabs-md-tab-text-color-active:crimson;
 }
 .tab-button.has-title-only{
   margin-top: -20px;
+}
+.toolbar-ios ion-title{
+  position: relative;
+}
+
+.toolbar-ios .segment-ios{
+  width: 20%;
 }
