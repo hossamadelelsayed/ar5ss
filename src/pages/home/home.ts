@@ -208,9 +208,11 @@ export class HomePage {
   }
   paginateAndRender(GroupShowID : number ,CurrentPage : number ,GroupIndex : number)
   {
-    this.commonService.presentLoading('Please Wait');
+    //this.commonService.presentLoading('Please Wait');
+    // setTimeout(() => {
+    //   this.commonService.dismissLoading();
+    // }, 250);
     this.productService.groupProductPaginate(GroupShowID,CurrentPage).subscribe((products)=>{
-      this.commonService.dismissLoading();
       for (let i = 0 ; i < products.data.length ; i++)
       {
         this.groupShow[GroupIndex].Products.push(products.data[i]);
