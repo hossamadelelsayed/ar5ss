@@ -48,7 +48,7 @@
 
 <div *ngIf="!showSearch" style="margin-bottom: 50px;">
   <div class="products" *ngFor="let group of groupShow">
-     <h6 class="prodh6">{{group.Group.group_name}}</h6>
+     <h6 class="prodh6">{{group.Group.group_name}} &nbsp; {{group.Group.Item}}</h6>
      <span>{{ 'More' | translate}}</span>
         <ion-scroll direction="y" >
           <div class="infiniteScroll" infinite-scroll [lang]="MainService.lang" (onScrollMethod)="loadNext(group.Group.GroupShowID)">
@@ -70,6 +70,7 @@
                   <marquee *ngIf="MainService.lang == 'en'" direction="left" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee>
                   <marquee *ngIf="MainService.lang == 'ar'" direction="right" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee></h4>
                 <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
+                <h5 *ngIf="product.ProductPriceDesc != 0" style="color: red ; text-decoration: line-through;"> {{product.ProductPriceDesc}} {{ 'SAR' | translate}} </h5>
               </div>
               <ion-row>
                 <ion-col col-3>

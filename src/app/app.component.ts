@@ -12,6 +12,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {AllcategoriesPage} from "../pages/allcategories/allcategories";
 import {Network} from "@ionic-native/network";
 import {CommonService} from "../providers/common-service";
+import {CacheService} from 'ionic-cache';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,8 +27,12 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               public customerService : CustomerService ,  public push :Push ,
               public translate : TranslateService , public network: Network ,
-              public commonService : CommonService) {
+              public commonService : CommonService , public cache : CacheService) {
     platform.ready().then(() => {
+      //caching policy
+      cache.setDefaultTTL(60 * 60 * 12)  ;
+      cache.setOfflineInvalidate(false);
+      // this.cache.enableCache(false);
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
@@ -49,7 +54,6 @@ export class MyApp {
       this.commonService.translateArray(['network was disconnected :-(']).subscribe((res)=>{
         alert(res[0]);
       });
-
     });
 
   }

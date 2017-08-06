@@ -18,7 +18,7 @@
     <ion-item (click)="createLocation()">
       <h2>{{ 'Determine Your Location' | translate}}</h2>
     </ion-item>
-    <ion-item-sliding *ngFor="let location of locations">
+    <!--<ion-item-sliding *ngFor="let location of locations">
       <ion-item (click)="selectLocation(location.LocationID)">
         <h2 >{{location.Place}}</h2>
       </ion-item>
@@ -32,6 +32,19 @@
           {{ 'Delete' | translate}}
           </button>
       </ion-item-options>
-    </ion-item-sliding>
+    </ion-item-sliding>-->
+
+    <ion-row  *ngFor="let location of locations">
+      <ion-col col-8 (click)="selectLocation(location.LocationID)">
+   <h3 style="margin-top: 0px;">{{location.Place}}</h3>
+      </ion-col>
+      <ion-col style="text-align: end;" col-3>
+     <ion-checkbox style="padding-top: 6px;" (click)="setDefaultLocation(location.LocationID)"></ion-checkbox><a>{{ 'Default' | translate}}</a>
+      </ion-col>
+      <ion-col col-1>
+         <img  (click)="deleteUserLocation(location.LocationID)" src="assets/imgs/trash.png">
+      </ion-col>
+      <hr>
+    </ion-row>
   </ion-list>
 </ion-content>

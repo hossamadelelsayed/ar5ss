@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {MainService} from "./main-service";
 import {CustomerService} from "./customer-service";
+import {CacheService} from 'ionic-cache';
 
 /*
   Generated class for the ProductService provider.
@@ -30,7 +31,8 @@ export class ProductService {
 
 
 
-  constructor(public http: Http ,public customerService : CustomerService) {
+  constructor(public http: Http ,public customerService : CustomerService ,
+              public cache : CacheService) {
     console.log('Hello ProductService Provider');
   }
   searchProduct(KeyWord : string)
@@ -58,7 +60,9 @@ export class ProductService {
   }
   productDetails(ProductID : number)
   {
-    return this.http.get(this.productDetailsUrl+ProductID + '?lang=' + MainService.lang).map((res) => res.json());
+    let url = this.productDetailsUrl+ProductID + '?lang=' + MainService.lang ;
+    let request = this.http.get(url).map((res) => res.json());
+    return this.cache.loadFromObservable(url,request);
   }
   hotOffer()
   {
@@ -78,7 +82,9 @@ export class ProductService {
     if(this.customerService.customer != null)
       userKey = this.customerService.customer.UserID;
     else userKey = this.customerService.deviceToken ;
-    return this.http.get(this.groupShowUrl + userKey + '?lang=' + MainService.lang).map((res) => res.json());
+    let url = this.groupShowUrl + userKey + '?lang=' + MainService.lang ;
+    let request = this.http.get(url).map((res) => res.json());
+    return this.cache.loadFromObservable(url,request);
   }
   groupProductPaginate(GroupID : number , CurrentPage : number)
   {
@@ -86,7 +92,9 @@ export class ProductService {
     if(this.customerService.customer != null)
       userKey = this.customerService.customer.UserID;
     else userKey = this.customerService.deviceToken ;
-    return this.http.get(this.groupProductPaginateUrl + userKey + '/' + GroupID + '/' + CurrentPage +'?lang=' + MainService.lang).map((res) => res.json());
+    let url = this.groupProductPaginateUrl + userKey + '/' + GroupID + '/' + CurrentPage +'?lang=' + MainService.lang ;
+    let request = this.http.get(url).map((res) => res.json());
+    return this.cache.loadFromObservable(url,request);
   }
   categoryProducts(category_id : number , CurrentPage : number ,sortBy? : number)
   {
