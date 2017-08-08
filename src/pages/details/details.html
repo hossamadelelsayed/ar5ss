@@ -37,6 +37,14 @@
           [style.background]="color.colors_of_product.ColorHexa"
           (click)="goToSliderImage(color.ColorID)">
   </button>
+  <ion-fab left >
+    <button ion-fab color="light"><ion-icon style="color: crimson" name="md-share"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button (click)="sharefb()" ion-fab><ion-icon style="color: darkblue;" name="logo-facebook"></ion-icon></button>
+      <button (click)="sharetwitter()" ion-fab><ion-icon style="color: cornflowerblue" name="logo-twitter"></ion-icon></button>
+      <button (click)="sharetwhatsapp()" ion-fab><ion-icon style="color: green" name="logo-whatsapp"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 </div>
   <table>
     <tr>

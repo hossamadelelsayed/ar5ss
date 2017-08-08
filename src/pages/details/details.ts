@@ -4,6 +4,7 @@ import {CustomerService} from "../../providers/customer-service";
 import {ProductService} from "../../providers/product-service";
 import {CommonService} from "../../providers/common-service";
 import {MainService} from "../../providers/main-service";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 
 @IonicPage()
@@ -22,7 +23,8 @@ export class DetailsPage {
   @ViewChildren('cartImg') cartImg;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService : CustomerService , public productService: ProductService ,
-              public commonService : CommonService , public modalCtrl: ModalController ) {
+              public commonService : CommonService , public modalCtrl: ModalController ,
+              public sharing: SocialSharing) {
     this.ProductID = this.navParams.data.ProductID ;
   }
 
@@ -132,5 +134,35 @@ export class DetailsPage {
   {
     return this.commonService.icons(rate);
   }
+  sharefb(){
+    this.sharing.shareViaFacebook(this.productDetails.product_name,
+      this.productDetails.product_color[0].product_image[0].Image )
+      .then(()=>{
+        this.commonService.successToast();
+      }).catch((error)=>{
+        this.commonService.errorToast();
+    });
+  }
+  sharetwitter(){
+    this.sharing.shareViaTwitter(null,
+      this.productDetails.product_color[0].product_image[0].Image,
+      null )
+      .then(()=>{
+        this.commonService.successToast();
+      }).catch((error)=>{
+      this.commonService.errorToast();
+    });
+  }
+  sharetwhatsapp(){
+    this.sharing.shareViaWhatsApp(null,
+      this.productDetails.product_color[0].product_image[0].Image ,
+    null)
+      .then(()=>{
+        this.commonService.successToast();
+      }).catch((error)=>{
+      this.commonService.errorToast();
+    });
+  }
+
 
 }

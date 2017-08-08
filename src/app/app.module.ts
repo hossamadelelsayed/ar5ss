@@ -19,6 +19,7 @@ import {PayPal} from "@ionic-native/paypal";
 import {Geolocation} from "@ionic-native/geolocation";
 import {Network} from "@ionic-native/network";
 import {CacheModule} from 'ionic-cache';
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 
 
@@ -57,13 +58,14 @@ export function createTranslateLoader(http: Http) {
     CustomerService,
     CommonService,
     Camera,
-    NativeStorage,
-    ProductService,
-    Push,
-    BarcodeScanner,
+    NativeStorage ,
+    ProductService ,
+    Push ,
+    BarcodeScanner ,
     PayPal ,
     Geolocation ,
-    Network
+    Network ,
+    SocialSharing
   ]
 })
 export class AppModule {}

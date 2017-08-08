@@ -207,6 +207,10 @@ export class HomePage {
     this.productService.groupProductPaginate(GroupShowID,CurrentPage).subscribe((products)=>{
       for (let i = 0 ; i < products.data.length ; i++)
       {
+        if(this.groupShow[GroupIndex].Group.loadedNo == null)
+          this.groupShow[GroupIndex].Group.loadedNo = 4 ;
+        else
+          this.groupShow[GroupIndex].Group.loadedNo ++;
         this.groupShow[GroupIndex].Products.push(products.data[i]);
       }
     });

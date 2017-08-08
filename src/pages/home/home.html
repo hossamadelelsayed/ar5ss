@@ -48,8 +48,8 @@
 
 <div *ngIf="!showSearch" style="margin-bottom: 50px;">
   <div class="products" *ngFor="let group of groupShow">
-     <h6 class="prodh6">{{group.Group.group_name}} &nbsp; {{group.Group.Item}}</h6>
-     <span>{{ 'More' | translate}}</span>
+     <h6 class="prodh6">{{group.Group.group_name}} &nbsp; </h6>
+     <span>{{group.Group.Item}} &nbsp; - &nbsp; {{(group.Group.loadedNo != null)?  group.Group.loadedNo : 3 }}</span>
         <ion-scroll direction="y" >
           <div class="infiniteScroll" infinite-scroll [lang]="MainService.lang" (onScrollMethod)="loadNext(group.Group.GroupShowID)">
             <ion-card *ngFor="let product of group.Products">
