@@ -1,19 +1,11 @@
-import {Component, ViewChildren} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {AllcategoriesPage} from "../allcategories/allcategories";
-import {HotoffersPage} from "../hotoffers/hotoffers";
-import {WishlistPage} from "../wishlist/wishlist";
-import {EmptyhistoryPage} from "../emptyhistory/emptyhistory";
-import {SearchPage} from "../search/search";
+import {Component } from '@angular/core';
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {ProductService} from "../../providers/product-service";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
-import {DetailsPage} from "../details/details";
-import {Profile}from "../profile/profile";
-import {Settings} from "../settings/settings";
-import {HomePage} from "../home/home";
 import {MainService} from "../../providers/main-service";
 
+@IonicPage()
 @Component({
   selector: 'page-category',
   templateUrl: 'category.html',
@@ -116,23 +108,23 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
     });
   }
   gotoall(){
-    this.navCtrl.push(AllcategoriesPage);
+    this.navCtrl.push("AllcategoriesPage");
   }
   gotohot(){
-    this.navCtrl.push(HotoffersPage)
+    this.navCtrl.push("HotoffersPage");
   }
   gotowish(){
-    this.navCtrl.push(WishlistPage);
+    this.navCtrl.push("WishlistPage");
   }
   gotohistory(){
-    this.navCtrl.push(EmptyhistoryPage);
+    this.navCtrl.push("EmptyhistoryPage");
   }
   gotosearch(){
-    this.navCtrl.push(SearchPage);
+    this.navCtrl.push("SearchPage");
   }
   viewProduct(ProductID : number)
   {
-    this.navCtrl.push(DetailsPage,{
+    this.navCtrl.push("DetailsPage",{
       ProductID :ProductID
     });
   }

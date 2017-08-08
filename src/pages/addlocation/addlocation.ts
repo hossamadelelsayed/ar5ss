@@ -1,11 +1,12 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavController, NavParams,} from 'ionic-angular';
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CommonService} from "../../providers/common-service";
 import {Geolocation} from "@ionic-native/geolocation";
 import {CustomerService} from "../../providers/customer-service";
 
 
 declare var google;
+@IonicPage()
 @Component({
   selector: 'page-addlocation',
   templateUrl: 'addlocation.html',

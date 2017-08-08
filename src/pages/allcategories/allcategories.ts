@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ProductService} from "../../providers/product-service";
-import {CategoryPage} from "../category/category";
 
-
+@IonicPage()
 @Component({
   selector: 'page-allcategories',
   templateUrl: 'allcategories.html',
@@ -22,7 +21,7 @@ export class AllcategoriesPage {
   }
   goToCategoryDetails(category_id : number , category_name : string)
   {
-    this.navCtrl.push(CategoryPage,{
+    this.navCtrl.push("CategoryPage",{
       category_id : category_id ,
       category_name : category_name
     })

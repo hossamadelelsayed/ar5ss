@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {NavController, NavParams, AlertController, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {Camera} from "@ionic-native/camera";
 
-
+@IonicPage()
 @Component({
   selector: 'page-editprofile',
   templateUrl: 'editprofile.html',

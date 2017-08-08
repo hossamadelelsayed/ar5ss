@@ -3,11 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ProductService} from "../../providers/product-service";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
-import {DetailsPage} from "../details/details";
 import {MainService} from "../../providers/main-service";
 
 
-
+@IonicPage()
 @Component({
   selector: 'page-hotoffers',
   templateUrl: 'hotoffers.html',
@@ -117,7 +116,7 @@ export class HotoffersPage {
   }
   viewProduct(ProductID : number)
   {
-    this.navCtrl.push(DetailsPage,{
+    this.navCtrl.push("DetailsPage",{
       ProductID :ProductID
     });
   }

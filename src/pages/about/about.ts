@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 
 /**
@@ -8,6 +8,7 @@ import {CustomerService} from "../../providers/customer-service";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+@IonicPage()
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',

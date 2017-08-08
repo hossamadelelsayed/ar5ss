@@ -1,21 +1,13 @@
-import {Component, ElementRef, ViewChildren} from '@angular/core';
-import { NavController } from 'ionic-angular';
-import {SearchPage} from "../search/search";
+import {Component} from '@angular/core';
+import {NavController, IonicPage} from 'ionic-angular';
 import {ProductService} from "../../providers/product-service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {HotoffersPage} from "../hotoffers/hotoffers";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
-import {DetailsPage} from "../details/details";
-import {ShoppingcartsPage} from "../shoppingcarts/shoppingcarts";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
-import {CategoryPage} from "../category/category";
-import {Profile}from "../profile/profile";
-import {Settings} from "../settings/settings";
-import {WishlistPage} from "../wishlist/wishlist";
 import {MainService} from "../../providers/main-service";
 
-
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -66,10 +58,10 @@ export class HomePage {
   }
   goToHotOffers()
   {
-    this.navCtrl.push(HotoffersPage);
+    this.navCtrl.push("HotoffersPage");
   }
   gotosearch(){
-    this.navCtrl.push(SearchPage);
+    this.navCtrl.push("SearchPage");
   }
 
   addToWishList(ProductID : number,element:any)
@@ -136,13 +128,13 @@ export class HomePage {
   }
   viewProduct(ProductID : number)
   {
-    this.navCtrl.push(DetailsPage,{
+    this.navCtrl.push("DetailsPage",{
       ProductID :ProductID
     });
   }
   goToCart()
   {
-    this.navCtrl.push(ShoppingcartsPage);
+    this.navCtrl.push("ShoppingcartsPage");
   }
   searchProduct(){
   if(this.KeyWord != ''){
@@ -175,16 +167,16 @@ export class HomePage {
   }
 
    opencat(){
-    this.navCtrl.push(CategoryPage);
+    this.navCtrl.push("CategoryPage");
   }
   openfav(){
-    this.navCtrl.push(WishlistPage);
+    this.navCtrl.push("WishlistPage");
   }
   openpro(){
-    this.navCtrl.push(Profile);
+    this.navCtrl.push("Profile");
   }
   opensett(){
-    this.navCtrl.push(Settings)
+    this.navCtrl.push("Settings");
   }
   loadNext(GroupShowID : number)
   {

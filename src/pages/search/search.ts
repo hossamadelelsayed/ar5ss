@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {ProductService} from "../../providers/product-service";
-import {DetailsPage} from "../details/details";
 import {CommonService} from "../../providers/common-service";
 
 
 
-
+@IonicPage()
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',
@@ -40,7 +39,7 @@ export class SearchPage {
     this.productService.productBarcode(barcode).subscribe((res)=>{
       if(res.ProductID)
       {
-        this.navCtrl.push(DetailsPage,{
+        this.navCtrl.push("DetailsPage",{
           ProductID : res.ProductID
         });
       }

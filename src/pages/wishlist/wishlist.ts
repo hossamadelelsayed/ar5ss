@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
-import {DetailsPage} from "../details/details";
-import {CategoryPage} from "../category/category";
-import {Profile}from "../profile/profile";
-import {Settings} from "../settings/settings";
-import {HomePage} from "../home/home";
 
-
+@IonicPage()
 @Component({
   selector: 'page-wishlist',
   templateUrl: 'wishlist.html',
@@ -57,7 +52,7 @@ export class WishlistPage {
   }
   viewProduct(ProductID : number)
   {
-    this.navCtrl.push(DetailsPage,{
+    this.navCtrl.push("DetailsPage",{
       ProductID :ProductID
     });
   }
@@ -67,16 +62,4 @@ export class WishlistPage {
   }
 
 
-   openhome(){
-     this.navCtrl.push(HomePage)
-   }
-   opencat(){
-    this.navCtrl.push(CategoryPage);
-  }
-  openpro(){
-    this.navCtrl.push(Profile);
-  }
-  opensett(){
-    this.navCtrl.push(Settings)
-  }
 }

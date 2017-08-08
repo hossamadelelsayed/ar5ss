@@ -1,9 +1,8 @@
 import {Component, ViewChildren} from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
-import{SummaryPage} from "../summary/summary";
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
-import {LoginPage} from "../login/login";
+@IonicPage()
 @Component({
   selector: 'page-shoppingcarts',
   templateUrl: 'shoppingcarts.html',
@@ -30,8 +29,8 @@ export class ShoppingcartsPage {
   }
   gotosummary(){
     if(this.customerService.customer != null)
-      this.navCtrl.push(SummaryPage);
-    else this.navCtrl.push(LoginPage);
+      this.navCtrl.push("SummaryPage");
+    else this.navCtrl.push("LoginPage");
   }
   initCartTotal() : number
   {

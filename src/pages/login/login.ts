@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {SignupPage} from "../signup/signup";
-import {ForgetpassPage} from "../forgetpass/forgetpass";
-import {HomePage} from "../home/home";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {TranslateService} from "@ngx-translate/core";
 
-
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -49,15 +46,15 @@ export class LoginPage {
 
       }
     );
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push("HomePage");
   }
  gotoforget(){
-   this.navCtrl.push(ForgetpassPage);
+   this.navCtrl.push("ForgetpassPage");
  }
  gotosignup(){
-   this.navCtrl.push(SignupPage);
+   this.navCtrl.push("SignupPage");
  }
  gohome(){
-   this.navCtrl.push(HomePage);
+   this.navCtrl.push("HomePage");
  }
 }

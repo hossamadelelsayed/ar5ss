@@ -1,12 +1,12 @@
 import {Component, ViewChildren} from '@angular/core';
-import {NavController, NavParams, ModalController} from 'ionic-angular';
+import {NavController, NavParams, ModalController, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {ProductService} from "../../providers/product-service";
 import {CommonService} from "../../providers/common-service";
-import {OtherofferPage} from "../otheroffer/otheroffer";
-import {SliderImagePage} from "../slider-image/slider-image";
 import {MainService} from "../../providers/main-service";
 
+
+@IonicPage()
 @Component({
   selector: 'page-details',
   templateUrl: 'details.html',
@@ -59,7 +59,7 @@ export class DetailsPage {
     return this.commonService.checkProductIsExistInCart(this.cart , ProductID);
   }
   otherOffer(){
-      this.navCtrl.push(OtherofferPage,{
+      this.navCtrl.push("OtherofferPage",{
         ProductID : this.ProductID
       });
     }
@@ -122,7 +122,7 @@ export class DetailsPage {
   }
   goToSliderImage(ColorID : number)
   {
-    let modal = this.modalCtrl.create(SliderImagePage,{
+    let modal = this.modalCtrl.create("SliderImagePage",{
       ProductID : this.ProductID ,
       ColorID : ColorID
     });

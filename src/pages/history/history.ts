@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
-import {OrderDetailsPage} from "../order-details/order-details";
-import {HomePage} from "../home/home";
 
-
+@IonicPage()
 @Component({
   selector: 'page-history',
   templateUrl: 'history.html',
@@ -43,13 +41,13 @@ export class HistoryPage {
   }
   orderDetails(order : any)
   {
-    this.navCtrl.push(OrderDetailsPage,{
+    this.navCtrl.push("OrderDetailsPage",{
       order : order
     });
   }
   goToHome()
   {
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push("HomePage");
   }
 
 }

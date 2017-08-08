@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavController, NavParams, ViewController, IonicPage} from 'ionic-angular';
 import {ProductService} from "../../providers/product-service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CommonService} from "../../providers/common-service";
@@ -10,10 +10,12 @@ import {CommonService} from "../../providers/common-service";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+@IonicPage()
 @Component({
   selector: 'page-slider-image',
   templateUrl: 'slider-image.html',
 })
+
 export class SliderImagePage {
   public ProductID : number ;
   public ColorID : number ;

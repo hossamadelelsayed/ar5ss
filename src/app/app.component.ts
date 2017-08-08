@@ -2,14 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {Platform, Tabs, Tab} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
-import {WishlistPage} from "../pages/wishlist/wishlist";
 import {CustomerService} from "../providers/customer-service";
 import {Push, PushObject, PushOptions} from "@ionic-native/push";
-import {Profile} from "../pages/profile/profile";
-import {Settings} from "../pages/settings/settings";
 import {TranslateService} from "@ngx-translate/core";
-import {AllcategoriesPage} from "../pages/allcategories/allcategories";
 import {Network} from "@ionic-native/network";
 import {CommonService} from "../providers/common-service";
 import {CacheService} from 'ionic-cache';
@@ -18,11 +13,11 @@ import {CacheService} from 'ionic-cache';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  tab1 = HomePage;
-  tab2 = AllcategoriesPage;
-  tab3 = WishlistPage;
-  tab4 = Profile;
-  tab5 = Settings;
+  tab1 : string = "HomePage";
+  tab2 = "AllcategoriesPage";
+  tab3 = "WishlistPage";
+  tab4 = "Profile";
+  tab5 = "Settings";
   @ViewChild('myTabs') tabRef: Tabs;
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               public customerService : CustomerService ,  public push :Push ,
@@ -55,7 +50,6 @@ export class MyApp {
         alert(res[0]);
       });
     });
-
   }
 
   pushInit()
@@ -88,23 +82,23 @@ export class MyApp {
 
   setRootTab1(){
     if(this.tabRef._tabs[0].getViews().length > 1)
-      this.tabRef._tabs[0].setRoot(HomePage);
+      this.tabRef._tabs[0].setRoot("HomePage");
   }
   setRootTab2() {
     if(this.tabRef._tabs[1].getViews().length > 1)
-      this.tabRef._tabs[1].setRoot(AllcategoriesPage);
+      this.tabRef._tabs[1].setRoot("AllcategoriesPage");
   }
   setRootTab3() {
     if(this.tabRef._tabs[2].getViews().length > 1)
-      this.tabRef._tabs[2].setRoot(WishlistPage);
+      this.tabRef._tabs[2].setRoot("WishlistPage");
   }
   setRootTab4() {
     if(this.tabRef._tabs[3].getViews().length > 1)
-      this.tabRef._tabs[3].setRoot(Profile);
+      this.tabRef._tabs[3].setRoot("Profile");
   }
   setRootTab5() {
     if(this.tabRef._tabs[4].getViews().length > 1)
-      this.tabRef._tabs[4].setRoot(Settings);
+      this.tabRef._tabs[4].setRoot("Settings");
   }
 }
 

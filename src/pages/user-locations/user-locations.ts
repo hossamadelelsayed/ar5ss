@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ViewController} from 'ionic-angular';
-import {AddlocationPage} from "../addlocation/addlocation";
+import {NavController, NavParams, ViewController, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 
@@ -10,6 +9,7 @@ import {CommonService} from "../../providers/common-service";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+@IonicPage()
 @Component({
   selector: 'page-user-locations',
   templateUrl: 'user-locations.html',
@@ -28,7 +28,7 @@ export class UserLocationsPage {
   }
   createLocation()
   {
-    this.navCtrl.push(AddlocationPage);
+    this.navCtrl.push("AddlocationPage");
   }
   selectLocation(LocationID)
   {

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {ConfirmPage} from "../confirm/confirm";
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {TranslateService} from "@ngx-translate/core";
 
+
+@IonicPage()
 @Component({
   selector: 'page-forgetpass',
   templateUrl: 'forgetpass.html',
@@ -43,6 +44,6 @@ export class ForgetpassPage {
     );
   }
 gotoconfirm(){
-  this.navCtrl.push(ConfirmPage);
+  this.navCtrl.push("ConfirmPage");
 }
 }

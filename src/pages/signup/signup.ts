@@ -4,10 +4,8 @@ import {CommonService} from "../../providers/common-service";
 import {CustomerService} from "../../providers/customer-service";
 import {TranslateService} from "@ngx-translate/core";
 import {Camera} from "@ionic-native/camera";
-import {HomePage} from "../home/home";
-import {LoginPage} from "../login/login";
 
-
+@IonicPage()
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
@@ -52,7 +50,7 @@ export class SignupPage {
 
       }
     );
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push("HomePage");
   }
   galleryOrCamera() {
     let confirm = this.alertCtrl.create({
@@ -108,6 +106,6 @@ export class SignupPage {
       this.customer.Image = this.image; //imageData;
   }
   gotosignin(){
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push("LoginPage");
   }
 }

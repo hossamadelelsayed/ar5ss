@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {HistoryPage} from "../history/history";
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
+
+
+@IonicPage()
 @Component({
   selector: 'page-emptyhistory',
   templateUrl: 'emptyhistory.html',
@@ -13,7 +15,7 @@ export class EmptyhistoryPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EmptyhistoryPage');
   }
-gothistory(){
-  this.navCtrl.push(HistoryPage);
-}
+  gothistory(){
+    this.navCtrl.push("HistoryPage");
+  }
 }

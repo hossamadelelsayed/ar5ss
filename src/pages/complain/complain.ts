@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
-import {Settings} from "../settings/settings";
 
-
+@IonicPage()
 @Component({
   selector: 'page-complain',
   templateUrl: 'complain.html',

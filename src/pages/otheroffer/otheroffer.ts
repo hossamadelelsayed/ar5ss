@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CommonService} from "../../providers/common-service";
 import {CustomerService} from "../../providers/customer-service";
-import {DetailsPage} from "../details/details";
 
-
+@IonicPage()
 @Component({
   selector: 'page-otheroffer',
   templateUrl: 'otheroffer.html',
@@ -29,7 +28,7 @@ export class OtherofferPage {
   }
   viewProduct(ProductID : number)
   {
-    this.navCtrl.push(DetailsPage,{
+    this.navCtrl.push("DetailsPage",{
       ProductID :ProductID
     });
   }

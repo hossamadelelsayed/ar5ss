@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ActionSheetController, ModalController} from 'ionic-angular';
-import {AddlocationPage} from "../../pages/addlocation/addlocation";
+import {NavController, NavParams, ActionSheetController, ModalController, IonicPage} from 'ionic-angular';
 import {CommonService} from "../../providers/common-service";
 import {MainService} from "../../providers/main-service";
 import {PayPal, PayPalConfiguration, PayPalPayment} from "@ionic-native/paypal";
 import {CustomerService} from "../../providers/customer-service";
-import {HomePage} from "../home/home";
-import {PaymentsPage} from "../payments/payments";
-import {UserLocationsPage} from "../user-locations/user-locations";
+
+@IonicPage()
 @Component({
   selector: 'page-summary',
   templateUrl: 'summary.html',
@@ -49,7 +47,7 @@ export class SummaryPage {
     });
   }
   goaddlocation(){
-    this.navCtrl.push(AddlocationPage);
+    this.navCtrl.push("AddlocationPage");
   }
   getUserLocationsButtons(newLocationTrans : string) : any []
   {
@@ -70,7 +68,7 @@ export class SummaryPage {
         text: newLocationTrans,
         icon: 'navigate',
         handler: () => {
-          this.navCtrl.push(AddlocationPage);
+          this.navCtrl.push("AddlocationPage");
         }
       };
     buttons.push(addNewLocationButton);
@@ -79,7 +77,7 @@ export class SummaryPage {
 
   showUserLocations()
   {
-    let modal = this.modalCtrl.create(UserLocationsPage);
+    let modal = this.modalCtrl.create("UserLocationsPage");
     modal.present();
     modal.onDidDismiss((res)=>{
       this.LocationID = res.LocationID ;
@@ -125,7 +123,7 @@ export class SummaryPage {
   }
   showPaymentMethod()
   {
-    let modal = this.modalCtrl.create(PaymentsPage,this.paymentTypes);
+    let modal = this.modalCtrl.create("PaymentsPage",this.paymentTypes);
     modal.present();
     modal.onDidDismiss((res)=>{
       this.PaymentID = res.PaymentID ;
@@ -183,7 +181,7 @@ export class SummaryPage {
       if(res.state == '202')
       {
         this.commonService.successToast();
-        this.navCtrl.push(HomePage);
+        this.navCtrl.push("HomePage");
       }
       else
         this.commonService.errorToast();
