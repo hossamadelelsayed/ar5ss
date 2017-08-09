@@ -20,6 +20,8 @@ import {Geolocation} from "@ionic-native/geolocation";
 import {Network} from "@ionic-native/network";
 import {CacheModule} from 'ionic-cache';
 import {SocialSharing} from "@ionic-native/social-sharing";
+import {SQLite} from "@ionic-native/sqlite";
+import { DbService } from '../providers/db-service';
 
 
 
@@ -65,7 +67,9 @@ export function createTranslateLoader(http: Http) {
     PayPal ,
     Geolocation ,
     Network ,
-    SocialSharing
+    SocialSharing ,
+    SQLite,
+    DbService
   ]
 })
 export class AppModule {}

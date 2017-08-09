@@ -95,14 +95,14 @@
                     #icon
                     class="cardfoot"
                     ios="ios-heart"  md="md-heart"
-                    (click)="addToWishList(product.ProductID,icon)"></ion-icon>
+                    (click)="addToWishList(product.ProductID,icon , product)"></ion-icon>
                   <ion-icon
                     *ngIf="product.FavoritID != null"
                     [attr.id]="product.ProductID"
                     #icon
                     class="cardfoot"
                     style="color: crimson"
-                    ios="ios-heart"  md="md-heart" (click)="addToWishList(product.ProductID , icon)"></ion-icon>
+                    ios="ios-heart"  md="md-heart" (click)="addToWishList(product.ProductID , icon , product)"></ion-icon>
                 </ion-col>
               </ion-row>
             </ion-card>
@@ -157,21 +157,3 @@
 </ion-row>
 
 </ion-content>
-<!--
-<ion-footer>
-  <ion-row class="tabrow">
-
-    <ion-col col-2 class="cen">
-      <img src="assets/imgs/tab_bar_home_active.png">
-      </ion-col>
-    <ion-col col-2 class="cen" (click)="opencat()">
-      <img src="assets/imgs/tab_bar_category.png"></ion-col>
-    <ion-col col-1></ion-col>
-    <ion-col col-2 class="cen" (click)="openfav()"><img src="assets/imgs/tab_bar_heart.png"></ion-col>
-    <ion-col col-1></ion-col>
-    <ion-col col-2 class="cen" (click)="openpro()"><img src="assets/imgs/tab_bar_profile.png"></ion-col>
-    <ion-col col-2 class="cen" (click)="opensett()"><img src="assets/imgs/tab_bar_settings.png"></ion-col>
-
-  </ion-row>
-</ion-footer>
--->

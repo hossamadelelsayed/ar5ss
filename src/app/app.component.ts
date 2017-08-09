@@ -8,6 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Network} from "@ionic-native/network";
 import {CommonService} from "../providers/common-service";
 import {CacheService} from 'ionic-cache';
+import {DbService} from "../providers/db-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +23,8 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               public customerService : CustomerService ,  public push :Push ,
               public translate : TranslateService , public network: Network ,
-              public commonService : CommonService , public cache : CacheService) {
+              public commonService : CommonService , public cache : CacheService ,
+              public dbService : DbService ) {
     platform.ready().then(() => {
       //caching policy
       cache.setDefaultTTL(60 * 60 * 12)  ;
@@ -44,14 +46,30 @@ export class MyApp {
       this.translate.setDefaultLang('ar');
       platform.setDir('rtl', true);
     });
+    // handling online
+    this.fireWhenOnline();
+    // handling offline
+    this.fireWhenOffline();
+
+  }
+  fireWhenOnline()
+  {
+    this.network.onConnect().subscribe(() => {
+      console.log('network connected!');
+      this.customerService.online = true ;
+    });
+  }
+  fireWhenOffline()
+  {
     this.network.onDisconnect().subscribe(() => {
       console.log('network was disconnected :-(');
+      this.customerService.online = false ;
+      this.dbService.openOrCreateSQLiteDB();
       this.commonService.translateArray(['network was disconnected :-(']).subscribe((res)=>{
         alert(res[0]);
       });
     });
   }
-
   pushInit()
   {
     // to initialize push notifications

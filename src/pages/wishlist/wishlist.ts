@@ -9,7 +9,7 @@ import {CommonService} from "../../providers/common-service";
   templateUrl: 'wishlist.html',
 })
 export class WishlistPage {
-  public wishList : any ;
+  public wishList : any[] = [] ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService: CustomerService , public commonService : CommonService) {
   }
@@ -20,10 +20,20 @@ export class WishlistPage {
     this.getWishList();
   }
   getWishList(){
-    this.customerService.getWishList().subscribe((res)=>{
-      this.wishList = res ;
-      console.log(this.wishList);
-    });
+    if(this.customerService.online)
+      this.customerService.getWishList().subscribe((res)=>{
+        this.wishList = res ;
+      });
+    else
+    {
+      this.customerService.getWishListOffline().subscribe((res)=>{
+        console.log(res);
+        for(let i = 0 ; i < res.rows.length ; i++)
+        {
+          this.wishList.push(res.rows.item(i));
+        }
+      })
+    }
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad WishlistPage');

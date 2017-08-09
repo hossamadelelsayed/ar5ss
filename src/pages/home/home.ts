@@ -23,7 +23,7 @@ export class HomePage {
   public MainService : MainService =  MainService ;
   constructor(public navCtrl: NavController , public productService : ProductService ,
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
-              public commonService : CommonService , private barcodeScanner: BarcodeScanner) {
+              public commonService : CommonService , private barcodeScanner: BarcodeScanner ) {
 
     //setTimeout(()=> this.initObjects() , 1000);
   }
@@ -64,22 +64,32 @@ export class HomePage {
     this.navCtrl.push("SearchPage");
   }
 
-  addToWishList(ProductID : number,element:any)
+  addToWishList(ProductID : number, element:any , productObj ?: any )
   {
     if(element.style.color == 'crimson')
       this.removeFav(ProductID , element);
     else
-      this.addFav(ProductID , element);
+      this.addFav(ProductID , element , productObj);
   }
-  addFav(ProductID : number , element : any ) {
+  addFav(ProductID : number , element : any , productObj ?: any) {
     element.style.color = 'crimson';
-    this.customerService.addToWishList(ProductID).subscribe((res) => {
-      if (res == true) {
-        this.commonService.successToast();
-      }
-      else
-        this.commonService.errorToast();
-    });
+    if(this.customerService.online)
+    {
+      this.customerService.addToWishList(ProductID).subscribe((res) => {
+        if (res == true) {
+          this.commonService.successToast();
+        }
+        else
+          this.commonService.errorToast();
+      });
+    }
+    else
+    {
+      console.log(productObj);
+      this.customerService.addToWishListOffline(ProductID,productObj.product_name,productObj.Rate,productObj.Image);
+      this.customerService.getWishListOffline();
+    }
+
   }
   removeFav(ProductID : number , element : any)
   {

@@ -6,6 +6,8 @@ import {NativeStorage} from "@ionic-native/native-storage";
 import {CommonService} from "./common-service";
 import {TranslateService} from "@ngx-translate/core";
 import {Geolocation} from "@ionic-native/geolocation";
+import {Observable} from "rxjs";
+import {DbService} from "./db-service";
 
 /*
   Generated class for the CustomerService provider.
@@ -21,6 +23,7 @@ export class CustomerService {
   public customer ;
   public lat : any ;
   public lang : any ;
+  public online : boolean = true ;
   public deviceToken : string = 'xyzx';
   public customerCreateUrl : string = MainService.baseUrl+"register/";
   public customerLoginUrl : string = MainService.baseUrl+"login/";
@@ -69,7 +72,7 @@ export class CustomerService {
 
   constructor(public http: Http,public nativeStorage : NativeStorage,
               public commonService : CommonService, public translateService :TranslateService ,
-              public geolocation: Geolocation) {
+              public geolocation: Geolocation  , public dbService : DbService) {
     console.log('Hello CustomerService Provider');
   }
   setDefaultLocation(LocationID : number){
@@ -248,7 +251,42 @@ export class CustomerService {
     else
       return this.http.get(this.getCartByTokenUrl+this.deviceToken + '?lang=' + MainService.lang).map((res) => res.json());
   }
-  addToWishList(ProductID : number)
+  addToWishListOffline(ProductID : number, ProductName : string, Rate : number, Image: string)
+  {
+    let UserID : number = 0 ;
+    if(this.customer != null)
+      UserID = this.customer.UserID ;
+    this.dbService.checkIfTableExist('Favorite').then((exist)=>{
+      if(exist.rows.length > 0)
+      {
+        this.execFavLocalInsertion(UserID,ProductID , ProductName , Rate , Image);
+      }
+      else
+      {
+        this.dbService.createFavoriteTable()
+          .then(()=>{
+            console.log('fav table is created');
+            this.execFavLocalInsertion(UserID,ProductID , ProductName , Rate , Image);
+          })
+          .catch((err)=>console.log(err)) ;
+      }
+
+    })
+      .catch((err)=>console.log(err));
+  }
+  execFavLocalInsertion(UserID : number ,ProductID : number, ProductName : string, Rate : number, Image: string)
+  {
+    this.dbService.execFavLocalInsertion(UserID, this.deviceToken  , ProductID , ProductName , Rate , Image)
+      .then((res)=>{
+        console.log(res);
+        console.log('inserted');
+        this.commonService.successToast();
+      })
+        .catch((err)=>{
+          console.log(err);
+        });
+  }
+  addToWishList(ProductID : number) : Observable<any>
   {
     let body ;
     if(this.customer != null)
@@ -273,6 +311,10 @@ export class CustomerService {
       return this.http.get(this.getWishListByCustomerUrl+this.customer.UserID).map((res) => res.json());
     else
       return this.http.get(this.getWishListByTokenUrl+this.deviceToken).map((res) => res.json());
+  }
+  getWishListOffline()
+  {
+    return Observable.fromPromise(this.dbService.execFavLocalGet());
   }
   customerForgetPassword(Email : string )
   {
@@ -375,4 +417,6 @@ export class CustomerService {
       console.log(this.lat + ' ' + this.lat);
     });
   }
+
+
 }
