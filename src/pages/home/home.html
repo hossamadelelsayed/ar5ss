@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>
       <!--<span>{{ 'Main' | translate }}</span>-->
-      <img  src="assets/imgs/applogo.png">
+      <span class="titlelogo">أرخص<img src="assets/imgs/navigate-arrows.png"></span>
        <div style="float:right" >
        <!--<ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>-->
        <p class="cartNo">{{ cartNo }}</p>
@@ -77,13 +77,13 @@
                   <ion-icon
                     *ngIf="product.CartID == null" class="cardfoot" >
                     <img [attr.id]="product.ProductID" #icon
-                         (click)="addToCart(product.ProductID , product.SellerID , icon)"
+                         (click)="addToCart(product.ProductID , product.SellerID , icon,product)"
                          style="width: 25px;" src="assets/imgs/cart_off.png" >
                   </ion-icon>
                   <ion-icon
                     *ngIf="product.CartID != null" class="cardfoot" >
                     <img [attr.id]="product.ProductID" #icon
-                         (click)="addToCart(product.ProductID , product.SellerID , icon)"
+                         (click)="addToCart(product.ProductID , product.SellerID , icon,product)"
                          style="width: 25px;" src="assets/imgs/cart_on.png" >
                   </ion-icon>
                 </ion-col>

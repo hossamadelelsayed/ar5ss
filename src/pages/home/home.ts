@@ -38,11 +38,11 @@ export class HomePage {
     });
     console.log('fired');
   }
-  ionViewWillEnter()
+  ionViewDidLoad()
   {
     this.initObjects();
   }
-  ionViewWillLeave(){
+  ionViewWillUnload(){
     console.log('deallocate');
     this.groupShow = [] ;
   }
@@ -73,24 +73,15 @@ export class HomePage {
   }
   addFav(ProductID : number , element : any , productObj ?: any) {
     element.style.color = 'crimson';
-    if(this.customerService.online)
-    {
-      this.customerService.addToWishList(ProductID).subscribe((res) => {
+      this.customerService.addToWishList(ProductID,productObj.product_name,productObj.Rate,productObj.Image,productObj.ProductPrice)
+        .subscribe((res) => {
         if (res == true) {
           this.commonService.successToast();
         }
-        else
-          this.commonService.errorToast();
+        // else
+        //   this.commonService.errorToast();
       });
     }
-    else
-    {
-      console.log(productObj);
-      this.customerService.addToWishListOffline(ProductID,productObj.product_name,productObj.Rate,productObj.Image);
-      this.customerService.getWishListOffline();
-    }
-
-  }
   removeFav(ProductID : number , element : any)
   {
     element.style.color = 'darkgrey';
@@ -102,16 +93,17 @@ export class HomePage {
         this.commonService.errorToast();
     });
   }
-  addToCart(ProductID : number , SellerID : number,element : any)
+  addToCart(ProductID : number , SellerID : number,element : any, productObj ?: any )
   {
     if(this.commonService.splitFromLastBackSlash(element.src) == 'cart_on.png')
       this.removeCart(ProductID , element);
     else
-      this.addCart(ProductID , SellerID ,element);
+      this.addCart(ProductID , SellerID ,element,productObj);
   }
-  addCart(ProductID : number , SellerID : number ,element : any ) {
+  addCart(ProductID : number , SellerID : number ,element : any , productObj ?: any  ) {
     element.src = 'assets/imgs/cart_on.png';
-    this.customerService.addToCart(ProductID , SellerID).subscribe((res)=>{
+    if(!this.customerService.online)this.cartNo++; // update in later
+    this.customerService.addToCart(ProductID , SellerID,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
       if(res == true)
       {
         this.commonService.successToast();

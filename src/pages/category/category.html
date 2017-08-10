@@ -56,7 +56,8 @@
     <div class="contdiv" (click)="viewProduct(product.ProductID)">
        <div class="imagesdiv">
         <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
-         <div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>
+         <!--<div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>-->
+         <img class="imgbrandd"  [src]="product.Logo" >
          <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
          <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
        </div>
@@ -105,7 +106,7 @@
     <div class="product" (click)="viewProduct(product.ProductID)">
       <div style="height:35px">
         <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
-        <div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>
+        <img class="imgbrandd"  [src]="product.Logo" >
         <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
         <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
       </div>
@@ -118,7 +119,7 @@
           <ion-row class="starrow">
               <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon>
         </ion-row>
-              <h4>{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</h4>
+              <h5>{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</h5>
               <h5>{{product.CategroyName}}
                 <span style="color: lightgrey"> {{ category_name }}</span>
               </h5>

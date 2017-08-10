@@ -29,7 +29,10 @@ export class ShoppingcartsPage {
   }
   gotosummary(){
     if(this.customerService.customer != null)
-      this.navCtrl.push("SummaryPage");
+      this.navCtrl.push("SummaryPage",{
+        cartShipping:this.cartShipping ,
+        cartTotal:this.cartTotal
+      });
     else this.navCtrl.push("LoginPage");
   }
   initCartTotal() : number

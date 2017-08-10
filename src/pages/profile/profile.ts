@@ -36,7 +36,7 @@ export class Profile {
   }
   goToMap()
   {
-    this.navCtrl.push("AddlocationPage");
+    this.navCtrl.push("UserLocationsPage");
   }
 
 

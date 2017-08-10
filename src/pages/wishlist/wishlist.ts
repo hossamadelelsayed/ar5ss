@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
+import {DbService} from "../../providers/db-service";
 
 @IonicPage()
 @Component({
@@ -11,7 +12,8 @@ import {CommonService} from "../../providers/common-service";
 export class WishlistPage {
   public wishList : any[] = [] ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
-              public customerService: CustomerService , public commonService : CommonService) {
+              public customerService: CustomerService , public commonService : CommonService ,
+              public dbService : DbService) {
   }
 
 
@@ -20,20 +22,10 @@ export class WishlistPage {
     this.getWishList();
   }
   getWishList(){
-    if(this.customerService.online)
-      this.customerService.getWishList().subscribe((res)=>{
+     this.customerService.getWishList().subscribe((res)=>{
         this.wishList = res ;
+        console.log(this.wishList);
       });
-    else
-    {
-      this.customerService.getWishListOffline().subscribe((res)=>{
-        console.log(res);
-        for(let i = 0 ; i < res.rows.length ; i++)
-        {
-          this.wishList.push(res.rows.item(i));
-        }
-      })
-    }
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad WishlistPage');
@@ -51,11 +43,34 @@ export class WishlistPage {
 
     });
   }
-  addToCart(ProductID : number , SellerID : number)
+  addToCart(ProductID : number , SellerID : number,element : any, productObj ?: any )
   {
-    this.customerService.addToCart(ProductID,SellerID).subscribe((res)=>{
+    if(this.commonService.splitFromLastBackSlash(element.src) == 'cart_on.png')
+      this.removeCart(ProductID , element);
+    else
+      this.addCart(ProductID , SellerID ,element,productObj);
+  }
+  addCart(ProductID : number , SellerID : number ,element : any , productObj ?: any  ) {
+    element.src = 'assets/imgs/cart_on.png';
+    this.customerService.addToCart(ProductID , SellerID,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
       if(res == true)
+      {
         this.commonService.successToast();
+      }
+      else if(res.error)
+        this.commonService.translateAndToast(res.error);
+      else
+        this.commonService.errorToast();
+    });
+  }
+  removeCart(ProductID : number , element : any)
+  {
+    element.src = 'assets/imgs/cart_off.png';
+    this.customerService.delCart(ProductID).subscribe((res)=>{
+      if(res.state == '202')
+      {
+        this.commonService.successToast();
+      }
       else
         this.commonService.errorToast();
     });

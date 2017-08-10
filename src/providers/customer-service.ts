@@ -29,6 +29,8 @@ export class CustomerService {
   public customerLoginUrl : string = MainService.baseUrl+"login/";
   public customerForgetPasswordUrl : string = MainService.baseUrl+"forgetpassword/";
   public addToWishListUrl : string = MainService.baseUrl+"inserttowishlist";
+  public pushLocalWishListUrl : string = MainService.baseUrl+"inserttowishlistoffline";
+  public pushLocalCartUrl : string = MainService.baseUrl+"addcartoffline";
   public getWishListByCustomerUrl : string = MainService.baseUrl+"getwishlist/";
   public getWishListByTokenUrl : string = MainService.baseUrl+"getwishlistfortokenid/";
   public addToCartUrl : string = MainService.baseUrl+"addcart";
@@ -74,6 +76,24 @@ export class CustomerService {
               public commonService : CommonService, public translateService :TranslateService ,
               public geolocation: Geolocation  , public dbService : DbService) {
     console.log('Hello CustomerService Provider');
+  }
+  pushLocalWishList()
+  {
+    this.dbService.execFavLocalGet().then((sqliteRes)=>{
+         this.http.post(this.pushLocalWishListUrl , this.dbService.sqliteResToArr(sqliteRes) ).map((res) => res.json()).subscribe((res)=>{
+           if(res == true)
+             this.dbService.execFavLocalDel().then(()=>console.log('fav table is empty')).catch((err)=>console.log(err))
+         });
+    }).catch((err)=>console.log(err))
+  }
+  pushLocalCart()
+  {
+    this.dbService.execCartLocalGet().then((sqliteRes)=>{
+      this.http.post(this.pushLocalCartUrl , this.dbService.sqliteResToArr(sqliteRes) ).map((res) => res.json()).subscribe((res)=>{
+        if(res == true)
+          this.dbService.execCartLocalDel().then(()=>console.log('cart table is empty')).catch((err)=>console.log(err))
+      });
+    }).catch((err)=>console.log(err))
   }
   setDefaultLocation(LocationID : number){
     return this.http.put(this.setDefaultLocationUrl + LocationID , {} ).map((res) => res.json());
@@ -217,7 +237,48 @@ export class CustomerService {
   {
       return this.http.delete(this.deleteWishlistUrl+favoritID).map((res) => res.json());
   }
-  addToCart(ProductID : number , SellerID : number)
+  addToCart(ProductID : number, SellerID : number ,ProductName ?: string, Image ?: string , ProductPrice ?: number) : Observable<any>
+  {
+    if(this.online)
+      return this.addToCartOnline(ProductID,SellerID);
+    else this.addToCartOffline(ProductID , SellerID ,ProductName , Image ,ProductPrice);
+  }
+  addToCartOffline(ProductID : number, SellerID : number ,ProductName : string, Image: string , ProductPrice : number)
+  {
+    let UserID : number = 0 ;
+    if(this.customer != null)
+      UserID = this.customer.UserID ;
+    this.dbService.checkIfTableExist('Cart').then((exist)=>{
+      if(exist.rows.length > 0)
+      {
+        this.execCartLocalInsertion(UserID,ProductID , SellerID ,ProductName , Image ,ProductPrice);
+      }
+      else
+      {
+        this.dbService.createCartTable()
+          .then(()=>{
+            console.log('cart table is created');
+            this.execCartLocalInsertion(UserID,ProductID , SellerID ,ProductName , Image , ProductPrice);
+          })
+          .catch((err)=>console.log(err)) ;
+      }
+
+    })
+      .catch((err)=>console.log(err));
+  }
+  execCartLocalInsertion(UserID : number, ProductID : number, SellerID : number ,ProductName : string, Image: string , ProductPrice : number)
+  {
+    this.dbService.execCartLocalInsertion(UserID , this.deviceToken  , ProductID , SellerID ,ProductName , Image , ProductPrice )
+      .then((res)=>{
+        console.log(res);
+        console.log('inserted');
+        this.commonService.successToast();
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
+  }
+  addToCartOnline(ProductID : number , SellerID : number)
   {
     let body ;
     if(this.customer != null)
@@ -244,14 +305,25 @@ export class CustomerService {
     }
     return this.http.post(this.addToCartUrl,body).map((res) => res.json());
   }
-  getCart()
+  getCartOnline() : Observable<any>
   {
     if(this.customer != null)
       return this.http.get(this.getCartByCustomerUrl+this.customer.UserID + '?lang=' + MainService.lang).map((res) => res.json());
     else
       return this.http.get(this.getCartByTokenUrl+this.deviceToken + '?lang=' + MainService.lang).map((res) => res.json());
   }
-  addToWishListOffline(ProductID : number, ProductName : string, Rate : number, Image: string)
+  getCartOffline() : Observable<any>
+  {
+    return Observable.fromPromise(this.dbService.execCartLocalGet()).map((res)=>this.dbService.sqliteResToArr(res));
+  }
+  getCart() : Observable<any>
+  {
+    if(this.online)
+      return this.getCartOnline();
+    else
+      return this.getCartOffline();
+  }
+  addToWishListOffline(ProductID : number, ProductName : string, Rate : number, Image: string , ProductPrice : number)
   {
     let UserID : number = 0 ;
     if(this.customer != null)
@@ -259,14 +331,14 @@ export class CustomerService {
     this.dbService.checkIfTableExist('Favorite').then((exist)=>{
       if(exist.rows.length > 0)
       {
-        this.execFavLocalInsertion(UserID,ProductID , ProductName , Rate , Image);
+        this.execFavLocalInsertion(UserID,ProductID , ProductName , Rate , Image ,ProductPrice);
       }
       else
       {
         this.dbService.createFavoriteTable()
           .then(()=>{
             console.log('fav table is created');
-            this.execFavLocalInsertion(UserID,ProductID , ProductName , Rate , Image);
+            this.execFavLocalInsertion(UserID,ProductID , ProductName , Rate , Image , ProductPrice);
           })
           .catch((err)=>console.log(err)) ;
       }
@@ -274,9 +346,9 @@ export class CustomerService {
     })
       .catch((err)=>console.log(err));
   }
-  execFavLocalInsertion(UserID : number ,ProductID : number, ProductName : string, Rate : number, Image: string)
+  execFavLocalInsertion(UserID : number ,ProductID : number, ProductName : string, Rate : number, Image: string , ProductPrice : number)
   {
-    this.dbService.execFavLocalInsertion(UserID, this.deviceToken  , ProductID , ProductName , Rate , Image)
+    this.dbService.execFavLocalInsertion(UserID, this.deviceToken  , ProductID , ProductName , Rate , Image , ProductPrice)
       .then((res)=>{
         console.log(res);
         console.log('inserted');
@@ -286,7 +358,13 @@ export class CustomerService {
           console.log(err);
         });
   }
-  addToWishList(ProductID : number) : Observable<any>
+  addToWishList(ProductID : number, ProductName ?: string, Rate ?: number, Image ?: string , ProductPrice ?: number): Observable<any>
+  {
+    if(this.online)
+      return this.addToWishListOnline(ProductID);
+    else this.addToWishListOffline(ProductID , ProductName , Rate , Image ,ProductPrice);
+  }
+  addToWishListOnline(ProductID : number) : Observable<any>
   {
     let body ;
     if(this.customer != null)
@@ -305,16 +383,23 @@ export class CustomerService {
     }
     return this.http.post(this.addToWishListUrl,body).map((res) => res.json());
   }
-  getWishList()
+  getWishList() : Observable<any>
+  {
+    if(this.online)
+      return this.getWishListOnline();
+    else
+      return this.getWishListOffline();
+  }
+  getWishListOnline() : Observable<any>
   {
     if(this.customer != null)
       return this.http.get(this.getWishListByCustomerUrl+this.customer.UserID).map((res) => res.json());
     else
       return this.http.get(this.getWishListByTokenUrl+this.deviceToken).map((res) => res.json());
   }
-  getWishListOffline()
+  getWishListOffline() : Observable<any>
   {
-    return Observable.fromPromise(this.dbService.execFavLocalGet());
+    return Observable.fromPromise(this.dbService.execFavLocalGet()).map((res)=>this.dbService.sqliteResToArr(res));
   }
   customerForgetPassword(Email : string )
   {

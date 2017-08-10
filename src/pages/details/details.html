@@ -20,7 +20,7 @@
     <div *ngFor="let color of productDetails?.product_color">
       <ion-slide *ngFor="let image of color.product_image">
         <ion-item class= "align" (click)="goToSliderImage(color.ColorID)">
-          <img  [src]="image.Image" >
+          <img   style="height:300px;" [src]="image.Image" >
           <!--<img *ngIf="productDetails?.HotOfferID != 0" class="hot" src="assets/imgs/oldhot.png">-->
         </ion-item>
       </ion-slide>
@@ -38,7 +38,7 @@
           (click)="goToSliderImage(color.ColorID)">
   </button>
   <ion-fab left >
-    <button ion-fab color="light"><ion-icon style="color: crimson" name="md-share"></ion-icon></button>
+    <button ion-fab color="light"><ion-icon style="color: gray" name="md-share"></ion-icon></button>
     <ion-fab-list side="top">
       <button (click)="sharefb()" ion-fab><ion-icon style="color: darkblue;" name="logo-facebook"></ion-icon></button>
       <button (click)="sharetwitter()" ion-fab><ion-icon style="color: cornflowerblue" name="logo-twitter"></ion-icon></button>

@@ -16,9 +16,13 @@ export class SummaryPage {
   public PaymentID : number = 0;
   public LocationID : number = 0 ;
   public LocationName : string = '' ;
+  public cartTotal : number = 0 ;
+  public cartShipping : number = 0 ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public actionSheetCtrl :  ActionSheetController , public commonService : CommonService ,
               public payPal: PayPal , public customerService : CustomerService , public modalCtrl :ModalController) {
+      this.cartTotal = this.navParams.data.cartTotal ;
+      this.cartShipping = this.navParams.data.cartShipping ;
   }
 
   ionViewDidLoad() {

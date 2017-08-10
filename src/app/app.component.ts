@@ -45,18 +45,19 @@ export class MyApp {
       // rtl init
       this.translate.setDefaultLang('ar');
       platform.setDir('rtl', true);
+      // handling online
+      this.fireWhenOnline();
+      // handling offline
+      this.fireWhenOffline();
     });
-    // handling online
-    this.fireWhenOnline();
-    // handling offline
-    this.fireWhenOffline();
-
   }
   fireWhenOnline()
   {
     this.network.onConnect().subscribe(() => {
       console.log('network connected!');
       this.customerService.online = true ;
+      this.customerService.pushLocalWishList();
+      this.customerService.pushLocalCart();
     });
   }
   fireWhenOffline()

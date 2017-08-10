@@ -43,14 +43,14 @@
       <h5 class="h5">{{'Shipping'|translate}}</h5>
       </ion-col>
       <ion-col col-7 style="text-align:end">
-     <P class="par">15  {{'SAR' | translate}} </P>
+     <P class="par">{{cartShipping}}  &nbsp; {{'SAR' | translate}} </P>
       </ion-col>
     </ion-row>
     <hr>
     </ion-list>
 <div style="background-color:#efefef;padding: 5px;">
   <p class="total">{{ 'TOTAL' | translate}}</p>
-  <h4 class="price">3,000 {{'SAR' | translate}}</h4>
+  <h4 class="price">{{cartTotal + cartShipping}} &nbsp;{{'SAR' | translate}}</h4>
 </div>
 <button [disabled]="PaymentID == 0 || LocationID == 0" ion-button block (click)="confirmOrder()">{{'Confirm' | translate}}</button>
 </ion-content>
