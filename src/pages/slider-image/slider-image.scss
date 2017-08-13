@@ -6,4 +6,9 @@ page-slider-image {
     background-color: #f0f9f7;
     height: 90%;
   }
+  .swiper-slide img {
+    height: 400px;
+    max-height: 400px;
+    min-height: 400px;
+  }
 }

@@ -116,9 +116,6 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
   gotowish(){
     this.navCtrl.push("WishlistPage");
   }
-  gotohistory(){
-    this.navCtrl.push("EmptyhistoryPage");
-  }
   gotosearch(){
     this.navCtrl.push("SearchPage");
   }

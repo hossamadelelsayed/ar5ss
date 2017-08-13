@@ -42,7 +42,14 @@ export class Settings {
     else
       this.platform.setDir('rtl', true);
   }
-
+  goToFav()
+  {
+    this.navCtrl.push("WishlistPage");
+  }
+  goToCart()
+  {
+    this.navCtrl.push("ShoppingcartsPage");
+  }
 
 
 }

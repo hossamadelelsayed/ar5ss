@@ -64,10 +64,7 @@ color:crimson !important;
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
   color: crimson;
 }
-
 $tabs-md-tab-text-color-active:crimson;
-
-
 }
 .scroll-content{
   margin-bottom: 0 !important;
@@ -253,7 +250,7 @@ $tabs-md-tab-text-color-active:crimson;
 
 }
 [dir="ltr"] .has-title-only .tab-button-text {
-  padding-top: 62px;
+  padding-top: 46px;
   white-space: normal;
   font-family: 'Montserrat-Bold' !important;
 }
@@ -302,4 +299,22 @@ $tabs-md-tab-text-color-active:crimson;
   font-weight: normal;
   font-style: normal;
 }
+.categorytitle{
+  margin-right: 16px;
+}
+[dir="rtl"] .categorytitle{
+  margin-left: 30px;
+}
+.titlepadding{
+  padding-right: 53px;
+}
+[dir="rtl"] .titlepadding{
+  padding-left: 113px;
+}
+.titeldetails{
+  margin-left: 69px;
+}
+[dir="rtl"] .titeldetails{
+  margin-right: 75px;
 
+}

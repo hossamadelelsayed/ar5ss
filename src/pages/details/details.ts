@@ -163,6 +163,11 @@ export class DetailsPage {
       this.commonService.errorToast();
     });
   }
-
+  goToProductAttr()
+  {
+    this.navCtrl.push("ProductAttrPage",{
+     productProperty : this.productProperty
+    });
+  }
 
 }

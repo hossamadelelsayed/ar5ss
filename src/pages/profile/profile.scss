@@ -6,10 +6,9 @@ page-profile {
 .content{
    background:#f0f9f7;
 }
-.toolbar-title span {
-
-    padding-right: 30px;
-}
+  .toolbar-title {
+    direction:rtl ;
+  }
 .search{
        padding-right: 15px;
        padding-left: 0px;
@@ -41,5 +40,6 @@ page-profile {
     color: #333366 !important;
     font-weight: 600;
     font-size: 3rem;
+    padding-left: 60px;
   }
 }

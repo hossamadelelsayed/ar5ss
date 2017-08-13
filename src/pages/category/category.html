@@ -4,9 +4,10 @@
 
   <ion-navbar>
     <ion-title>
-      <img  style="margin: auto;" src="assets/imgs/applogo.png"><br>
+      <span class="titlepadding">
+      <span class="titlelogo">أرخص<img src="assets/imgs/navigate-arrows.png"></span></span><br>
             <!--<ion-icon class="search" ios="ios-search" md="md-search" (click)="gotosearch()"></ion-icon>-->
-          <span style="margin-left: 50px;">{{ 'Category' | translate}}</span>
+          <span class="categorytitle">{{ 'Category' | translate}}</span>
 
 
  <div class="headdiv">
@@ -113,7 +114,7 @@
 
        <ion-row style="width:100%">
       <ion-col style="margin-top: -5px;" col-4>
-        <img style="height: 86px; width: 85%;" [src]="product.Image" (click)="gotohistory()">
+        <img style="height: 86px; width: 85%;" [src]="product.Image">
       </ion-col>
       <ion-col style="margin-top: -3px;" col-8>
           <ion-row class="starrow">

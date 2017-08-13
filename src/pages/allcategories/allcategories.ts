@@ -26,6 +26,14 @@ export class AllcategoriesPage {
       category_name : category_name
     })
   }
+  goToFav()
+  {
+    this.navCtrl.push("WishlistPage");
+  }
+  goToCart()
+  {
+    this.navCtrl.push("ShoppingcartsPage");
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllcategoriesPage');
   }

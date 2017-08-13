@@ -262,5 +262,14 @@ page-home {
     color: #333366 !important;
     font-weight: 600;
     font-size: 3rem;
+    margin-left: 33px;
+  }
+  .toolbar-title{
+    direction: rtl;
+  }
+  .discount{
+    text-align: center;
+    color: green;
+    font-size: 1rem;
   }
 }

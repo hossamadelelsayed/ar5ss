@@ -7,11 +7,11 @@ page-wishlist {
    background:#f0f9f7;
 }
 .toolbar-title span {
-    padding-right: 30px ;
+    direction: rtl ;
 }
 .totalrow{
-    padding: 20px;
-    height: 150px;
+    padding: 10px;
+    height: 106px;
     border-bottom: 1px solid gray;
 }
 
@@ -55,10 +55,14 @@ h6{
 [col-3] ,[col-9]{
     padding: 0 5px ;
 }
+  .toolbar-title {
+    direction:rtl ;
+  }
   .titlelogo{
     font-family: hacen-samra-lt !important;
     color: #333366 !important;
     font-weight: 600;
     font-size: 3rem;
+    padding-left: 60px;
   }
 }

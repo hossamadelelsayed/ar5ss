@@ -196,12 +196,14 @@ export class CustomerService {
   updateUser(Name : string ,
              Email : string ,
              Mobile : string ,
-             Image: string  ) {
+             Image: string  ,
+             Password ?: string ) {
     let customer = {
       Name: Name,
       Email: Email,
       Mobile: Mobile,
-      Image: Image
+      Image: Image ,
+      Password : Password
     };
     return this.http.put(this.updateUserUrl + this.customer.UserID , customer).map((res) => res.json());
   }

@@ -26,7 +26,8 @@ export class Editprofile {
       inputs.Name ,
       inputs.Email ,
       inputs.Mobile ,
-      this.Image64
+      this.Image64 ,
+      inputs.Password ,
     ).subscribe((res)=>{
       if(res.UserID)
       {

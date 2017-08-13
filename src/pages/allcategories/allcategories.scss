@@ -3,6 +3,9 @@ page-allcategories {
         background: #f8f8f8;
 
    }
+  .toolbar-title {
+    direction:rtl ;
+  }
 
   img{
     max-height: 70px;
@@ -29,5 +32,6 @@ page-allcategories {
     color: #333366 !important;
     font-weight: 600;
     font-size: 3rem;
+    padding-left: 60px;
   }
 }

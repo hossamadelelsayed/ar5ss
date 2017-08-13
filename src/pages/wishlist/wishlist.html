@@ -5,22 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>
       <!-- <ion-icon class="search" ios="ios-search" md="md-search"></ion-icon> -->
+      <ion-icon style="float: right;margin-top: 10px;" ios="ios-heart" md="md-heart" (click)="goToFav()"></ion-icon>
+      <ion-icon style="float: right;margin-top: 10px;padding-right: 25px;" ios="ios-cart" md="md-cart" (click)="goToCart()"></ion-icon>
       <span class="titlelogo">أرخص<img src="assets/imgs/navigate-arrows.png"></span>
-
       <!--<span>{{ 'Wish List' | translate}}</span>-->
       </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
-
-
 <ion-row class="totalrow" *ngFor="let product of wishList" >
   <ion-col style="padding: 0;" col-4>
    <img [src]="product.Image" height="100%" width="95px" (click)="viewProduct(product.ProductID)">

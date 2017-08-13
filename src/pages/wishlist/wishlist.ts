@@ -85,6 +85,13 @@ export class WishlistPage {
   {
     return this.commonService.icons(rate);
   }
-
+  goToFav()
+  {
+    this.navCtrl.push("WishlistPage");
+  }
+  goToCart()
+  {
+    this.navCtrl.push("ShoppingcartsPage");
+  }
 
 }

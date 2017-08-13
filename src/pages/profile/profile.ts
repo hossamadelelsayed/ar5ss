@@ -38,7 +38,13 @@ export class Profile {
   {
     this.navCtrl.push("UserLocationsPage");
   }
-
-
+  goToFav()
+  {
+    this.navCtrl.push("WishlistPage");
+  }
+  goToCart()
+  {
+    this.navCtrl.push("ShoppingcartsPage");
+  }
 
 }

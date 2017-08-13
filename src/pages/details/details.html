@@ -1,7 +1,8 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title><ion-row> <img  class="logo" src="assets/imgs/applogo.png"></ion-row>
+    <ion-title><ion-row class="titeldetails">    <span class="titlelogo">أرخص<img src="assets/imgs/navigate-arrows.png"></span>
+    </ion-row>
       <span>{{ 'Product Details' | translate}}</span>
       <div class="cartfavicon">
         <ion-icon style="font-size:25px;color: darkgray" #fav name="heart"
@@ -37,6 +38,10 @@
           [style.background]="color.colors_of_product.ColorHexa"
           (click)="goToSliderImage(color.ColorID)">
   </button>
+  <br>
+  <div style="text-align: center">
+    {{productDetails?.SeialNumbers}}
+  </div>
   <ion-fab left >
     <button ion-fab color="light"><ion-icon style="color: gray" name="md-share"></ion-icon></button>
     <ion-fab-list side="top">
@@ -55,7 +60,15 @@
       <td>{{prop.property_name}}</td>
       <td>{{(MainService.lang == 'ar') ? prop.value : prop.valuee}}</td>
     </tr>
-
+    <tr>
+      <td>
+        <button ion-button clear>{{"Explore" | translate}}</button>
+      </td>
+      <td>
+        <ion-icon name="arrow-forward" (click)="goToProductAttr()">
+        </ion-icon>
+      </td>
+    </tr>
   </table>
     <button class="btn3" (click)="otherOffer()" > {{ 'Other Offers found' | translate}}</button>
  <hr>
