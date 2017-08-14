@@ -14,6 +14,9 @@ import {CommonService} from "../../providers/common-service";
 })
 export class Settings {
   public MainService : MainService = MainService ;
+  public wishList : any[] = [] ;
+  public cart : any[] = [] ;
+
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService : CustomerService , public platform : Platform ,
               private translate: TranslateService , public commonService :  CommonService) {
@@ -21,6 +24,15 @@ export class Settings {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Settings');
+  }
+  ionViewWillEnter()
+  {
+    this.customerService.getCart().subscribe((res : any[])=>{
+      this.cart = res ;
+    });
+    this.customerService.getWishList().subscribe((res : any[])=>{
+      this.wishList = res ;
+    });
   }
  gotocomplain(){
    if(this.customerService.customer != null)

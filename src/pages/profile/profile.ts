@@ -7,11 +7,21 @@ import {CustomerService} from "../../providers/customer-service";
   templateUrl: 'profile.html',
 })
 export class Profile {
+  public wishList : any[] = [] ;
+  public cart : any[] = [] ;
 
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService : CustomerService) {
   }
-
+  ionViewWillEnter()
+  {
+    this.customerService.getCart().subscribe((res : any[])=>{
+      this.cart = res ;
+    });
+    this.customerService.getWishList().subscribe((res : any[])=>{
+      this.wishList = res ;
+    });
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad Profile');
   }

@@ -10,8 +10,12 @@
     <ion-title>
     <!--<ion-title><ion-icon class="search" ios="ios-search" md="md-search"></ion-icon>-->
     <!-- <span>{{ 'Your Profile' | translate}}</span> -->
-      <ion-icon style="float: right;margin-top: 10px;" ios="ios-heart" md="md-heart" (click)="goToFav()"></ion-icon>
-      <ion-icon style="float: right;margin-top: 10px;padding-right: 25px;" ios="ios-cart" md="md-cart" (click)="goToCart()"></ion-icon>
+      <p class="cartNoInner">{{ cart.length }}</p>
+      <ion-icon *ngIf="wishList.length == 0" style="float: right;margin-top: 10px;color: lightgrey;" ios="ios-heart" md="md-heart" (click)="goToFav()"></ion-icon>
+      <ion-icon *ngIf="wishList.length > 0" style="float: right;margin-top: 10px;color: crimson;" ios="ios-heart" md="md-heart" (click)="goToFav()"></ion-icon>
+      <ion-icon *ngIf="cart.length == 0" style="float: right;margin-top: 10px;padding-right: 25px;color: lightgrey;" ios="ios-cart" md="md-cart" (click)="goToCart()"></ion-icon>
+      <ion-icon *ngIf="cart.length > 0" style="float: right;margin-top: 10px;padding-right: 25px;color: crimson;" ios="ios-cart" md="md-cart" (click)="goToCart()"></ion-icon>
+
       <span class="titlelogo">أرخص<img src="assets/imgs/navigate-arrows.png"></span>
 
     </ion-title>

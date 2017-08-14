@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ProductService} from "../../providers/product-service";
+import {CustomerService} from "../../providers/customer-service";
 
 @IonicPage()
 @Component({
@@ -9,11 +10,20 @@ import {ProductService} from "../../providers/product-service";
 })
 export class AllcategoriesPage {
   public category : any ;
+
+  public wishList : any[] = [] ;
+  public cart : any[] = [] ;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public productService : ProductService) {
+              public productService : ProductService , public customerService : CustomerService) {
   }
   ionViewWillEnter()
   {
+    this.customerService.getCart().subscribe((res : any[])=>{
+      this.cart = res ;
+    });
+    this.customerService.getWishList().subscribe((res : any[])=>{
+      this.wishList = res ;
+    });
     this.productService.category().subscribe((res)=>{
       this.category = res ;
       console.log(res);

@@ -3,6 +3,7 @@ import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {DbService} from "../../providers/db-service";
+import {MainService} from "../../providers/main-service";
 
 @IonicPage()
 @Component({
@@ -11,14 +12,19 @@ import {DbService} from "../../providers/db-service";
 })
 export class WishlistPage {
   public wishList : any[] = [] ;
+  public cart : any[] = [] ;
+  public MainService : MainService = MainService ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
-              public customerService: CustomerService , public commonService : CommonService ,
-              public dbService : DbService) {
+              public customerService: CustomerService , public commonService : CommonService ) {
   }
 
 
   ionViewWillEnter()
   {
+    this.customerService.getCart().subscribe((res : any[])=>{
+     this.cart = res ;
+    });
+
     this.getWishList();
   }
   getWishList(){

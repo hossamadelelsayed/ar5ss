@@ -24,7 +24,7 @@ export class CustomerService {
   public lat : any ;
   public lang : any ;
   public online : boolean = true ;
-  public deviceToken : string = 'xyzx';
+  public deviceToken : string = null;
   public customerCreateUrl : string = MainService.baseUrl+"register/";
   public customerLoginUrl : string = MainService.baseUrl+"login/";
   public customerForgetPasswordUrl : string = MainService.baseUrl+"forgetpassword/";
@@ -494,7 +494,7 @@ export class CustomerService {
           //return customer
         },
         error => console.error(error)
-      );
+      )
   }
   customerSetLocation()
   {

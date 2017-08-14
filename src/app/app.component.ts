@@ -49,6 +49,7 @@ export class MyApp {
       this.fireWhenOnline();
       // handling offline
       this.fireWhenOffline();
+
     });
   }
   fireWhenOnline()
@@ -98,7 +99,6 @@ export class MyApp {
 
     pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
   }
-
   setRootTab1(){
     if(this.tabRef._tabs[0].getViews().length > 1)
       this.tabRef._tabs[0].setRoot("HomePage");

@@ -32,15 +32,19 @@ export class HomePage {
     this.productService.hotads().subscribe((res)=>{
       this.hotads = res ;
     });
-    this.customerService.getCart().subscribe((cartRes)=>{
-      this.cart = cartRes ;
-      this.cartNo = this.cart.length ;
-    });
+
     console.log('fired');
   }
   ionViewDidLoad()
   {
     this.initObjects();
+  }
+  ionViewWillEnter()
+  {
+    this.customerService.getCart().subscribe((cartRes)=>{
+      this.cart = cartRes ;
+      this.cartNo = this.cart.length ;
+    });
   }
   ionViewWillUnload(){
     console.log('deallocate');
@@ -122,7 +126,7 @@ export class HomePage {
       if(res.state == '202')
       {
         this.commonService.successToast();
-        this.cartNo--;
+        if(this.cartNo != 0) this.cartNo--;
       }
       else
         this.commonService.errorToast();

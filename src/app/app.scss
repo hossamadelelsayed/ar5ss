@@ -28,9 +28,9 @@ $tabs-md-tab-icon-color:crimson;
       overflow: scroll;
 }
 
-.toolbar-title{
-color:crimson !important;
-}
+//.toolbar-title{
+//color:crimson !important;
+//}
 .toolbar-ios ion-title{
   padding: 5px ;
 }
@@ -83,11 +83,6 @@ $tabs-md-tab-text-color-active:crimson;
       text-align: center;
     }
 }
-
-
-
-
-
 .tabs-md .tab-button[id=tab-t0-0] {
   min-height: 5.6rem;
   font-weight: normal;
@@ -317,4 +312,15 @@ $tabs-md-tab-text-color-active:crimson;
 [dir="rtl"] .titeldetails{
   margin-right: 75px;
 
+}
+.cartNoInner {
+  display: inline;
+  font-size: 12px;
+  color: crimson;
+  position: fixed;
+  top: -10px;
+  right: 75px;
+  border: 1px solid black;
+  padding: 0 4px;
+  border-radius: 50%;
 }
