@@ -58,7 +58,7 @@ export class WishlistPage {
   }
   addCart(ProductID : number , SellerID : number ,element : any , productObj ?: any  ) {
     element.src = 'assets/imgs/cart_on.png';
-    this.customerService.addToCart(ProductID , SellerID,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
+    this.customerService.addToCart(ProductID , 0,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
       if(res == true)
       {
         this.commonService.successToast();

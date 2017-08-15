@@ -86,5 +86,6 @@
   "network was disconnected :-(" : "تعذر الاتصال بشبكة الانترنت" ,
   "Profile" : "بياناتى" ,
   "Explore" : "استعراض" ,
-  "Ar5ss By" : "أرخص ب"
+  "Ar5ss By" : "أرخص ب" ,
+  "Connection established" : "تم الاتصال"
 }

@@ -166,9 +166,32 @@ export class CustomerService {
     };
     return this.http.post(this.addLocationUrl , body ).map((res) => res.json());
   }
-  deleteCart(CartID : number  ) {
+
+  deleteCart(CartID : number  ) : Observable<any> {
+    if(this.online)
+      return this.deleteCartOnline(CartID);
+    else return this.deleteCartOffline(CartID);
+  }
+  deleteCartOnline(CartID : number  ) : Observable<any>
+  {
     return this.http.delete(this.deleteCartUrl + CartID ).map((res) => res.json());
   }
+  deleteCartOffline(CartID : number  ) : Observable<any>
+  {
+     return Observable.fromPromise(this.dbService.execCartLocalDelByID(CartID).then((res)=>{
+      console.log(res);
+      console.log('deleted');
+    })
+      .catch((err)=>{
+        console.log(err);
+      })).map(()=>{
+      let data = {
+        state : '202'
+      } ;
+      return data ;
+    });
+  }
+
   delCart(ProductID : number){
     let body ;
     if(this.customer != null)
@@ -237,7 +260,28 @@ export class CustomerService {
   }
   deleteWishlist(favoritID : number)
   {
+    if(this.online)
+      return this.deleteWishlistOnline(favoritID);
+    else return this.deleteWishlistOffline(favoritID);
+  }
+  deleteWishlistOnline(favoritID : number) : Observable<any>
+  {
       return this.http.delete(this.deleteWishlistUrl+favoritID).map((res) => res.json());
+  }
+  deleteWishlistOffline(favoritID : number) : Observable<any>
+  {
+    return Observable.fromPromise(this.dbService.execFavLocalDelByID(favoritID).then((res)=>{
+      console.log(res);
+      console.log('deleted');
+    })
+      .catch((err)=>{
+        console.log(err);
+      })).map(()=>{
+      let data = {
+        stats : 'done'
+      } ;
+      return data ;
+    });
   }
   addToCart(ProductID : number, SellerID : number ,ProductName ?: string, Image ?: string , ProductPrice ?: number) : Observable<any>
   {

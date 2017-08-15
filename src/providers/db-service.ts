@@ -55,6 +55,10 @@ export class DbService {
   {
     return this.db.executeSql(`DELETE FROM Favorite` , {});
   }
+  execFavLocalDelByID(FavoritID : number) : Promise<any>
+  {
+    return this.db.executeSql(`DELETE FROM Favorite WHERE FavoritID = '${FavoritID}'`, {});
+  }
   // cart stuff
   createCartTable() : Promise <any>
   {
@@ -84,20 +88,10 @@ export class DbService {
   {
     return this.db.executeSql(`DELETE FROM Cart` , {});
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  execCartLocalDelByID(CartID : number) : Promise<any>
+  {
+    return this.db.executeSql(`DELETE FROM Cart WHERE CartID = '${CartID}'`, {});
+  }
   sqliteResToArr(res : any) : any []
   {
     let array :any[] = [];

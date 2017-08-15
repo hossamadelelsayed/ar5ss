@@ -24,7 +24,7 @@ export class CommonService {
   presentToast(txt:string) {
     let toast = this.toastCtrl.create({
       message: txt,
-      duration: 750,
+      duration: 1000,
       position: 'middle'
     });
     toast.present();

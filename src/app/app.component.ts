@@ -45,20 +45,24 @@ export class MyApp {
       // rtl init
       this.translate.setDefaultLang('ar');
       platform.setDir('rtl', true);
-      // handling online
-      this.fireWhenOnline();
       // handling offline
       this.fireWhenOffline();
+      // handling online
+      this.fireWhenOnline();
+
 
     });
   }
   fireWhenOnline()
   {
     this.network.onConnect().subscribe(() => {
-      console.log('network connected!');
-      this.customerService.online = true ;
-      this.customerService.pushLocalWishList();
-      this.customerService.pushLocalCart();
+      setTimeout(() => {
+          console.log('network connected!!!!!');
+          this.commonService.translateAndToast('Connection established');
+          this.customerService.online = true ;
+          this.customerService.pushLocalWishList();
+          this.customerService.pushLocalCart();
+      }, 3000);
     });
   }
   fireWhenOffline()
@@ -67,9 +71,7 @@ export class MyApp {
       console.log('network was disconnected :-(');
       this.customerService.online = false ;
       this.dbService.openOrCreateSQLiteDB();
-      this.commonService.translateArray(['network was disconnected :-(']).subscribe((res)=>{
-        alert(res[0]);
-      });
+      this.commonService.translateAndToast('network was disconnected :-(');
     });
   }
   pushInit()
