@@ -101,6 +101,7 @@ export class HomePage {
   }
   addToCart(ProductID : number , SellerID : number,element : any, productObj ?: any )
   {
+    console.log(element);
     if(this.commonService.splitFromLastBackSlash(element.src) == 'cart_on.png')
       this.removeCart(ProductID , element);
     else

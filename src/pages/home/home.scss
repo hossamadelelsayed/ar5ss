@@ -61,7 +61,7 @@ page-home {
     }
     span{
 
-      padding-left:12px;
+      padding-left:5px;
       color:gray;
     }}
 
@@ -123,10 +123,15 @@ page-home {
         border-radius: 20px;
     }
    .prodimg{
-            max-height: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70%;
+                max-height: 100%;
+       padding-right: 5px;
+    margin-right: auto;
+    width: 128px;
+    margin: auto;
+    display: block;
+    padding-right: 2px;
+    margin-left: 3px;
+            
 
    }
    .starrow{

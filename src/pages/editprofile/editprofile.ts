@@ -25,7 +25,7 @@ export class Editprofile {
     this.customerService.updateUser(
       inputs.Name ,
       inputs.Email ,
-      inputs.Mobile ,
+      '966'+inputs.Mobile ,
       this.Image64 ,
       inputs.Password ,
     ).subscribe((res)=>{

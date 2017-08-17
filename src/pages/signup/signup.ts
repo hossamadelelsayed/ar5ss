@@ -27,7 +27,7 @@ export class SignupPage {
   {
     this.customerService.customerCreate(
       this.customer.Name,this.customer.Email,this.customer.Password,
-      974+this.customer.Mobile,this.customer.Image
+      966+this.customer.Mobile,this.customer.Image
     ).subscribe((data)=>{
       if(data.error)
       {

@@ -64,7 +64,7 @@
                   <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
                   <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
                 </div>
-                <span style="padding-left: 12px;
+                <span style="
     height: 120px;
     width: 155px;">
                 <img class="prodimg"  [src]="product.Image" >
@@ -136,31 +136,14 @@
       <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
     </div>
     <div class="iconsdiv">
-      <ion-icon
-        *ngIf="!checkProductInCart(product.ProductID)"
-        class="cardfoot" (click)="addToCart(product.ProductID , product.SellerID)">
-        <img [attr.id]="product.ProductID"
-             #productsCartIcon
-             style="width: 25px;" src="assets/imgs/cart_off.png" >
-      </ion-icon>
-      <ion-icon
-        *ngIf="checkProductInCart(product.ProductID)"
-        class="cardfoot" (click)="addToCart(product.ProductID , product.SellerID)">
-        <img [attr.id]="product.ProductID"
-             #productsCartIcon
-             style="width: 25px;" src="assets/imgs/cart_on.png" >
+      <ion-icon class="cardfoot"  >
+        <img style="width: 25px;"
+             #icon2
+             (click)="addToCart(product.ProductID , product.SellerID ,icon2, product)"
+             src="assets/imgs/cart_off.png" >
       </ion-icon>
         <ion-icon
-          *ngIf="!checkProductInFav(product.ProductID)"
-          [attr.id]="product.ProductID"
-          #productsIcon
-          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
-        <ion-icon
-          *ngIf="checkProductInFav(product.ProductID)"
-          [attr.id]="product.ProductID"
-          #productsIcon
-          style="color: crimson;"
-          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID)"></ion-icon>
+          class="hearticon" #icon ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID,icon, product)"></ion-icon>
     </div>
   </ion-col>
 </ion-row>

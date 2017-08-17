@@ -73,44 +73,52 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
         this.categoryProducts = res.data;
       });
   }
-  addToWishList(ProductID : number , element:any)
+  addToWishList(ProductID : number, element:any , productObj ?: any )
   {
-      if(element.style.color == 'crimson')
-        this.removeFav(ProductID , element);
-      else
-        this.addFav(ProductID , element);
+    if(element.style.color == 'crimson')
+      this.removeFav(ProductID , element);
+    else
+      this.addFav(ProductID , element , productObj);
   }
-  addFav(ProductID : number , element : any ) {
+  addFav(ProductID : number , element : any , productObj ?: any) {
     element.style.color = 'crimson';
-    this.customerService.addToWishList(ProductID).subscribe((res) => {
-      if (res == true)
-        this.commonService.successToast();
-      else
-        this.commonService.errorToast();
-    });
+    this.customerService.addToWishList(ProductID,productObj.product_name,productObj.Rate,productObj.Image,productObj.ProductPrice)
+      .subscribe((res) => {
+        if (res == true) {
+          this.commonService.successToast();
+        }
+        // else
+        //   this.commonService.errorToast();
+      });
   }
   removeFav(ProductID : number , element : any)
   {
     element.style.color = 'darkgrey';
     this.customerService.deleteFav(ProductID).subscribe((res)=>{
-      if (res.state == '202')
+      if (res.state == '202') {
         this.commonService.successToast();
+      }
       else
         this.commonService.errorToast();
     });
   }
-  addToCart(ProductID : number , SellerID : number , element : any)
+  addToCart(ProductID : number , SellerID : number,element : any, productObj ?: any )
   {
+    console.log(element);
     if(this.commonService.splitFromLastBackSlash(element.src) == 'cart_on.png')
       this.removeCart(ProductID , element);
     else
-      this.addCart(ProductID , SellerID ,element);
+      this.addCart(ProductID , SellerID ,element,productObj);
   }
-  addCart(ProductID : number , SellerID : number ,element : any ) {
+  addCart(ProductID : number , SellerID : number ,element : any , productObj ?: any  ) {
     element.src = 'assets/imgs/cart_on.png';
-    this.customerService.addToCart(ProductID , SellerID).subscribe((res)=>{
+    // if(!this.customerService.online)this.cartNo++; // update in later
+    this.customerService.addToCart(ProductID , SellerID,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
       if(res == true)
+      {
         this.commonService.successToast();
+        // this.cartNo++;
+      }
       else if(res.error)
         this.commonService.translateAndToast(res.error);
       else
@@ -122,7 +130,10 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
     element.src = 'assets/imgs/cart_off.png';
     this.customerService.delCart(ProductID).subscribe((res)=>{
       if(res.state == '202')
+      {
         this.commonService.successToast();
+        // if(this.cartNo != 0) this.cartNo--;
+      }
       else
         this.commonService.errorToast();
     });
@@ -159,5 +170,9 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
         this.categoryProducts.push(products.data[i]);
       }
     });
+  }
+  goToCart()
+  {
+    this.navCtrl.push("ShoppingcartsPage");
   }
 }

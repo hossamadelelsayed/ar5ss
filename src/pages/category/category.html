@@ -83,25 +83,25 @@
         class="gridicon" >
         <img
           [attr.id]="product.ProductID" #icon style="width: 25px;" src="assets/imgs/cart_off.png"
-          (click)="addToCart(product.ProductID , product.SellerID ,icon)">
+          (click)="addToCart(product.ProductID , product.SellerID ,icon , product)">
       </ion-icon>
       <ion-icon
         *ngIf="product.CartID != null" class="gridicon">
         <img
           [attr.id]="product.ProductID" #icon style="width: 25px;" src="assets/imgs/cart_on.png"
-          (click)="addToCart(product.ProductID , product.SellerID , icon)">
+          (click)="addToCart(product.ProductID , product.SellerID , icon , product)">
       </ion-icon>
         <ion-icon
           *ngIf="product.FavoritID == null"
           [attr.id]="product.ProductID"
           #icon
-          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID,icon)"></ion-icon>
+          class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID,icon,product)"></ion-icon>
       <ion-icon
         *ngIf="product.FavoritID != null"
         [attr.id]="product.ProductID"
         #icon
         style="color: #f01666"
-        class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID , icon)"></ion-icon>
+        class="hearticon" ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID , icon , product)"></ion-icon>
     </div>
   </ion-col>
     </ion-row>
@@ -119,8 +119,8 @@
       </div>
 
        <ion-row style="width:100%">
-      <ion-col style="margin-top: -5px;" col-4>
-        <img style="height: 86px; width: 85%;" [src]="product.Image">
+      <ion-col style="margin-top: -5px;height: 86px; width: 85%" col-4>
+        <img style="max-height: 100%; max-width: 100%;" [src]="product.Image">
       </ion-col>
       <ion-col style="margin-top: -3px;" col-8>
           <ion-row class="starrow">
@@ -143,13 +143,13 @@
           *ngIf="product.CartID == null" class="botticon" >
           <img
             [attr.id]="product.ProductID" #icon style="width: 18px;" src="assets/imgs/cart_off.png"
-            (click)="addToCart(product.ProductID , product.SellerID , icon)">
+            (click)="addToCart(product.ProductID , product.SellerID , icon,product)">
         </ion-icon>
         <ion-icon
           *ngIf="product.CartID != null" class="botticon">
           <img
             [attr.id]="product.ProductID" #icon style="width: 18px;" src="assets/imgs/cart_on.png"
-            (click)="addToCart(product.ProductID , product.SellerID , icon)">
+            (click)="addToCart(product.ProductID , product.SellerID , icon , product)">
         </ion-icon>
 
           <ion-icon
@@ -157,13 +157,13 @@
               [attr.id]="product.ProductID"
               #icon
               style="color:darkgray"
-              class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID,icon)">
+              class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID,icon ,product)">
           </ion-icon>
           <ion-icon
               *ngIf="product.FavoritID != null"
               [attr.id]="product.ProductID"
               #icon
-              style="color:#f01666" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID,icon)">
+              style="color:#f01666" class="botticon"ios="ios-heart" md="md-heart" (click)="addToWishList(product.ProductID,icon , product)">
            </ion-icon>
 
       </ion-col>
