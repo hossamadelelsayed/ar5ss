@@ -18,6 +18,7 @@ export class CategoryPage {
   public sortType : number  = this.productService.sortByASC;
   public CurrentPage : number = 1 ;
   public showing : string = 'list';
+  public cartNo : number = 0 ;
   public MainService : MainService = MainService ;
 constructor(public navCtrl: NavController, public navParams: NavParams,
               public productService : ProductService , public customerService : CustomerService ,
@@ -34,6 +35,7 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
   {
     this.customerService.getCart().subscribe((res : any[])=>{
       this.cart = res ;
+      this.cartNo = res.length ;
     });
   }
   ionViewDidLoad()
@@ -112,12 +114,12 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
   }
   addCart(ProductID : number , SellerID : number ,element : any , productObj ?: any  ) {
     element.src = 'assets/imgs/cart_on.png';
-    // if(!this.customerService.online)this.cartNo++; // update in later
+    if(!this.customerService.online)this.cartNo++; // update in later
     this.customerService.addToCart(ProductID , SellerID,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
       if(res == true)
       {
         this.commonService.successToast();
-        // this.cartNo++;
+        this.cartNo++;
       }
       else if(res.error)
         this.commonService.translateAndToast(res.error);
@@ -132,7 +134,7 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
       if(res.state == '202')
       {
         this.commonService.successToast();
-        // if(this.cartNo != 0) this.cartNo--;
+        if(this.cartNo != 0) this.cartNo--;
       }
       else
         this.commonService.errorToast();

@@ -22,6 +22,7 @@ export class HomePage {
   public showSearch : boolean = false ;
   public KeyWord : string  ;
   public MainService : MainService =  MainService ;
+  public pageLang : string = MainService.lang;
   constructor(public navCtrl: NavController , public productService : ProductService ,
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
               public commonService : CommonService , private barcodeScanner: BarcodeScanner ) {
@@ -43,6 +44,8 @@ export class HomePage {
   }
   ionViewWillEnter()
   {
+    if(this.pageLang != MainService.lang)
+      this.initObjects();
     this.customerService.getCart().subscribe((cartRes)=>{
       this.cart = cartRes ;
       this.cartNo = this.cart.length ;

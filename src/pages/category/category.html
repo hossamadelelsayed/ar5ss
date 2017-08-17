@@ -4,10 +4,10 @@
 
   <ion-navbar>
     <ion-title>
-      <p class="cartNoInner">{{ cart.length }}</p>
+      <p class="cartNoInner">{{ cartNo }}</p>
       <ion-icon  style="float: right;margin-top: 10px;" (click)="goToCart()">
-        <img *ngIf="cart.length == 0" style="width: 20px;" src="assets/imgs/cart_off.png">
-        <img *ngIf="cart.length > 0" style="width: 20px;"  src="assets/imgs/cart_on.png">
+        <img *ngIf="cartNo == 0" style="width: 20px;" src="assets/imgs/cart_off.png">
+        <img *ngIf="cartNo > 0" style="width: 20px;"  src="assets/imgs/cart_on.png">
       </ion-icon>
 
       <span class="titlepadding">

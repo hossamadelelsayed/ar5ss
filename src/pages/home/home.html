@@ -49,7 +49,8 @@
 <div *ngIf="!showSearch" style="margin-bottom: 50px;">
   <div class="products" *ngFor="let group of groupShow">
      <h6 class="prodh6">{{group.Group.group_name}}</h6>
-     <span>{{group.Group.Item}}/<span  style="font-weight: bold;
+     <span>
+       {{group.Group.Item}}/<span  style="font-weight: bold;
                                                 color: #525252;">
        {{(group.Group.loadedNo != null)?group.Group.loadedNo : 3 }}</span></span>
         <ion-scroll direction="y" >
