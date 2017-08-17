@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CommonService} from "../../providers/common-service";
 import {CustomerService} from "../../providers/customer-service";
+import {MainService} from "../../providers/main-service";
 
 @IonicPage()
 @Component({
@@ -12,6 +13,8 @@ export class OtherofferPage {
 
   public ProductID : number ;
   public relatedProduct : any[] ;
+
+  public MainService : MainService =  MainService ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public commonService : CommonService , public customerService : CustomerService ) {
       this.ProductID = this.navParams.data.ProductID;

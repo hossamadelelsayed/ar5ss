@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {NavController, IonicPage} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, IonicPage, Slides} from 'ionic-angular';
 import {ProductService} from "../../providers/product-service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CustomerService} from "../../providers/customer-service";
@@ -13,6 +13,7 @@ import {MainService} from "../../providers/main-service";
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild('hotSlider') hotSlider: Slides;
   public hotads : any ;
   public groupShow : any[] ;
   public cart : any[] = [] ;
@@ -31,6 +32,7 @@ export class HomePage {
     this.getGroupShow();
     this.productService.hotads().subscribe((res)=>{
       this.hotads = res ;
+     // this.hotSlider.autoplay();
     });
 
     console.log('fired');

@@ -20,7 +20,7 @@
   <br><span style="color: crimson;">{{ 'Change Avatar' | translate }}</span>
 </div>
 
-  <form #f="ngForm"  (ngSubmit)="updateUser(f.value)">
+  <!--<form #f="ngForm"  (ngSubmit)="updateUser(f.value)">
     <ion-icon ios="ios-person" md="md-person"></ion-icon>
     <ion-input [ngModel]="customerService.customer.Name" name="Name" type="text" placeholder="Full Name" required></ion-input>
 
@@ -35,8 +35,50 @@
     <ion-input [ngModel]="customerService.customer.Mobile" name="Mobile" style="width:65%" type="number" placeholder="Phone Number" required></ion-input>
     <ion-input style="width:20%;margin-right: 5%;" type="number" placeholder="+966" value="974" readonly></ion-input>
     <button [disabled]="!f.valid"  ion-button block class="signup" type="submit">{{ 'Edit Profile' | translate}}</button>
+-->
+<ion-list>
+<form #f="ngForm"  (ngSubmit)="updateUser(f.value)">
+<ion-row>
+  <ion-col col-1>
+    <ion-icon ios="ios-person" md="md-person"></ion-icon>
+  </ion-col>
+  <ion-col col-11>
+    <ion-input [ngModel]="customerService.customer.Name" name="Name" type="text" placeholder="Full Name" required></ion-input>
+  </ion-col>
+</ion-row>
 
+<ion-row>
+  <ion-col col-1>
+    <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+  </ion-col>
+  <ion-col col-11>
+    <ion-input [ngModel]="customerService.customer.Email" name="Email" type="email" placeholder="Email" required></ion-input>
+  </ion-col>
+</ion-row>
 
+<ion-row>
+  <ion-col col-1>
+    <ion-icon name="person-add"></ion-icon>
+  </ion-col>
+  <ion-col col-11>
+    <ion-input name="Password" type="password" placeholder="Password" required></ion-input>
+  </ion-col>
+</ion-row>
 
-  </form>
+<ion-row>
+  <ion-col col-1>
+    <ion-icon ios="ios-call" md="md-call"></ion-icon>
+  </ion-col>
+  <ion-col col-11>
+    <ion-input [ngModel]="customerService.customer.Mobile" name="Mobile" style="width:65%" type="number" placeholder="Phone Number" required></ion-input>
+    <ion-input style="width:20%;margin-right: 5%;" type="number" placeholder="+966" value="974" readonly></ion-input>
+
+  </ion-col>
+</ion-row>
+    <button [disabled]="!f.valid"  ion-button block class="signup" type="submit">{{ 'Edit Profile' | translate}}</button>
+
+ </form>
+</ion-list>
+
+ 
 </ion-content>

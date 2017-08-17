@@ -11,11 +11,11 @@
         <ion-col col-4>
           <img class="img" [src]="product.Image">
 
-          <button ion-button round [style.background]="product.ColorHexa"></button>
-          
+          <!--<button ion-button round [style.background]="product.ColorHexa"></button>-->
+
         </ion-col>
         <ion-col col-8>
-          <h2 style="font-family: inherit; color: #4A4D4D;">{{product.product_name}} ,  <small>{{product.size}}</small></h2>
+          <h2 style="font-family: inherit; color: #4A4D4D;">{{product.product_name}} ,  <small>, {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</small></h2>
           <p style="font-size: 16px; color:gray;">{{product.ProductPrice}} {{ 'SAR' | translate}}</p>
           <ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon">
           </ion-icon>

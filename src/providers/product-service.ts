@@ -66,7 +66,7 @@ export class ProductService {
   }
   hotOffer()
   {
-    return this.http.get(this.hotOfferUrl + MainService.lang).map((res) => res.json());
+    return this.http.get(this.hotOfferUrl + MainService.lang ).map((res) => res.json());
   }
   category()
   {
@@ -83,8 +83,9 @@ export class ProductService {
       userKey = this.customerService.customer.UserID;
     else userKey = this.customerService.deviceToken ;
     let url = this.groupShowUrl + userKey + '?lang=' + MainService.lang ;
-    let request = this.http.get(url).map((res) => res.json());
-    return this.cache.loadFromObservable(url,request);
+    return this.http.get(url).map((res) => res.json());
+    // let request = this.http.get(url).map((res) => res.json());
+    // return this.cache.loadFromObservable(url,request);
   }
   groupProductPaginate(GroupID : number , CurrentPage : number)
   {
@@ -93,8 +94,9 @@ export class ProductService {
       userKey = this.customerService.customer.UserID;
     else userKey = this.customerService.deviceToken ;
     let url = this.groupProductPaginateUrl + userKey + '/' + GroupID + '/' + CurrentPage +'?lang=' + MainService.lang ;
-    let request = this.http.get(url).map((res) => res.json());
-    return this.cache.loadFromObservable(url,request);
+    return this.http.get(url).map((res) => res.json());
+    // let request = this.http.get(url).map((res) => res.json());
+    // return this.cache.loadFromObservable(url,request);
   }
   categoryProducts(category_id : number , CurrentPage : number ,sortBy? : number)
   {

@@ -103,7 +103,7 @@ export class CustomerService {
   }
   getRelatedProduct(ProductID : number)
   {
-    return this.http.get(this.getRelatedProductUrl + ProductID ).map((res) => res.json());
+    return this.http.get(this.getRelatedProductUrl + ProductID + '?lang='  + MainService.lang ).map((res) => res.json());
   }
   customerRate(ProductID : number , Rate : number)
   {

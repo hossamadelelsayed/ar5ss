@@ -17,8 +17,8 @@
 <!--style="background-size: 100%; background-repeat: no-repeat;width: 365px;-->
 <!--height: 100%;" [style.background-image]="getBackground(image.Image)"-->
 <ion-content class="content" padding>
-  <ion-slides  autoplay="5000" loop="true" speed="3000" class="slider" dir="ltr">
-    <ion-slide  *ngFor="let image of images | async">
+  <ion-slides class="slider" dir="ltr">
+    <ion-slide  *ngFor="let image of images">
       <img class="pic" [src]="image.Image">
     </ion-slide>
   </ion-slides>

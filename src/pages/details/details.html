@@ -42,7 +42,7 @@
   <div style="text-align: center">
     {{productDetails?.SeialNumbers}}
   </div>
-  <ion-fab left >
+  <ion-fab left style="margin-top: -70px;" >
     <button ion-fab color="light"><ion-icon style="color: gray" name="md-share"></ion-icon></button>
     <ion-fab-list side="top">
       <button (click)="sharefb()" ion-fab><ion-icon style="color: darkblue;" name="logo-facebook"></ion-icon></button>
@@ -80,13 +80,13 @@
   <ion-col col-6>
     <button class="addtocar" ion-button large (click)="addToCart(ProductID , productDetails?.SellerID)">{{ 'Add To Cart' | translate}}</button>
   </ion-col>
-  <ion-col col-6>
-    <h6 style="    text-align: end;
-    margin: 0 10px;">{{'Shipping' |translate }}</h6>
-    <p style="    text-align: end;
-    margin: 10px;
-    color: #dc143c;">5000 {{ 'SAR' | translate}}<p>
-  </ion-col>
+  <!--<ion-col col-6>-->
+    <!--<h6 style="    text-align: end;-->
+    <!--margin: 0 10px;">{{'Shipping' |translate }}</h6>-->
+    <!--<p style="    text-align: end;-->
+    <!--margin: 10px;-->
+    <!--color: #dc143c;">5000 {{ 'SAR' | translate}}<p>-->
+  <!--</ion-col>-->
 </ion-row>
   </div>
 </ion-content>

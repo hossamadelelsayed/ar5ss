@@ -13,7 +13,8 @@ import {MainService} from "../../providers/main-service";
 export class CategoryPage {
   public category_id : number ;
   public category_name : string ;
-  public categoryProducts : any ;
+  public categoryProducts : any[] ;
+  public cart : any[] = [] ;
   public sortType : number  = this.productService.sortByASC;
   public CurrentPage : number = 1 ;
   public showing : string = 'list';
@@ -31,27 +32,46 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
 
   ionViewWillEnter()
   {
+    this.customerService.getCart().subscribe((res : any[])=>{
+      this.cart = res ;
+    });
+  }
+  ionViewDidLoad()
+  {
         this.getcategoryProducts();
   }
-  ionViewWillLeave(){
+  ionViewWillUnload(){
     console.log('deallocate');
     this.categoryProducts = [] ;
   }
   sortBy()
   {
     if(this.sortType == this.productService.sortByASC)
+    {
       this.sortType = this.productService.sortByDESC;
-    else this.sortType = this.productService.sortByASC;
-    this.getcategoryProducts();
+      this.categoryProducts.sort((a,b)=>{
+        if (a.ProductPrice >= b.ProductPrice)
+          return 1;
+       return 0;
+      });
+    }
+
+    else
+      {
+        this.sortType = this.productService.sortByASC;
+        this.categoryProducts.sort((a,b)=>{
+          if (a.ProductPrice <= b.ProductPrice)
+            return 1;
+          return 0;
+        });
+      }
+    //this.getcategoryProducts();
   }
   getcategoryProducts()
   {
       this.productService.categoryProducts(this.category_id,this.CurrentPage,this.sortType).subscribe((res) => {
         this.categoryProducts = res.data;
       });
-  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoryPage');
   }
   addToWishList(ProductID : number , element:any)
   {
