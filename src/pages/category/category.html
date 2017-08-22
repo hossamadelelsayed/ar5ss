@@ -113,13 +113,13 @@
     <div class="product" (click)="viewProduct(product.ProductID)">
       <div style="height:35px">
         <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
-        <img class="imgbrandd"  [src]="product.Logo" >
+        <img class="imgbrande"  [src]="product.Logo" >
         <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
         <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
       </div>
 
        <ion-row style="width:100%">
-      <ion-col style="margin-top: -5px;height: 86px; width: 85%" col-4>
+      <ion-col style="margin-top: -5px;height: 94px; width: 85%" col-4>
         <img style="max-height: 100%; max-width: 100%;" [src]="product.Image">
       </ion-col>
       <ion-col style="margin-top: -3px;" col-8>

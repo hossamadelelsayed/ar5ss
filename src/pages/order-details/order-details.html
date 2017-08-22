@@ -8,11 +8,11 @@
   <ion-list>
     <div *ngFor="let product of orderDetails">
       <ion-row >
-        <ion-col col-3>
-          <button class="btn" ion-button round [style.background]="product.ColorHexa"></button>
+        <ion-col col-4>
+          <!--<button class="btn" ion-button round [style.background]="product.ColorHexa"></button>-->
           <img class="img" [src]="product.Image">
         </ion-col>
-        <ion-col col-7 >
+        <ion-col col-8 >
 
 
           <h2 style="font-family: inherit; color: #4A4D4D;">{{product.product_name}} , <small>  {{product.size}} </small></h2>

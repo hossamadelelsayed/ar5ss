@@ -40,12 +40,13 @@ export class HomePage {
   }
   ionViewDidLoad()
   {
-    this.initObjects();
+   // this.initObjects();
   }
   ionViewWillEnter()
   {
-    if(this.pageLang != MainService.lang)
-      this.initObjects();
+    // if(this.pageLang != MainService.lang)
+    //   this.initObjects();
+    this.initObjects();
     this.customerService.getCart().subscribe((cartRes)=>{
       this.cart = cartRes ;
       this.cartNo = this.cart.length ;

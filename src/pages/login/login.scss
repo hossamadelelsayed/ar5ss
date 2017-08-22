@@ -2,14 +2,14 @@ page-login {
   .toolbar-background{
       background: white;
       border-bottom: none;
-  }   
+  }
 
     .header::after{
       background-image: none;
   }
 .imagediv{
       text-align: center;
-      margin-top: 15px;
+      //margin-top: 15px;
         img{
             height: 130px;
             width: 130px;
@@ -18,7 +18,7 @@ page-login {
         }
 }
 form{
-    margin-top: 40px;
+    margin-top: 20px;
     width: 85%;
     margin-right: auto;
     margin-left: auto;
@@ -51,7 +51,7 @@ ion-icon{
     color: black;
 }
 .signup{
-      margin-top: 30px;
+      margin-top: 10px;
      width: 100%;
     p{
         color:black;

@@ -1,4 +1,7 @@
 page-category {
+  .back-button.show-back-button {
+     display: none;
+  }
   ion-list{
     margin-top: 41px;
   }
@@ -199,5 +202,9 @@ h4{
   }
   .toolbar-title{
     direction: rtl;
+  }
+  .imgbrande{
+    width: 60px;
+    float: left;
   }
 }

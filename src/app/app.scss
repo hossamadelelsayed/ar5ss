@@ -324,3 +324,30 @@ $tabs-md-tab-text-color-active:crimson;
   padding: 0 4px;
   border-radius: 50%;
 }
+//.prodimg{
+//  max-height: 100%;
+//  padding-right: 5px;
+//  margin-right: auto;
+//  width: 128px;
+//  margin: auto;
+//  display: block;
+//  padding-right: 2px;
+//  margin-left: 3px;
+//
+//}
+.prodimg {
+  max-height: 100%;
+  margin-right: auto;
+  width: 128px;
+  margin: auto;
+  display: block;
+  margin-left: 15px;
+}
+[dir="rtl"] .prodimg {
+  max-height: 100%;
+  margin-right: auto;
+  width: 128px;
+  margin: auto;
+  display: block;
+  margin-left: auto;
+}

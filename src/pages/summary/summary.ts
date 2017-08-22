@@ -181,7 +181,9 @@ export class SummaryPage {
   }
   confirmOrder()
   {
+    this.commonService.presentLoading("please Wait .....");
     this.customerService.confirmOrder(this.PaymentID,this.LocationID).subscribe((res)=>{
+      this.commonService.dismissLoading();
       if(res.state == '202')
       {
         this.commonService.successToast();
