@@ -31,10 +31,12 @@ export class SignupPage {
     ).subscribe((data)=>{
       if(data.error)
         this.commonService.presentToast(data.error);
-      else if(data.Erorr)
-        this.commonService.presentToast(data.Erorr);
+      else if (data.Error)
+        this.commonService.presentToast(data.Error);
       else
+      {
         this.successlogin(data);
+      }
     });
   }
   successlogin(customer)
@@ -90,7 +92,8 @@ export class SignupPage {
     this.camera.getPicture({
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: 1000,
-      targetHeight: 1000
+      targetHeight: 1000,
+      correctOrientation : true ,
     }).then((imageData) => {
       // imageData is a base64 encoded string
       this.image_accommodation(imageData);

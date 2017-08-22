@@ -30,10 +30,11 @@ export class UserLocationsPage {
   {
     this.navCtrl.push("AddlocationPage");
   }
-  selectLocation(LocationID)
+  selectLocation(LocationID,LocationName)
   {
       this.viewCtrl.dismiss({
-        LocationID : LocationID
+        LocationID : LocationID ,
+        LocationName : LocationName
       });
   }
   deleteUserLocation(LocationID : number)

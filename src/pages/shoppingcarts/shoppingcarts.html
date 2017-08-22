@@ -28,7 +28,7 @@
       <ion-input [attr.id]="'price'+product.ProductID" [hidden]="true" #prices [value]="quantity?.value * product.ProductPrice" ></ion-input>
       {{ quantity?.value * product.ProductPrice}} {{ 'SAR' | translate}}</p>
          <p class="shipping">
-           ({{(product.Shiping == 0)?'مجانا' : product.Shiping}} {{'SAR' | translate}} {{'Shipping' | translate}})</p>
+           ({{(product.Shiping != 0)? product.Shiping : 'Free' | translate}} {{'Shipping' | translate}})</p>
         </ion-row>
 
 

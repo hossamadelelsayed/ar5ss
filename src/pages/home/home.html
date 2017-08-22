@@ -83,13 +83,13 @@
               <ion-row>
                 <ion-col col-3>
                   <ion-icon
-                    *ngIf="product.CartID == null" class="cardfoot" >
+                    *ngIf="product.CartID == null || product.CartState == 2" class="cardfoot" >
                     <img [attr.id]="product.ProductID" #icon
                          (click)="addToCart(product.ProductID , product.SellerID , icon,product)"
                          style="width: 25px;" src="assets/imgs/cart_off.png" >
                   </ion-icon>
                   <ion-icon
-                    *ngIf="product.CartID != null" class="cardfoot" >
+                    *ngIf="product.CartID != null && product.CartState == 1" class="cardfoot" >
                     <img [attr.id]="product.ProductID" #icon
                          (click)="addToCart(product.ProductID , product.SellerID , icon,product)"
                          style="width: 25px;" src="assets/imgs/cart_on.png" >

@@ -8,7 +8,7 @@
   <ion-navbar>
     <ion-title>
       <!-- <ion-icon class="search" ios="ios-search" md="md-search"></ion-icon> -->
-      <p class="cartNoInner">{{ cart.length }}</p>
+      <p class="cartNoInner">{{ cartNo }}</p>
       <!--<ion-icon *ngIf="wishList.length == 0" style="float: right;margin-top: 10px;color: lightgrey;" ios="ios-heart" md="md-heart" (click)="goToFav()"></ion-icon>-->
       <!--<ion-icon *ngIf="wishList.length > 0" style="float: right;margin-top: 10px;color: crimson;" ios="ios-heart" md="md-heart" (click)="goToFav()"></ion-icon>-->
       <ion-icon  style="float: right;margin-top: 10px;" (click)="goToCart()">
@@ -40,13 +40,13 @@
           <ion-col col-9><ion-icon *ngFor="let icon of icons(product.Rate); let i = index" style="color:orange" [name]="icon"></ion-icon></ion-col>
           <ion-col col-3 style="text-align:end">
             <ion-icon
-              *ngIf="product.CartID == null" class="carticon" >
+              *ngIf="product.CartID == null || product.CartState == 2" class="carticon" >
               <img [attr.id]="product.ProductID" #icon
                    (click)="addToCart(product.ProductID , product.SellerID , icon,product)"
                    style="width: 25px;" src="assets/imgs/cart_off.png" >
             </ion-icon>
             <ion-icon
-              *ngIf="product.CartID != null" class="carticon" >
+              *ngIf="product.CartID != null && product.CartState == 1" class="carticon" >
               <img [attr.id]="product.ProductID" #icon
                    (click)="addToCart(product.ProductID , product.SellerID , icon,product)"
                    style="width: 25px;" src="assets/imgs/cart_on.png" >

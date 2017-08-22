@@ -76,6 +76,12 @@ export class ShoppingcartsPage {
   deleteFromCartDetails(ProductID : number)
   {
     this.cartDetails = this.cartDetails.filter((item) => {
+      if(item.ProductID == ProductID)
+      {
+        this.cartShipping -= item.Shiping;
+
+      }
+
       return (item.ProductID != ProductID);
     });
     setTimeout(() => {

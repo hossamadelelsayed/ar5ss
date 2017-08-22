@@ -86,6 +86,7 @@ export class SummaryPage {
     modal.present();
     modal.onDidDismiss((res)=>{
       this.LocationID = res.LocationID ;
+      this.LocationName = res.LocationName ;
     });
     /*this.commonService.translateArray(
       [

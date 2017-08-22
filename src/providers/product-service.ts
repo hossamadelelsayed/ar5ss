@@ -61,8 +61,9 @@ export class ProductService {
   productDetails(ProductID : number)
   {
     let url = this.productDetailsUrl+ProductID + '?lang=' + MainService.lang ;
-    let request = this.http.get(url).map((res) => res.json());
-    return this.cache.loadFromObservable(url,request);
+    return this.http.get(url).map((res) => res.json());
+    // let request = this.http.get(url).map((res) => res.json());
+    // return this.cache.loadFromObservable(url,request);
   }
   hotOffer()
   {

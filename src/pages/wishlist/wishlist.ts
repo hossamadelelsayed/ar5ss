@@ -13,6 +13,7 @@ import {MainService} from "../../providers/main-service";
 export class WishlistPage {
   public wishList : any[] = [] ;
   public cart : any[] = [] ;
+  public cartNo : number = 0 ;
   public MainService : MainService = MainService ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public customerService: CustomerService , public commonService : CommonService ) {
@@ -23,8 +24,8 @@ export class WishlistPage {
   {
     this.customerService.getCart().subscribe((res : any[])=>{
      this.cart = res ;
+     this.cartNo = res.length ;
     });
-
     this.getWishList();
   }
   getWishList(){
@@ -58,9 +59,10 @@ export class WishlistPage {
   }
   addCart(ProductID : number , SellerID : number ,element : any , productObj ?: any  ) {
     element.src = 'assets/imgs/cart_on.png';
-    this.customerService.addToCart(ProductID , 0,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
+    this.customerService.addToCart(ProductID ,SellerID ,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
       if(res == true)
       {
+        this.cartNo++;
         this.commonService.successToast();
       }
       else if(res.error)
@@ -75,6 +77,7 @@ export class WishlistPage {
     this.customerService.delCart(ProductID).subscribe((res)=>{
       if(res.state == '202')
       {
+        this.cartNo--;
         this.commonService.successToast();
       }
       else
@@ -99,5 +102,4 @@ export class WishlistPage {
   {
     this.navCtrl.push("ShoppingcartsPage");
   }
-
 }
