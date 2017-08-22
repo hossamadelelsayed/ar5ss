@@ -14,6 +14,7 @@ export class SummaryPage {
   public userLocations : any[] ;
   public paymentTypes : any[] ;
   public PaymentID : number = 0;
+  public PaymentString : string = '';
   public LocationID : number = 0 ;
   public LocationName : string = '' ;
   public cartTotal : number = 0 ;
@@ -104,6 +105,12 @@ export class SummaryPage {
     switch(code){
       case CustomerService.paymentPaypalCode:
         this.payPalPayment("10");
+        this.PaymentID = CustomerService.paymentPaypalCode;
+        this.PaymentString = 'PAYPAL';
+        break;
+      case CustomerService.paymentCashCode:
+        this.PaymentID = CustomerService.paymentCashCode;
+        this.PaymentString = 'CASH';
         break;
       default:
         alert("Wrong Grade.........");
@@ -183,7 +190,6 @@ export class SummaryPage {
   {
     this.commonService.presentLoading("please Wait .....");
     this.customerService.confirmOrder(this.PaymentID,this.LocationID).subscribe((res)=>{
-      this.commonService.dismissLoading();
       if(res.state == '202')
       {
         this.commonService.successToast();
@@ -192,6 +198,7 @@ export class SummaryPage {
       else
         this.commonService.errorToast();
     });
+    this.commonService.dismissLoading();
   }
 
 }

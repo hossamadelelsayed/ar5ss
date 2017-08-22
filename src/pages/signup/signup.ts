@@ -30,13 +30,11 @@ export class SignupPage {
       966+this.customer.Mobile,this.customer.Image
     ).subscribe((data)=>{
       if(data.error)
-      {
         this.commonService.presentToast(data.error);
-      }
+      else if(data.Erorr)
+        this.commonService.presentToast(data.Erorr);
       else
-      {
         this.successlogin(data);
-      }
     });
   }
   successlogin(customer)
