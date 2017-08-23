@@ -57,11 +57,15 @@ export class MyApp {
   {
     this.network.onConnect().subscribe(() => {
       setTimeout(() => {
-          console.log('network connected!!!!!');
-          this.commonService.translateAndToast('Connection established');
-          this.customerService.online = true ;
+        // connection of database
+        console.log('network connected!!!!!');
+        this.commonService.translateAndToast('Connection established');
+        this.customerService.online = true ;
+        this.dbService.openOrCreateSQLiteDB().then(()=>{
+          console.log("enter function");
           this.customerService.pushLocalWishList();
           this.customerService.pushLocalCart();
+        });
       }, 3000);
     });
   }

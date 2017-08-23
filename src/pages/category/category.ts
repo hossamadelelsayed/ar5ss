@@ -15,7 +15,8 @@ export class CategoryPage {
   public category_name : string ;
   public categoryProducts : any[] ;
   public cart : any[] = [] ;
-  public sortType : number  = this.productService.sortByASC;
+  public defaultSortType : number  = this.productService.sortByASC;
+  public sortType : number  = this.productService.sortByDESC;
   public CurrentPage : number = 1 ;
   public showing : string = 'list';
   public cartNo : number = 0 ;
@@ -50,28 +51,36 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
   {
     if(this.sortType == this.productService.sortByASC)
     {
-      this.sortType = this.productService.sortByDESC;
-      this.categoryProducts.sort((a,b)=>{
-        if (a.ProductPrice >= b.ProductPrice)
-          return 1;
-       return 0;
+      this.productService.getProductSort(this.productService.sortByASC ,this.category_id ).subscribe((res)=>{
+        this.sortType = this.productService.sortByDESC;
+        this.categoryProducts = res ;
       });
+      // this.sortType = this.productService.sortByDESC;
+      // this.categoryProducts.sort((a,b)=>{
+      //   if (a.ProductPrice >= b.ProductPrice)
+      //     return 1;
+      //  return 0;
+      // });
     }
 
     else
       {
-        this.sortType = this.productService.sortByASC;
-        this.categoryProducts.sort((a,b)=>{
-          if (a.ProductPrice <= b.ProductPrice)
-            return 1;
-          return 0;
+        this.productService.getProductSort(this.productService.sortByDESC ,this.category_id ).subscribe((res)=>{
+          this.sortType = this.productService.sortByASC;
+          this.categoryProducts = res ;
         });
+        // this.sortType = this.productService.sortByASC;
+        // this.categoryProducts.sort((a,b)=>{
+        //   if (a.ProductPrice <= b.ProductPrice)
+        //     return 1;
+        //   return 0;
+        // });
       }
     //this.getcategoryProducts();
   }
   getcategoryProducts()
   {
-      this.productService.categoryProducts(this.category_id,this.CurrentPage,this.sortType).subscribe((res) => {
+      this.productService.categoryProducts(this.category_id,this.CurrentPage,this.defaultSortType).subscribe((res) => {
         this.categoryProducts = res.data;
       });
   }

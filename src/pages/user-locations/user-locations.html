@@ -16,7 +16,10 @@
 <ion-content >
   <ion-list>
     <ion-item (click)="createLocation()">
-      <h2>{{ 'Determine Your Location' | translate}}</h2>
+      <h2>{{ 'Determine Your Location' | translate}}
+        <ion-icon style="color:green;margin: 5px;" name="add-circle"></ion-icon>
+      </h2>
+
     </ion-item>
     <!--<ion-item-sliding *ngFor="let location of locations">
       <ion-item (click)="selectLocation(location.LocationID)">

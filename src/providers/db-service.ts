@@ -15,8 +15,8 @@ export class DbService {
   constructor( public sqlite : SQLite ) {
     console.log('Hello DbServiceProvider Provider');
   }
-  openOrCreateSQLiteDB(){
-    this.sqlite.create({
+  openOrCreateSQLiteDB() : Promise <any>{
+    return this.sqlite.create({
       name: 'data.db',
       location: 'default'
     }).then((dbObj: SQLiteObject) => {
@@ -29,6 +29,7 @@ export class DbService {
     return this.db.executeSql(`CREATE TABLE Favorite(
                               FavoritID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
                               UserID    INTEGER NOT NULL,
+                              SellerID INTEGER DEFAULT 0 ,
                               TokenID   TEXT    DEFAULT NULL,
                               ProductID INTEGER NOT NULL ,
                               product_name TEXT NOT NULL ,
@@ -58,6 +59,10 @@ export class DbService {
   execFavLocalDelByID(FavoritID : number) : Promise<any>
   {
     return this.db.executeSql(`DELETE FROM Favorite WHERE FavoritID = '${FavoritID}'`, {});
+  }
+  execFavLocalDelByProductID(ProductID : number) : Promise<any>
+  {
+    return this.db.executeSql(`DELETE FROM Favorite WHERE ProductID = '${ProductID}'`, {});
   }
   // cart stuff
   createCartTable() : Promise <any>
@@ -91,6 +96,10 @@ export class DbService {
   execCartLocalDelByID(CartID : number) : Promise<any>
   {
     return this.db.executeSql(`DELETE FROM Cart WHERE CartID = '${CartID}'`, {});
+  }
+  execCartLocalDelByProductID(ProductID : number) : Promise<any>
+  {
+    return this.db.executeSql(`DELETE FROM Cart WHERE ProductID = '${ProductID}'`, {});
   }
   sqliteResToArr(res : any) : any []
   {

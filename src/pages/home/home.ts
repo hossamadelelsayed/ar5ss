@@ -27,7 +27,7 @@ export class HomePage {
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
               public commonService : CommonService , private barcodeScanner: BarcodeScanner ) {
 
-    //setTimeout(()=> this.initObjects() , 1000);
+    setTimeout(()=> this.initObjects() , 6000);
   }
   initObjects(){
     this.getGroupShow();
@@ -35,6 +35,7 @@ export class HomePage {
       this.hotads = res ;
      // this.hotSlider.autoplay();
     });
+    this.countCart();
 
     console.log('fired');
   }
@@ -47,6 +48,10 @@ export class HomePage {
     // if(this.pageLang != MainService.lang)
     //   this.initObjects();
     this.initObjects();
+    this.countCart();
+  }
+  countCart()
+  {
     this.customerService.getCart().subscribe((cartRes)=>{
       this.cart = cartRes ;
       this.cartNo = this.cart.length ;

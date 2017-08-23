@@ -39,6 +39,10 @@ export class WishlistPage {
   }
   deleteWishlist(favoritID : number)
   {
+    if(!this.customerService.online){
+      this.commonService.translateAndToast("Offline Mode Now , Go Home");
+      return ;
+    }
     this.customerService.deleteWishlist(favoritID).subscribe((res)=>{
       if(res.stats == 'done')
       {
@@ -59,6 +63,12 @@ export class WishlistPage {
   }
   addCart(ProductID : number , SellerID : number ,element : any , productObj ?: any  ) {
     element.src = 'assets/imgs/cart_on.png';
+    if(!this.customerService.online){
+      this.commonService.translateAndToast("Offline Mode Now , Go Home");
+      return ;
+      //this.cartNo++;
+
+    } // update in later
     this.customerService.addToCart(ProductID ,SellerID ,productObj.product_name,productObj.Image,productObj.ProductPrice).subscribe((res)=>{
       if(res == true)
       {
@@ -73,6 +83,11 @@ export class WishlistPage {
   }
   removeCart(ProductID : number , element : any)
   {
+    element.src = 'assets/imgs/cart_on.png';
+    if(!this.customerService.online){
+      this.commonService.translateAndToast("Offline Mode Now , Go Home");
+      return ;
+    }
     element.src = 'assets/imgs/cart_off.png';
     this.customerService.delCart(ProductID).subscribe((res)=>{
       if(res.state == '202')

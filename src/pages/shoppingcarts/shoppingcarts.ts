@@ -64,6 +64,10 @@ export class ShoppingcartsPage {
   }
   deleteCart(CartID : number , ProductID : number)
   {
+    if(!this.customerService.online){
+      this.commonService.translateAndToast("Offline Mode Now , Go Home");
+      return ;
+    }
     this.customerService.deleteCart(CartID).subscribe((res)=>{
       if(res.state == '202')
       {

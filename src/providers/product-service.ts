@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import {MainService} from "./main-service";
 import {CustomerService} from "./customer-service";
 import {CacheService} from 'ionic-cache';
+import {Observable} from "rxjs";
 
 /*
   Generated class for the ProductService provider.
@@ -25,6 +26,7 @@ export class ProductService {
   public productColorUrl : string = MainService.baseUrl+"productcolor";
   public searchProductUrl : string = MainService.baseUrl+"serachproduct";
   public getProductPropertyUrl : string = MainService.baseUrl+"getPoductValue/";
+  public getProductSortUrl : string = MainService.baseUrl+"getproductsort/";
   public readonly sortByASC : number = 1 ;
   public readonly sortByDESC : number = 2 ;
 
@@ -87,6 +89,16 @@ export class ProductService {
     return this.http.get(url).map((res) => res.json());
     // let request = this.http.get(url).map((res) => res.json());
     // return this.cache.loadFromObservable(url,request);
+  }
+  getProductSort( sortBy : number , category_id : number ): Observable<any>
+  {
+    let userKey : string ;
+    if(this.customerService.customer != null)
+      userKey = this.customerService.customer.UserID;
+    else userKey = this.customerService.deviceToken ;
+    let url = this.getProductSortUrl + userKey + '/' + sortBy + '/' + category_id +'?lang=' + MainService.lang ;
+    return this.http.get(url).map((res) => res.json());
+
   }
   groupProductPaginate(GroupID : number , CurrentPage : number)
   {
