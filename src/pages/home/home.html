@@ -63,7 +63,10 @@
                   <img class="imgbrand"  [src]="product.Logo" >
                   <!--<div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>-->
                   <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
-                  <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
+                  <img *ngIf="product.HotOfferID > 0  && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
+                  <img *ngIf="group.Group.GroupShowID == 18 && MainService.lang == 'en'" class="hot" src="assets/imgs/special.png">
+                  <img *ngIf="group.Group.GroupShowID == 18 && MainService.lang == 'ar'" class="hot" src="assets/imgs/special_ar.png">
+
                 </div>
                 <span style="
     height: 120px;
