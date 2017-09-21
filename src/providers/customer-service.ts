@@ -41,7 +41,7 @@ export class CustomerService {
   public getComplainTypesUrl : string = MainService.baseUrl+"complaintype?lang=";
   public insertComplainUrl : string = MainService.baseUrl+"insertcomplain";
   public contactUrl : string = MainService.baseUrl+"contact";
-  public aboutUrl : string = MainService.baseUrl+"about";
+  public aboutUrl : string = MainService.baseUrl+"about?lang=";
   public updateUserUrl : string = MainService.baseUrl+"updateuser/";
   public updateQtyUrl : string = MainService.baseUrl+"modifaycart/";
   public deleteCartUrl : string = MainService.baseUrl+"deletecart/";
@@ -105,12 +105,13 @@ export class CustomerService {
   {
     return this.http.get(this.getRelatedProductUrl + ProductID + '?lang='  + MainService.lang ).map((res) => res.json());
   }
-  customerRate(ProductID : number , Rate : number)
+  customerRate(OrderID : number , ProductID : number , Rate : number)
   {
     let body = {
       ProductID : ProductID,
       Rate : Rate,
-      UserID : this.customer.UserID
+      UserID : this.customer.UserID ,
+      OrderID : OrderID
     };
     return this.http.post(this.customerRateUrl , body ).map((res) => res.json());
   }
@@ -274,7 +275,7 @@ export class CustomerService {
   }
   about()
   {
-    return this.http.get(this.aboutUrl).map((res) => res.json());
+    return this.http.get(this.aboutUrl+MainService.lang).map((res) => res.json());
   }
   contact(Email : string,Title : string,Body : string)
   {

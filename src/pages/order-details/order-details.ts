@@ -29,13 +29,13 @@ export class OrderDetailsPage {
   {
     return this.commonService.icons(rate);
   }
-  customerRate(ProductID : number, Rate : number )
+  customerRate(OrderID : number ,ProductID : number, Rate : number )
   {
-    this.customerService.customerRate(ProductID , Rate).subscribe((res)=>{
+    this.customerService.customerRate(OrderID , ProductID , Rate).subscribe((res)=>{
       if(res.state == '202')
         this.commonService.successToast();
-      else
-        this.commonService.errorToast();
+      else if(res.Error == 'You Are Rated This Product Before')
+        this.commonService.translateAndToast('You Are Rated This Product Before');
     });
   }
 }

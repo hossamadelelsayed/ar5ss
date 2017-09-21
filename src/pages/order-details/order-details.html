@@ -8,11 +8,12 @@
   <ion-list>
     <div *ngFor="let product of orderDetails">
       <ion-row >
-        <ion-col col-4>
+        <ion-col style="height: 150px;
+    width: 100px;" col-5>
           <!--<button class="btn" ion-button round [style.background]="product.ColorHexa"></button>-->
           <img class="img" [src]="product.Image">
         </ion-col>
-        <ion-col col-8 >
+        <ion-col col-7 >
 
 
           <h2 style="font-family: inherit; color: #4A4D4D;">{{product.product_name}} , <small>  {{product.size}} </small></h2>
@@ -40,7 +41,7 @@
         </ion-col>
         <ion-col col-6 style="font-size: xx-large;">
           <ion-icon *ngFor="let icon of icons(product.Rate); let i = index;" style="color:orange" [name]="icon"
-          (click)="customerRate(product.ProductID,i+1)"
+          (click)="customerRate(product.OrderID,product.ProductID,i+1)"
           ></ion-icon>
         </ion-col>
         <ion-col col-3>

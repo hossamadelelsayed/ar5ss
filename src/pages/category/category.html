@@ -31,18 +31,20 @@
     <ion-row class="headrow">
       <ion-col col-4 (click)="gotoall()">
       <ion-icon style="padding-right:3px" ios="ios-grid" md="md-grid"></ion-icon>
-      <h6>{{ 'Category' | translate}}</h6><br><span> {{ category_name }}</span>
+      <h6>{{ 'Category' | translate}}</h6><br>{{ category_name }}
       </ion-col>
-      <ion-col col-4 (click)="sortBy()" style="border-right:1px solid lightgray;border-left:1px solid lightgray;">
-        <ion-icon ios="ios-arrow-round-down" md="md-arrow-round-down"></ion-icon>
-        <ion-icon ios="ios-arrow-round-up" md="md-arrow-round-up"></ion-icon>
+      <ion-col col-4 (click)="sortBy()" class="sortc">
+       <ion-icon *ngIf="sortType == productService.sortByDESC && MainService.lang == 'ar'" ios="ios-arrow-round-up" md="md-arrow-round-up"></ion-icon>
+        <ion-icon *ngIf="sortType == productService.sortByASC && MainService.lang == 'ar'" ios="ios-arrow-round-down" md="md-arrow-round-down"></ion-icon>
+         <ion-icon *ngIf="sortType == productService.sortByDESC && MainService.lang == 'en'" ios="ios-arrow-round-up" md="md-arrow-round-up"></ion-icon>
+        <ion-icon *ngIf="sortType == productService.sortByASC && MainService.lang == 'en'" ios="ios-arrow-round-down" md="md-arrow-round-down"></ion-icon>
         <h6>{{ 'Sort By' | translate}}</h6><br>
-        <span>
-          {{(sortType == productService.sortByDESC && MainService.lang == 'ar') ?  'الأعلى سعر' : ''}}
+
+          {{(sortType == productService.sortByDESC && MainService.lang == 'ar') ?  ' اعلى سعر': ''}}
           {{(sortType == productService.sortByDESC && MainService.lang == 'en') ?  'Heighest Price' : ''}}
-          {{(sortType == productService.sortByASC && MainService.lang == 'ar') ?  'الأقل سعر' : ''}}
+          {{(sortType == productService.sortByASC && MainService.lang == 'ar') ?  ' اقل سعر' : ''}}
           {{(sortType == productService.sortByASC && MainService.lang == 'en') ?  'Lowest Price' : ''}}
-          </span>
+
       </ion-col>
       <ion-col col-4 (click)="gotohot()">
          <img src="assets/imgs/sort.png "height="12px">
