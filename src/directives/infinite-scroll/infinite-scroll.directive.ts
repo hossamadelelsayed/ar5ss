@@ -19,7 +19,7 @@ export class InfiniteScrollDirective {
       this.element = this.el.nativeElement ;
   }
   onScroll($event){
-    if(this.lang == 'ar' && this.element.scrollLeft == 0){
+    if(this.lang == 'ar' && this.element.scrollLeft < 50 ){
       this.onScrollMethod.emit();
     }
     else if(this.lang == 'en' && this.element.scrollLeft == (this.element.scrollWidth - this.element.clientWidth)){

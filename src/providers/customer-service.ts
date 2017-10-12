@@ -55,8 +55,8 @@ export class CustomerService {
   public orderHistoryUrl : string = MainService.baseUrl+"orderhiostry/";
   public customerRateUrl : string = MainService.baseUrl+"rate";
   public getRelatedProductUrl : string = MainService.baseUrl+"getrelatedproduct/";
-
-
+  public getCitiesUrl : string = MainService.baseUrl+"city";
+  public setCityForGuestUrl : string = MainService.baseUrl+"setcityforguest";
 
 
 
@@ -76,6 +76,16 @@ export class CustomerService {
               public commonService : CommonService, public translateService :TranslateService ,
               public geolocation: Geolocation  , public dbService : DbService) {
     console.log('Hello CustomerService Provider');
+  }
+  setCityForGuest(CityID : number){
+    let body = {
+      CityID : CityID ,
+      TokenID : this.deviceToken
+    };
+    return this.http.post(this.setCityForGuestUrl,body).map((res) => res.json());
+  }
+  getCities(){
+    return this.http.get(this.getCitiesUrl).map((res) => res.json());
   }
   pushLocalWishList()
   {
@@ -162,12 +172,13 @@ export class CustomerService {
     };
     return this.http.post(this.orderHistoryUrl + this.customer.UserID , body ).map((res) => res.json());
   }
-  confirmOrder(PaymentID :  number , LocationID : number)
+  confirmOrder(PaymentID :  number , LocationID : number , CityName : string)
   {
     let body = {
       UserID : this.customer.UserID ,
       PaymentID : PaymentID ,
-      LocationID : LocationID
+      LocationID : LocationID,
+      CityName : CityName
     };
     return this.http.post(this.confirmOrderUrl , body ).map((res) => res.json());
   }
@@ -498,7 +509,8 @@ export class CustomerService {
                  Email : string ,
                  Password : string ,
                  Mobile : string ,
-                 Image: string  )
+                 Image: string ,
+                CityID : number)
   {
     let customer = {
       Name : Name ,
@@ -508,7 +520,8 @@ export class CustomerService {
       UseType : 1 ,
       DivceType : 1 ,
       Token : this.deviceToken ,
-      Image: Image
+      Image : Image ,
+      CityID : CityID
     };
     return this.http.post(this.customerCreateUrl+MainService.lang,customer).map((res) => res.json());
   }
@@ -572,8 +585,8 @@ export class CustomerService {
         error => console.error(error)
       );
   }
-  customerStorageGet(){
-    this.nativeStorage.getItem('customer')
+  customerStorageGet() : Promise<any>{
+    return this.nativeStorage.getItem('customer')
       .then(
         (customer) => {
           this.customer = customer;

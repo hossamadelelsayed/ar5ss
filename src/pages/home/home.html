@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>
       <!--<span>{{ 'Main' | translate }}</span>-->
-      <span class="titlelogo">أرخص<img src="assets/imgs/navigate-arrows.png"></span>
+      <span class="titlelogo"><img src="assets/imgs/logo.png"></span>
        <div style="float:right" >
        <!--<ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>-->
        <p class="cartNo">{{ cartNo }}</p>
@@ -36,31 +36,43 @@
 </ion-header>
 
 <ion-content>
-<div class="imgdiv">
-  <ion-slides #hotSlider dir="ltr">
+  <!--(ionSlideDidChange)="slideChanged()"-->
+<div *ngIf="hotads?.Slider.length > 0" class="imgdiv">
+  <ion-slides *ngIf="hotads?.Mode[0].Mode == 1" pager autoplay="2000" dir="ltr">
     <ion-slide
-      *ngFor="let image of hotads"
+      *ngFor="let image of hotads.Slider"
       style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
-      (click)="goToHotOffers()">
+      (click)="goToHotOffers(image.CategoryID , image.ProductID)">
+    </ion-slide>
+  </ion-slides>
+  <ion-slides *ngIf="hotads?.Mode[0].Mode != 1" pager dir="ltr">
+    <ion-slide
+      *ngFor="let image of hotads.Slider"
+      style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
+      (click)="goToHotOffers(image.CategoryID , image.ProductID)">
     </ion-slide>
   </ion-slides>
 </div>
 
 <div *ngIf="!showSearch" style="margin-bottom: 50px;">
-  <div class="products" *ngFor="let group of groupShow">
-     <h6 class="prodh6">{{group.Group.group_name}}</h6>
-     <span>
-       {{group.Group.Item}}/<span  style="font-weight: bold;
-                                                color: #525252;">
-       {{(group.Group.loadedNo != null)?group.Group.loadedNo : 3 }}</span></span>
-        <ion-scroll direction="y" >
-          <div class="infiniteScroll" infinite-scroll [lang]="MainService.lang" (onScrollMethod)="loadNext(group.Group.GroupShowID)">
+  <div  class="products" *ngFor="let group of groupShow">
+     <h6 class="prodh6" (click)="goToGroupProducts(group.Group.GroupShowID , group.Group.group_name)">
+       {{group.Group.group_name}}
+     </h6>
+    <!--<span >-->
+       <!--{{group.Group.Item}}/<span  style="font-weight: bold;-->
+                                                <!--color: #525252;">-->
+       <!--{{(group.Group.loadedNo != null)?group.Group.loadedNo : 3 }}</span></span>-->
+    <span (click)="goToGroupProducts(group.Group.GroupShowID , group.Group.group_name)">
+    <span  style="font-weight: bold;color: #525252;margin-left: 5px;">{{'المزيد'}}</span></span>
+    <ion-scroll direction="y" >
+      <!--infinite-scroll [lang]="MainService.lang" (onScrollMethod)="loadNext(group.Group.GroupShowID)"-->
+          <div class="infiniteScroll" >
             <ion-card *ngFor="let product of group.Products">
               <div class="detaildiv" (click)="viewProduct(product.ProductID)">
                 <div class="imagesdiv">
                   <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
-
-                  <img class="imgbrand"  [src]="product.Logo" >
+                 <img class="imgbrand" [src]="product.Logo" >
                   <!--<div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>-->
                   <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
                   <img *ngIf="product.HotOfferID > 0  && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
@@ -119,6 +131,14 @@
                 </ion-col>
               </ion-row>
             </ion-card>
+            <!--<ion-card-->
+              <!--style="background-color: white;"-->
+              <!--(click)="goToGroupProducts(group.Group.GroupShowID , group.Group.group_name)">-->
+              <!--<div class="moreCard" >-->
+                <!--&lt;!&ndash;<ion-icon  class="moreArrow" name="arrow-dropright"></ion-icon>&ndash;&gt;-->
+                <!--<p class="moreWord">المزيد</p>-->
+                <!--</div>-->
+            <!--</ion-card>-->
           </div>
         </ion-scroll>
   </div>

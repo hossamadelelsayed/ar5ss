@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {Platform, Tabs, Tab} from 'ionic-angular';
+import {Component, ViewChild, NgZone} from '@angular/core';
+import {Platform, Tabs, Tab, NavController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {CustomerService} from "../providers/customer-service";
@@ -14,17 +14,19 @@ import {DbService} from "../providers/db-service";
   templateUrl: 'app.html'
 })
 export class MyApp {
+  initPage : string = null;
   tab1 : string = "HomePage";
   tab2 = "AllcategoriesPage";
   tab3 = "WishlistPage";
   tab4 = "Profile";
   tab5 = "Settings";
   @ViewChild('myTabs') tabRef: Tabs;
+  @ViewChild('nav') nav:NavController;
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               public customerService : CustomerService ,  public push :Push ,
               public translate : TranslateService , public network: Network ,
               public commonService : CommonService , public cache : CacheService ,
-              public dbService : DbService ) {
+              public dbService : DbService , public zone: NgZone  ) {
     platform.ready().then(() => {
       //caching policy
       cache.setDefaultTTL(60 * 60 * 12)  ;
@@ -40,6 +42,18 @@ export class MyApp {
       this.pushInit();
       // chseck for any customer
       this.customerService.customerStorageGet();
+        // .then(()=>{
+        //   if(this.customerService.customer == null ){
+        //     // this.initPage = "CityPage";
+        //      this.tabRef._tabs[0].push("CityPage");
+        //     // this.tabRef.select(0,{});
+        //   }
+          // else {
+          //   this.initPage = "HomePage";
+          //   this.tabRef._tabs[0].setRoot("HomePage");
+          //   this.tabRef.select(0,{});
+          // }
+        // });
       // get location
       this.customerService.customerSetLocation();
       // rtl init

@@ -4,6 +4,7 @@ import {CommonService} from "../../providers/common-service";
 import {MainService} from "../../providers/main-service";
 import {PayPal, PayPalConfiguration, PayPalPayment} from "@ionic-native/paypal";
 import {CustomerService} from "../../providers/customer-service";
+import {NativeGeocoder, NativeGeocoderReverseResult} from "@ionic-native/native-geocoder";
 
 @IonicPage()
 @Component({
@@ -17,11 +18,13 @@ export class SummaryPage {
   public PaymentString : string = '';
   public LocationID : number = 0 ;
   public LocationName : string = '' ;
+  public location : any ;
   public cartTotal : number = 0 ;
   public cartShipping : number = 0 ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public actionSheetCtrl :  ActionSheetController , public commonService : CommonService ,
-              public payPal: PayPal , public customerService : CustomerService , public modalCtrl :ModalController) {
+              public payPal: PayPal , public customerService : CustomerService , public modalCtrl :ModalController ,
+              public nativeGeocoder: NativeGeocoder) {
       this.cartTotal = this.navParams.data.cartTotal ;
       this.cartShipping = this.navParams.data.cartShipping ;
   }
@@ -85,8 +88,9 @@ export class SummaryPage {
     let modal = this.modalCtrl.create("UserLocationsPage");
     modal.present();
     modal.onDidDismiss((res)=>{
+      this.location = res ;
       this.LocationID = res.LocationID ;
-      this.LocationName = res.LocationName ;
+      this.LocationName = res.Place ;
     });
     /*this.commonService.translateArray(
       [
@@ -190,15 +194,19 @@ export class SummaryPage {
   confirmOrder()
   {
     this.commonService.presentLoading("please Wait .....");
-    this.customerService.confirmOrder(this.PaymentID,this.LocationID).subscribe((res)=>{
-      if(res.state == '202')
-      {
-        this.commonService.successToast();
-        this.navCtrl.push("HomePage");
-      }
-      else
-        this.commonService.errorToast();
-    });
+    this.nativeGeocoder.reverseGeocode(this.location.latitude,this.location.longitude)
+      .then((result: NativeGeocoderReverseResult) => {
+      console.log(result);
+        this.customerService.confirmOrder(this.PaymentID,this.LocationID,result.administrativeArea).subscribe((res)=>{
+          if(res.state == '202')
+          {
+            this.commonService.successToast();
+            this.navCtrl.push("HomePage");
+          }
+          else
+            this.commonService.errorToast();
+        });
+    }).catch((error: any) => console.log(error));
     this.commonService.dismissLoading();
   }
 

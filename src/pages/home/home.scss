@@ -66,9 +66,9 @@ page-home {
     }}
 
   ion-scroll {
-    position: relative;
-    display: list-item;
-    padding: 13%;
+    //position: relative;
+    //display: list-item;
+    //padding: 13%;
             .scroll-content{
                 white-space: nowrap;
                 height: 290px;
@@ -80,7 +80,7 @@ page-home {
             }
 
  .card{
-    width: 41%;
+    width: 157px;
     display: inline-block;
     height: 265px;
     max-height: 265px;
@@ -265,5 +265,27 @@ page-home {
     color: green;
     font-size: 14px;
     font-weight: bold;
+  }
+  .moreCard{
+    position: relative;
+    margin :auto;
+    margin-top: 33%;
+    border: 1px solid crimson;
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, crimson, crimson);
+  }
+  .moreArrow{
+    font-size: 7.2em;
+    position: absolute;
+    right: 57px;
+    top: 20px;
+  }
+  .moreWord{
+    color: white;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-top: 47px;
   }
 }

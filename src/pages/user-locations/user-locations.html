@@ -38,7 +38,7 @@
     </ion-item-sliding>-->
 
     <ion-row  *ngFor="let location of locations">
-      <ion-col col-8 (click)="selectLocation(location.LocationID,location.Place)">
+      <ion-col col-8 (click)="selectLocation(location)">
    <h3 style="margin-top: 0px;">{{location.Place}}</h3>
       </ion-col>
       <ion-col style="text-align: end;" col-3>

@@ -27,6 +27,8 @@ export class ProductService {
   public searchProductUrl : string = MainService.baseUrl+"serachproduct";
   public getProductPropertyUrl : string = MainService.baseUrl+"getPoductValue/";
   public getProductSortUrl : string = MainService.baseUrl+"getproductsort/";
+  public getGroupProductsUrl : string = MainService.baseUrl+"getproductofgroupshow/";
+
   public readonly sortByASC : number = 1 ;
   public readonly sortByDESC : number = 2 ;
 
@@ -36,6 +38,14 @@ export class ProductService {
   constructor(public http: Http ,public customerService : CustomerService ,
               public cache : CacheService) {
     console.log('Hello ProductService Provider');
+  }
+  getGroupProducts(GroupID : number)
+  {
+    let userKey : string ;
+    if(this.customerService.customer != null)
+      userKey = this.customerService.customer.UserID;
+    else userKey = this.customerService.deviceToken ;
+    return this.http.get(this.getGroupProductsUrl + userKey + '/' + GroupID  + '?lang=' + MainService.lang).map((res) => res.json());
   }
   searchProduct(KeyWord : string)
   {

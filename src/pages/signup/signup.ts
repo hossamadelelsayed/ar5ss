@@ -13,21 +13,25 @@ import {Camera} from "@ionic-native/camera";
 export class SignupPage {
   public customer ;
   public image : string ;
+  public cities : any[] ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,
               public commonService : CommonService , public customerService : CustomerService,
               public translateService : TranslateService , public alertCtrl : AlertController,
-              public camera: Camera) {
+              public camera: Camera ) {
     this.customer = {'Image':''};
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
+    this.customerService.getCities().subscribe((res : any[])=>{
+      this.cities = res ;
+    });
   }
   register()
   {
     this.customerService.customerCreate(
       this.customer.Name,this.customer.Email,this.customer.Password,
-      966+this.customer.Mobile,this.customer.Image
+      966+this.customer.Mobile,this.customer.Image , this.customer.CityID
     ).subscribe((data)=>{
       if(data.error)
         this.commonService.presentToast(data.error);
@@ -41,6 +45,7 @@ export class SignupPage {
   }
   successlogin(customer)
   {
+    console.log(customer)
     this.customerService.customer = customer; // temparay has to be deleted
     this.customerService.customerStorageSave(customer);
     this.translateService.get('Success').subscribe(

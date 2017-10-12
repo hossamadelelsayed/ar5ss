@@ -13,7 +13,6 @@ import {MainService} from "../../providers/main-service";
   templateUrl: 'home.html'
 })
 export class HomePage {
-  @ViewChild('hotSlider') hotSlider: Slides;
   public hotads : any ;
   public groupShow : any[] ;
   public cart : any[] = [] ;
@@ -33,7 +32,7 @@ export class HomePage {
     this.getGroupShow();
     this.productService.hotads().subscribe((res)=>{
       this.hotads = res ;
-     // this.hotSlider.autoplay();
+      console.log(this.hotads);
     });
     this.countCart();
 
@@ -71,14 +70,22 @@ export class HomePage {
   getBackground (image) {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
-  goToHotOffers()
+  goToHotOffers(CategoryID : number , ProductID : number)
   {
-    this.navCtrl.push("HotoffersPage");
+    console.log('herere ' ,CategoryID , ProductID);
+    if(CategoryID != 0 )
+      this.navCtrl.push("CategoryPage",{
+        category_id : CategoryID
+      });
+    else if(ProductID != 0 )
+      this.navCtrl.push("DetailsPage",{
+        ProductID : ProductID
+    });
+    else this.navCtrl.push("HotoffersPage");
   }
   gotosearch(){
     this.navCtrl.push("SearchPage");
   }
-
   addToWishList(ProductID : number, element:any , productObj ?: any )
   {
     if(element.style.color == 'crimson')
@@ -231,6 +238,12 @@ export class HomePage {
           this.groupShow[GroupIndex].Group.loadedNo ++;
         this.groupShow[GroupIndex].Products.push(products.data[i]);
       }
+    });
+  }
+  goToGroupProducts(groupID : number , groupName : string){
+    this.navCtrl.push("GroupProductsPage",{
+      groupID : groupID ,
+      groupName : groupName
     });
   }
 }

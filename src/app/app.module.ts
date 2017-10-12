@@ -22,6 +22,7 @@ import {CacheModule} from 'ionic-cache';
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {SQLite} from "@ionic-native/sqlite";
 import { DbService } from '../providers/db-service';
+import {NativeGeocoder} from "@ionic-native/native-geocoder";
 
 
 
@@ -69,7 +70,8 @@ export function createTranslateLoader(http: Http) {
     Network ,
     SocialSharing ,
     SQLite,
-    DbService
+    DbService,
+    NativeGeocoder
   ]
 })
 export class AppModule {}

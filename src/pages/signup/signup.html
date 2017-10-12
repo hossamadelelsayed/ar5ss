@@ -74,7 +74,17 @@
 
       </ion-col>
     </ion-row>
-    <button [disabled]="!f.valid"  ion-button block class="signup" (click)="register()">{{ 'Sign Up' | translate}}</button>
+    <!--<ion-row>-->
+      <!--<ion-item>-->
+        <!--<ion-label>-->
+          <!--{{'City' | translate}}-->
+        <!--</ion-label>-->
+        <!--<ion-select [(ngModel)]="customer.CityID" name="CityID">-->
+          <!--<ion-option *ngFor="let city of cities" value="{{city.CityID}}">{{city.city_name}}</ion-option>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
+    <!--</ion-row>-->
+    <button [disabled]="!f.valid "  ion-button block class="signup" (click)="register()">{{ 'Sign Up' | translate}}</button>
     <button ion-button clear class="signin" (click)="gotosignin()"><p>{{ 'Already have an Account.' | translate}}</p> &nbsp;{{ 'Login' | translate}}</button>
   </form>
 </ion-list>
