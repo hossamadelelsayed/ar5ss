@@ -1,5 +1,5 @@
 import {Component, ViewChild, NgZone} from '@angular/core';
-import {Platform, Tabs, Tab, NavController} from 'ionic-angular';
+import {Platform, Tabs, Tab, NavController, AlertController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {CustomerService} from "../providers/customer-service";
@@ -26,7 +26,8 @@ export class MyApp {
               public customerService : CustomerService ,  public push :Push ,
               public translate : TranslateService , public network: Network ,
               public commonService : CommonService , public cache : CacheService ,
-              public dbService : DbService , public zone: NgZone  ) {
+              public dbService : DbService , public zone: NgZone ,
+              public alertCtrl : AlertController) {
     platform.ready().then(() => {
       //caching policy
       cache.setDefaultTTL(60 * 60 * 12)  ;
@@ -109,7 +110,10 @@ export class MyApp {
 
     const pushObject: PushObject = this.push.init(options);
 
-    pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+    pushObject.on('notification').subscribe((notification: any) => {
+      console.log('Received a notification', notification);
+      this.handleEvents(notification);
+    });
 
     pushObject.on('registration').subscribe((registration: any) => {
       this.customerService.deviceToken = registration.registrationId ;
@@ -138,6 +142,39 @@ export class MyApp {
   setRootTab5() {
     if(this.tabRef._tabs[4].getViews().length > 1)
       this.tabRef._tabs[4].setRoot("Settings");
+  }
+  handleEvents(data : any)
+  {
+    if (data.additionalData.foreground) {
+      switch (data.additionalData.type)
+      {
+        case 'rejectOrder':
+          this.rejectOrderEvent(data);
+          break;
+        default:
+          alert("Wrong Grade.........");
+
+      }
+    } else {
+      //if user NOT using app and push notification comes
+      //TODO: Your logic on click of push notification directly
+      console.log("Push notification clicked");
+      alert(data.message);
+    }
+  }
+  rejectOrderEvent(data : any)
+  {
+    let alert = this.alertCtrl.create({
+      title: data.title,
+      subTitle: data.message,
+      buttons: [{
+        text: 'OK',
+        handler: res => {
+          // this.readNotifications(data.additionalData.notification_id);
+        }
+      }]
+    });
+    alert.present();
   }
 }
 
