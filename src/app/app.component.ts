@@ -153,7 +153,6 @@ export class MyApp {
           break;
         default:
           alert("Wrong Grade.........");
-
       }
     } else {
       //if user NOT using app and push notification comes

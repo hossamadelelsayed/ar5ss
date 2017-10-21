@@ -2,10 +2,15 @@ page-group-products {
   .back-button.show-back-button {
     display: none;
   }
-  ion-list{
+  .ion-list{
     margin-top: 41px;
   }
-
+  .list-md {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: -1px;
+    margin-bottom: 40px;
+  }
   .content{
     background:#f1f5f5;
   }

@@ -2,8 +2,10 @@
   <ion-navbar>
     <ion-title>
       <!--<span>{{ 'Main' | translate }}</span>-->
-      <span class="titlelogo"><img src="assets/imgs/logo.png"></span>
-       <div style="float:right" >
+      <!--<span class="titlelogo"><img src="assets/imgs/logo.png"></span>-->
+      <span class="titlelogo">أرخص<img src="assets/imgs/navigate-arrows.png"></span>
+
+      <div style="float:right" >
        <!--<ion-icon style="padding-right: 13px;" ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>-->
        <p class="cartNo">{{ cartNo }}</p>
        <ion-icon (click)="goToCart()">
@@ -38,7 +40,7 @@
 <ion-content>
   <!--(ionSlideDidChange)="slideChanged()"-->
 <div *ngIf="hotads?.Slider.length > 0" class="imgdiv">
-  <ion-slides *ngIf="hotads?.Mode[0].Mode == 1" pager autoplay="2000" dir="ltr">
+  <ion-slides *ngIf="hotads?.Mode[0].Mode == 1" loop="true" pager autoplay="2000" dir="ltr">
     <ion-slide
       *ngFor="let image of hotads.Slider"
       style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
@@ -74,10 +76,11 @@
                   <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
                  <img class="imgbrand" [src]="product.Logo" >
                   <!--<div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>-->
-                  <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
-                  <img *ngIf="product.HotOfferID > 0  && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
-                  <img *ngIf="group.Group.GroupShowID == 18 && MainService.lang == 'en'" class="hot" src="assets/imgs/special.png">
-                  <img *ngIf="group.Group.GroupShowID == 18 && MainService.lang == 'ar'" class="hot" src="assets/imgs/special_ar.png">
+                  <!--تم تعديل هذا الجزء وحذف المميز وشرط مجموعه التصفيه بالاسم بدل الاى دى-->
+                  <!--<img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/special.png">-->
+                  <!--<img *ngIf="product.HotOfferID > 0  && MainService.lang == 'ar'" class="hot" src="assets/imgs/special_ar.png">-->
+                  <img *ngIf="group.Group.group_nameen == 'Sale'&& MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
+                  <img *ngIf="group.Group.group_name == 'تصفية' && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
 
                 </div>
                 <span style="
@@ -92,8 +95,10 @@
                 <h4>
                   <marquee *ngIf="MainService.lang == 'en'" direction="left" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee>
                   <marquee *ngIf="MainService.lang == 'ar'" direction="right" scrollamount="2">{{product.product_name}} , {{(MainService.lang == 'ar') ? product.size : product.sizeen}}</marquee></h4>
-                <h5>{{product.ProductPrice}} {{ 'SAR' | translate}}</h5>
-                <h5 *ngIf="product.ProductPriceDesc != 0" style="color: red ; text-decoration: line-through;"> {{product.ProductPriceDesc}} {{ 'SAR' | translate}} </h5>
+                <!--<h5 *ngIf="product.ProductPriceDesc != 0" > {{product.ProductPriceDesc}} {{ 'SAR' | translate}} </h5>-->
+                <!--<h5 style="color: red ; text-decoration: line-through;">{{product.ProductPrice}} {{ 'SAR' | translate}} </h5>-->
+                <h5 *ngIf="product.ProductPriceDesc != 0" > {{product.ProductPriceDesc}} {{ 'SAR' | translate}} </h5>
+                <h5 style="color: red ; text-decoration: line-through;" *ngIf="product.ProductPrice != 0">{{product.ProductPrice}} {{ 'SAR' | translate}} </h5>
               </div>
               <ion-row>
                 <ion-col col-3>

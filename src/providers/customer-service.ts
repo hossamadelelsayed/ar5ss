@@ -517,7 +517,7 @@ export class CustomerService {
       Email : Email ,
       Password : Password ,
       Mobile : Mobile ,
-      UseType : 1 ,
+      UseType : 2 ,
       DivceType : 1 ,
       Token : this.deviceToken ,
       Image : Image ,

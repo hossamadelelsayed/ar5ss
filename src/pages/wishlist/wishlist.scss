@@ -12,7 +12,7 @@ page-wishlist {
 .totalrow{
     padding: 10px;
     height: 106px;
-    border-bottom: 1px solid gray;
+
 }
 
 
@@ -64,5 +64,9 @@ h6{
     font-weight: 600;
     font-size: 3rem;
     padding-left: 17px;
+  }
+  img {
+
+    max-height: 67px;
   }
 }

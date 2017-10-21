@@ -33,8 +33,10 @@
               <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
               <!--<div class="leftimg">{{(MainService.lang == 'ar') ? product.BarndName : product.BarndNameE}}</div>-->
               <img class="imgbrandd"  [src]="product.Logo" >
-              <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
-              <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
+              <!--<img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">-->
+              <!--<img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">-->
+              <img *ngIf="groupName == 'Sale'&& MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
+              <img *ngIf="groupName == 'تصفية' && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
             </div>
             <div style="text-align:center;height: 130px;"><img  class="prodimg" [src]="product.Image" height="140px"></div>
             <ion-row>
@@ -80,8 +82,10 @@
           <div style="height:35px">
             <!--<img class="leftimg" [style.background]="product.ColorHexa">-->
             <img class="imgbrande"  [src]="product.Logo" >
-            <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
-            <img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
+            <!--<img *ngIf="product.HotOfferID > 0 && MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">-->
+            <!--<img *ngIf="product.HotOfferID > 0 && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">-->
+            <img *ngIf="groupName == 'Sale'&& MainService.lang == 'en'" class="hot" src="assets/imgs/hot.png">
+            <img *ngIf="groupName == 'تصفية' && MainService.lang == 'ar'" class="hot" src="assets/imgs/hot_ar.png">
           </div>
 
           <ion-row style="width:100%">

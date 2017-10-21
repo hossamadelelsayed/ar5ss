@@ -14,11 +14,13 @@
 
 <ion-content padding>
   <ion-list >
-    <ion-item *ngFor="let payment of paymentTypes" (click)="close(payment.PaymentID)">
-      <img [src]="payment.url"
-       style="height: 75px;
+    <div *ngFor="let payment of paymentTypes" (click)="close(payment.PaymentID)">
+      <ion-item *ngIf="payment.payment_nameen == 'Cash'">
+        <img [src]="payment.url"
+             style="height: 75px;
               width: 75px;" item-right>
-      <h6>{{ payment.payment_nameen }}</h6>
-    </ion-item>
+        <h6>{{ payment.payment_nameen }}</h6>
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>
