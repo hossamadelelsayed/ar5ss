@@ -40,20 +40,21 @@
 <ion-content>
   <!--(ionSlideDidChange)="slideChanged()"-->
 <div *ngIf="hotads?.Slider.length > 0" class="imgdiv">
-  <ion-slides *ngIf="hotads?.Mode[0].Mode == 1" loop="true" pager autoplay="2000" dir="ltr">
+  <ion-slides *ngIf="hotads?.Mode[0].Mode == 1"  pager="true" [autoplay]="1500" [loop]="true" dir="ltr"><!-- loop="true" -->
     <ion-slide
       *ngFor="let image of hotads.Slider"
       style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
       (click)="goToHotOffers(image.CategoryID , image.ProductID)">
     </ion-slide>
+    <ion-slides *ngIf="hotads?.Mode[0].Mode != 1" pager dir="ltr">
+      <ion-slide
+        *ngFor="let image of hotads.Slider"
+        style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
+        (click)="goToHotOffers(image.CategoryID , image.ProductID)">
+      </ion-slide>
+    </ion-slides>
   </ion-slides>
-  <ion-slides *ngIf="hotads?.Mode[0].Mode != 1" pager dir="ltr">
-    <ion-slide
-      *ngFor="let image of hotads.Slider"
-      style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
-      (click)="goToHotOffers(image.CategoryID , image.ProductID)">
-    </ion-slide>
-  </ion-slides>
+
 </div>
 
 <div *ngIf="!showSearch" style="margin-bottom: 50px;">
@@ -65,8 +66,9 @@
        <!--{{group.Group.Item}}/<span  style="font-weight: bold;-->
                                                 <!--color: #525252;">-->
        <!--{{(group.Group.loadedNo != null)?group.Group.loadedNo : 3 }}</span></span>-->
-    <span (click)="goToGroupProducts(group.Group.GroupShowID , group.Group.group_name)">
-    <span  style="font-weight: bold;color: #525252;margin-left: 5px;">{{'المزيد'}}</span></span>
+    <span style="padding-right: 120px;
+    padding-bottom: 8px;" (click)="goToGroupProducts(group.Group.GroupShowID , group.Group.group_name)">
+    <span  style="color: #525252;margin-left: 5px;">{{'المزيد'}}</span></span>
     <ion-scroll direction="y" >
       <!--infinite-scroll [lang]="MainService.lang" (onScrollMethod)="loadNext(group.Group.GroupShowID)"-->
           <div class="infiniteScroll" >

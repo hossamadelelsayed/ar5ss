@@ -30,16 +30,17 @@ export class HomePage {
   }
   initObjects(){
     this.getGroupShow();
-    this.productService.hotads().subscribe((res)=>{
-      this.hotads = res ;
-      console.log(this.hotads);
-    });
     this.countCart();
-
     console.log('fired');
   }
   ionViewDidLoad()
   {
+
+    console.log("ion View Did Load");
+    this.productService.hotads().subscribe((res)=>{
+      this.hotads = res ;
+      console.log("hot adds", this.hotads);
+    });
    // this.initObjects();
   }
   ionViewWillEnter()
@@ -47,7 +48,7 @@ export class HomePage {
     // if(this.pageLang != MainService.lang)
     //   this.initObjects();
     this.initObjects();
-    this.countCart();
+    //this.countCart();
   }
   countCart()
   {
@@ -64,7 +65,7 @@ export class HomePage {
   {
     this.productService.groupShow().subscribe((res)=>{
       this.groupShow = res ;
-      console.log(this.groupShow);
+    //  console.log(this.groupShow);
     });
   }
   getBackground (image) {
