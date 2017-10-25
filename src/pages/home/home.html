@@ -40,7 +40,7 @@
 <ion-content>
   <!--(ionSlideDidChange)="slideChanged()"-->
 <div *ngIf="hotads?.Slider.length > 0" class="imgdiv">
-  <ion-slides *ngIf="hotads?.Mode[0].Mode == 1"  pager="true" [autoplay]="1500" [loop]="true" dir="ltr"><!-- loop="true" -->
+  <ion-slides *ngIf="hotads?.Mode[0].Mode == 1"  pager="true" [autoplay]="3000" [loop]="true" dir="ltr"><!-- loop="true" -->
     <ion-slide
       *ngFor="let image of hotads.Slider"
       style="background-size: cover;" [style.background-image]="getBackground(image.Image)"
@@ -67,7 +67,9 @@
                                                 <!--color: #525252;">-->
        <!--{{(group.Group.loadedNo != null)?group.Group.loadedNo : 3 }}</span></span>-->
     <span style="padding-right: 120px;
-    padding-bottom: 8px;" (click)="goToGroupProducts(group.Group.GroupShowID , group.Group.group_name)">
+    padding-bottom: 8px;
+    padding-top: 10px;"
+          (click)="goToGroupProducts(group.Group.GroupShowID , group.Group.group_name)">
     <span  style="color: #525252;margin-left: 5px;">{{'المزيد'}}</span></span>
     <ion-scroll direction="y" >
       <!--infinite-scroll [lang]="MainService.lang" (onScrollMethod)="loadNext(group.Group.GroupShowID)"-->
@@ -86,7 +88,7 @@
 
                 </div>
                 <span style="
-    height: 120px;
+    height: 115px;
     width: 155px;">
                 <img class="prodimg"  [src]="product.Image" >
                 </span>
