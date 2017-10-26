@@ -24,7 +24,7 @@ export class AllcategoriesPage {
     this.customerService.getWishList().subscribe((res : any[])=>{
       this.wishList = res ;
     });
-    this.productService.category().subscribe((res)=>{
+    this.productService.category(this.customerService.cityName).subscribe((res)=>{
       this.category = res ;
       console.log(res);
     });

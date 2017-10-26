@@ -6,6 +6,7 @@ import {CustomerService} from "../../providers/customer-service";
 import {CommonService} from "../../providers/common-service";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {MainService} from "../../providers/main-service";
+import {Geolocation} from "@ionic-native/geolocation";
 
 @IonicPage()
 @Component({
@@ -21,21 +22,38 @@ export class HomePage {
   public showSearch : boolean = false ;
   public KeyWord : string  ;
   public MainService : MainService =  MainService ;
+  public cityName : string = "Riyadh Province";
+  public cities : any[] ;
   public pageLang : string = MainService.lang;
   constructor(public navCtrl: NavController , public productService : ProductService ,
               private sanitizer: DomSanitizer , public customerService : CustomerService ,
-              public commonService : CommonService , private barcodeScanner: BarcodeScanner ) {
+              public commonService : CommonService , private barcodeScanner: BarcodeScanner ,
+              private geolocation : Geolocation) {
 
     setTimeout(()=> this.initObjects() , 6000);
+
   }
   initObjects(){
-    this.getGroupShow();
-    this.countCart();
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.productService.getCityName(resp.coords.latitude, resp.coords.longitude).subscribe((res : any)=>{
+        console.log(res.results[res.results.length-2].address_components[0].long_name);
+        if(res.results.length > 0){
+          this.customerService.cityName = res.results[res.results.length-2].address_components[0].long_name ;
+          this.cityName = this.customerService.cityName ;
+        }
+
+        this.getGroupShow();
+      });
+    });
+      this.countCart();
     console.log('fired');
   }
   ionViewDidLoad()
   {
-
+    this.productService.getCities().subscribe((res)=>{
+      console.log('res res res res',res);
+      this.cities = res ;
+    });
     console.log("ion View Did Load");
     this.productService.hotads().subscribe((res)=>{
       this.hotads = res ;
@@ -63,7 +81,7 @@ export class HomePage {
   }
   getGroupShow()
   {
-    this.productService.groupShow().subscribe((res)=>{
+    this.productService.groupShow(this.cityName).subscribe((res)=>{
       this.groupShow = res ;
     //  console.log(this.groupShow);
     });
@@ -247,4 +265,5 @@ export class HomePage {
       groupName : groupName
     });
   }
+
 }

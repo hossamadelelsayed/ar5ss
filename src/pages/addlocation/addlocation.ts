@@ -3,9 +3,11 @@ import {NavController, NavParams, IonicPage} from 'ionic-angular';
 import {CommonService} from "../../providers/common-service";
 import {Geolocation} from "@ionic-native/geolocation";
 import {CustomerService} from "../../providers/customer-service";
+import {Http} from "@angular/http";
 
 
 declare var google;
+
 @IonicPage()
 @Component({
   selector: 'page-addlocation',
@@ -23,7 +25,8 @@ export class AddlocationPage {
               public navParams: NavParams,
               private geolocation: Geolocation,
               private commonService : CommonService ,
-              public customerService : CustomerService) {
+              public customerService : CustomerService ,
+              public http : Http) {
   }
   ionViewDidLoad(){
     this.loadMap();

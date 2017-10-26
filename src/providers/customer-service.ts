@@ -20,6 +20,7 @@ import {DbService} from "./db-service";
 @Injectable()
 export class CustomerService {
 
+  public cityName : string = "Riyadh Province";
   public customer ;
   public lat : any ;
   public lang : any ;
@@ -113,7 +114,7 @@ export class CustomerService {
   }
   getRelatedProduct(ProductID : number)
   {
-    return this.http.get(this.getRelatedProductUrl + ProductID + '?lang='  + MainService.lang ).map((res) => res.json());
+    return this.http.get(this.getRelatedProductUrl + ProductID + '/' +this.cityName+ '?lang='  + MainService.lang ).map((res) => res.json());
   }
   customerRate(OrderID : number , ProductID : number , Rate : number)
   {

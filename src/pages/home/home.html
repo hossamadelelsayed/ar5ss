@@ -13,6 +13,12 @@
          <img style="width: 20px;" *ngIf="cartNo > 0" src="assets/imgs/cart_on.png">
        </ion-icon>
        </div>
+      <ion-icon style="float: left;color: crimson;" name="pin">
+        <ion-select [(ngModel)]="cityName" [placeholder]="cityName" (ionChange)="getGroupShow()">
+          <ion-option *ngFor="let city of cities" [value]="city.city_nameen">{{(MainService.lang == 'ar') ? city.city_name : city.city_nameen}}</ion-option>
+        </ion-select>
+      </ion-icon>
+
     </ion-title>
   </ion-navbar>
 
