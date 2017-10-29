@@ -9,6 +9,8 @@ import {Network} from "@ionic-native/network";
 import {CommonService} from "../providers/common-service";
 import {CacheService} from 'ionic-cache';
 import {DbService} from "../providers/db-service";
+import {Geolocation} from "@ionic-native/geolocation";
+import {ProductService} from "../providers/product-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,8 +28,8 @@ export class MyApp {
               public customerService : CustomerService ,  public push :Push ,
               public translate : TranslateService , public network: Network ,
               public commonService : CommonService , public cache : CacheService ,
-              public dbService : DbService , public zone: NgZone ,
-              public alertCtrl : AlertController) {
+              public dbService : DbService , public zone: NgZone , public geolocation : Geolocation ,
+              public productService : ProductService , public alertCtrl : AlertController) {
     platform.ready().then(() => {
       //caching policy
       cache.setDefaultTTL(60 * 60 * 12)  ;
@@ -64,7 +66,15 @@ export class MyApp {
       this.fireWhenOffline();
       // handling online
       this.fireWhenOnline();
-
+      //
+      this.geolocation.getCurrentPosition().then((resp) => {
+        this.productService.getCityName(resp.coords.latitude, resp.coords.longitude).subscribe((res : any)=>{
+          console.log(res.results[res.results.length-2].address_components[0].long_name);
+          if(res.results.length > 0){
+            this.customerService.cityName = res.results[res.results.length-2].address_components[0].long_name ;
+          }
+        });
+      });
 
     });
   }
@@ -128,7 +138,7 @@ export class MyApp {
       this.tabRef._tabs[0].setRoot("HomePage");
   }
   setRootTab2() {
-    if(this.tabRef._tabs[1].getViews().length > 1)
+   // if(this.tabRef._tabs[1].getViews().length > 1)
       this.tabRef._tabs[1].setRoot("AllcategoriesPage");
   }
   setRootTab3() {

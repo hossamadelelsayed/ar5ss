@@ -22,7 +22,6 @@ export class HomePage {
   public showSearch : boolean = false ;
   public KeyWord : string  ;
   public MainService : MainService =  MainService ;
-  public cityName : string = "Riyadh Province";
   public cities : any[] ;
   public pageLang : string = MainService.lang;
   constructor(public navCtrl: NavController , public productService : ProductService ,
@@ -30,21 +29,11 @@ export class HomePage {
               public commonService : CommonService , private barcodeScanner: BarcodeScanner ,
               private geolocation : Geolocation) {
 
-    setTimeout(()=> this.initObjects() , 6000);
+    //setTimeout(()=> this.initObjects() , 6000);
 
   }
   initObjects(){
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.productService.getCityName(resp.coords.latitude, resp.coords.longitude).subscribe((res : any)=>{
-        console.log(res.results[res.results.length-2].address_components[0].long_name);
-        if(res.results.length > 0){
-          this.customerService.cityName = res.results[res.results.length-2].address_components[0].long_name ;
-          this.cityName = this.customerService.cityName ;
-        }
-
-        this.getGroupShow();
-      });
-    });
+    this.getGroupShow();
       this.countCart();
     console.log('fired');
   }
@@ -81,9 +70,10 @@ export class HomePage {
   }
   getGroupShow()
   {
-    this.productService.groupShow(this.cityName).subscribe((res)=>{
+    this.productService.groupShow(this.customerService.cityName).subscribe((res:any)=>{
       this.groupShow = res ;
-    //  console.log(this.groupShow);
+      //console.log(res);
+     //console.log(this.groupShow);
     });
   }
   getBackground (image) {
